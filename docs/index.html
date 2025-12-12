@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gabriella Vozar – Digital Media Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* COLOR & TYPOGRAPHY VARIABLES*/
+    :root {
+      --blush:   #F8DDE2;
+      --rose:    #E8B4C8;
+      --sage:    #A7C4A0;
+      --forest:  #6E937C;
+      --cream:   #FFF6F3;
+      --charcoal:#3A3A3A;
+      --card-bg: #F2F2F2;
+      --line:    #C6B8AE;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, var(--blush), var(--cream));
+      color: var(--charcoal);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* LAYOUT*/
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 246, 243, 0.9);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(198, 184, 174, 0.5);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      font-size: 1.1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--charcoal);
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -0.2rem;
+      width: 0;
+      height: 2px;
+      background: var(--sage);
+      border-radius: 999px;
+      transform: translateX(-50%);
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover::after,
+    nav a:focus-visible::after {
+      width: 100%;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 2.5rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 2.5rem;
+      }
+    }
+
+    .hero-text h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 3vw + 1.5rem, 3.2rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-text h1 span {
+      color: var(--forest);
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .hero-body {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      max-width: 34rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 0.65rem 1.5rem;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      background: var(--sage);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(110, 147, 124, 0.35);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(110, 147, 124, 0.45);
+      background: var(--forest);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--forest);
+      color: var(--forest);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: var(--forest);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(110, 147, 124, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-right: 0.75rem;
+    }
+
+    .hero-meta span::before {
+      content: "•";
+      color: var(--rose);
+    }
+
+    /* Right side "card" */
+    .hero-panel {
+      background: rgba(255, 246, 243, 0.9);
+      border-radius: 20px;
+      padding: 1.5rem 1.5rem 1.75rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(198, 184, 174, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-panel p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-panel ul {
+      list-style: none;
+      font-size: 0.9rem;
+      padding-left: 0;
+      margin-top: 0.5rem;
+    }
+
+    .hero-panel li {
+      margin-bottom: 0.3rem;
+      position: relative;
+      padding-left: 1.1rem;
+    }
+
+    .hero-panel li::before {
+      content: "✿";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--rose);
+      font-size: 0.8rem;
+    }
+
+    /* HIGHLIGHT SECTION*/
+    .highlights {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .highlights-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .highlights-header h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .highlights-header p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .highlight-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .highlight-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.25rem 1.3rem 1.3rem;
+      border: 1px solid rgba(198, 184, 174, 0.7);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .highlight-card:hover,
+    .highlight-card:focus-within {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .highlight-card h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .highlight-card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+
+    .highlight-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(167, 196, 160, 0.18);
+      color: var(--forest);
+      border: 1px solid rgba(167, 196, 160, 0.5);
+      margin-bottom: 0.4rem;
+    }
+
+    .highlight-card a {
+      font-size: 0.85rem;
+      color: var(--forest);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(110, 147, 124, 0.6);
+      padding-bottom: 1px;
+    }
+
+    .highlight-card a:hover,
+    .highlight-card a:focus-visible {
+      color: var(--charcoal);
+      border-color: var(--charcoal);
+    }
+
+    /* FOOTER*/
+    footer {
+      border-top: 1px solid rgba(198, 184, 174, 0.6);
+      background: rgba(255, 246, 243, 0.95);
+      padding: 0.9rem 1.5rem;
+      font-size: 0.8rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /*FULL SIDE-WALL VINES*/
+.side-vine {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  width: auto;
+  pointer-events: none;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+.side-vine-left {
+  left: 0;
+}
+
+.side-vine-right {
+  right: 0;
+  transform: scaleX(-1); /* mirror vine on the right */
+}
+
+/* Vine path – JS will animate strokeDashoffset */
+.vine-path {
+  fill: none;
+  stroke: var(--forest);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
+}
+
+/* Flowers start invisible and small */
+.vine-flower {
+  opacity: 0;
+  transform-origin: center;
+  transform: scale(0.3) translateY(6px);
+}
+
+/* Flowers bloom when JS adds .bloomed */
+.vine-flower.bloomed {
+  animation: flower-pop 0.9s ease-out forwards;
+}
+
+/* Flower colors */
+.vine-flower .petal {
+  fill: var(--rose);
+}
+
+.vine-flower .center {
+  fill: #ffe8aa;
+}
+
+/* Bloom animation */
+@keyframes flower-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(6px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Keep main content above vines */
+header,
+.hero,
+.highlights,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/*RESPONSIVE ADJUSTMENTS*/
+
+/* Tablet and smaller */
+@media (max-width: 900px) {
+  .nav-inner {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  nav a {
+    margin-left: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .hero {
+    padding: 2.5rem 1.25rem 3rem;
+  }
+
+  .hero-panel {
+    margin-top: 0.5rem;
+  }
+
+  .highlight-grid {
+    grid-template-columns: 1fr; /* stack highlight cards */
+  }
+}
+
+/* Small phones */
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+
+  header {
+    position: static; /* avoid sticky header taking too much space on very small screens */
+  }
+
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.75rem;
+  }
+
+  nav a {
+    margin-left: 0;
+  }
+
+  .hero {
+    grid-template-columns: 1fr; /* Already in your CSS but safe to reinforce */
+    padding: 2rem 1rem 2.5rem;
+  }
+
+  .hero-text h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero-body {
+    max-width: none;
+  }
+
+  .hero-panel {
+    padding: 1.2rem 1.1rem 1.3rem;
+  }
+
+  .highlights {
+    padding: 0 1rem 2.5rem;
+  }
+
+  /* Make vines more subtle or hide them on very small screens */
+  .side-vine {
+    opacity: 0.35;
+  }
+}
+
+/* Extra tiny screens (optional) */
+@media (max-width: 430px) {
+  .side-vine {
+    display: none; /* hide vines if they start crowding content */
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="logo">GV • Digital Media</div>
+      <nav aria-label="Main navigation">
+        <a href="projects.html">Projects</a>
+        <a href="design.html">Design</a>
+        <a href="photography.html">Photography</a>
+        <a href="game-design.html">Game Design</a>
+        <a href="about.html">About</a>
+        <a href="accessibility.html">Accessibility</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!--DECORATIVE SIDE-WALL VINES-->
+
+<!-- LEFT SIDE VINE -->
+<svg class="side-vine side-vine-left" viewBox="0 0 80 800" aria-hidden="true">
+  
+  <!-- Curving vine path -->
+  <path
+    class="vine-path"
+    d="
+      M40 0
+      C 20 60, 60 120, 35 180
+      C 10 250, 55 310, 28 380
+      C 5 460, 50 520, 30 600
+      C 10 680, 40 740, 40 800
+    "
+  />
+
+  <!-- FLOWER 1 -->
+  <g class="vine-flower" transform="translate(25, 160)">
+    <circle class="petal" cx="0" cy="-6" r="5" />
+    <circle class="petal" cx="5" cy="0" r="5" />
+    <circle class="petal" cx="0" cy="6" r="5" />
+    <circle class="petal" cx="-5" cy="0" r="5" />
+    <circle class="center" cx="0" cy="0" r="3.5" />
+  </g>
+
+  <!-- FLOWER 2 -->
+  <g class="vine-flower" transform="translate(50, 350)">
+    <circle class="petal" cx="0" cy="-6" r="5" />
+    <circle class="petal" cx="5" cy="0" r="5" />
+    <circle class="petal" cx="0" cy="6" r="5" />
+    <circle class="petal" cx="-5" cy="0" r="5" />
+    <circle class="center" cx="0" cy="0" r="3.5" />
+  </g>
+
+  <!-- FLOWER 3 -->
+  <g class="vine-flower" transform="translate(30, 580)">
+    <circle class="petal" cx="0" cy="-6" r="5" />
+    <circle class="petal" cx="5" cy="0" r="5" />
+    <circle class="petal" cx="0" cy="6" r="5" />
+    <circle class="petal" cx="-5" cy="0" r="5" />
+    <circle class="center" cx="0" cy="0" r="3.5" />
+  </g>
+
+</svg>
+
+
+
+<!-- RIGHT SIDE VINE -->
+<svg class="side-vine side-vine-right" viewBox="0 0 80 800" aria-hidden="true">
+
+  <!-- Same vine path (mirrored with CSS) -->
+  <path
+    class="vine-path"
+    d="
+      M40 0
+      C 20 60, 60 120, 35 180
+      C 10 250, 55 310, 28 380
+      C 5 460, 50 520, 30 600
+      C 10 680, 40 740, 40 800
+    "
+  />
+
+  <!-- FLOWER 1 -->
+  <g class="vine-flower" transform="translate(45, 200)">
+    <circle class="petal" cx="0" cy="-6" r="5" />
+    <circle class="petal" cx="5" cy="0" r="5" />
+    <circle class="petal" cx="0" cy="6" r="5" />
+    <circle class="petal" cx="-5" cy="0" r="5" />
+    <circle class="center" cx="0" cy="0" r="3.5" />
+  </g>
+
+  <!-- FLOWER 2 -->
+  <g class="vine-flower" transform="translate(50, 430)">
+    <circle class="petal" cx="0" cy="-6" r="5" />
+    <circle class="petal" cx="5" cy="0" r="5" />
+    <circle class="petal" cx="0" cy="6" r="5" />
+    <circle class="petal" cx="-5" cy="0" r="5" />
+    <circle class="center" cx="0" cy="0" r="3.5" />
+  </g>
+
+  <!-- FLOWER 3 -->
+  <g class="vine-flower" transform="translate(35, 650)">
+    <circle class="petal" cx="0" cy="-6" r="5" />
+    <circle class="petal" cx="5" cy="0" r="5" />
+    <circle class="petal" cx="0" cy="6" r="5" />
+    <circle class="petal" cx="-5" cy="0" r="5" />
+    <circle class="center" cx="0" cy="0" r="3.5" />
+  </g>
+
+</svg>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <!-- LEFT: text content -->
+      <div class="hero-text">
+        <h1 id="hero-title">
+          Hi, I’m <span>Gabriella Vozar</span>.
+        </h1>
+        <p class="hero-tagline">
+          A Digital Media, Arts, and Technology student blending code, design, animation, and storytelling.
+        </p>
+        <p class="hero-body">
+          This portfolio brings together the work I’ve developed this semester:
+          interactive web experiments, a research-based Tech Issue guide, design
+          and photography, and game-focused analysis. My major isn’t just design
+          – it’s a mix of programming, media production, and creative technology.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="btn-primary" href="projects.html">View Interactive Projects</a>
+          <a class="btn-secondary" href="about.html">Learn More About Me</a>
+        </div>
+
+        <div class="hero-meta">
+          <span>HTML • CSS • JavaScript • React</span>
+          <span>Blender • Photography • Game Design</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: highlight panel -->
+      <aside class="hero-panel" aria-label="Featured work preview">
+        <h2>What you’ll find here</h2>
+        <p>
+          This site is a snapshot of my growth as a multidisciplinary creator in the DIGIT program.
+        </p>
+        <ul>
+          <li>My Tech Issue Resource Guide on sustainable technology</li>
+          <li>Experiments with interactive JavaScript, CSS, and React</li>
+          <li>Photography and game design reflections</li>
+        </ul>
+      </aside>
+
+      <!-- Decorative flowers with grow animations -->
+      <div class="flower flower-left" aria-hidden="true">
+        <div class="stem"></div>
+        <div class="leaf leaf-left"></div>
+        <div class="leaf leaf-right"></div>
+        <div class="flower-head">
+          <div class="petal top"></div>
+          <div class="petal right"></div>
+          <div class="petal bottom"></div>
+          <div class="petal left"></div>
+          <div class="flower-center"></div>
+        </div>
+      </div>
+
+      <div class="flower flower-right" aria-hidden="true">
+        <div class="stem"></div>
+        <div class="leaf leaf-left"></div>
+        <div class="leaf leaf-right"></div>
+        <div class="flower-head">
+          <div class="petal top"></div>
+          <div class="petal right"></div>
+          <div class="petal bottom"></div>
+          <div class="petal left"></div>
+          <div class="flower-center"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="highlights" aria-labelledby="highlights-title">
+      <div class="highlights-header">
+        <h2 id="highlights-title">Featured semester work</h2>
+        <p>
+          A quick look at some of the projects I’ll highlight across this site.
+        </p>
+      </div>
+
+      <div class="highlight-grid">
+        <article class="highlight-card">
+          <div class="highlight-tag">Tech Issue Guide</div>
+          <h3>AI & Sustainable Technology</h3>
+          <p>
+            A research-driven resource guide exploring the environmental impact
+            of AI and digital consumption, built as a multi-page interactive website.
+          </p>
+          <a href="projects.html">See how I built it →</a>
+        </article>
+
+        <article class="highlight-card">
+          <div class="highlight-tag">Interactive Media</div>
+          <h3>Experiments with Code</h3>
+          <p>
+            From vanilla JavaScript to React and 3D experiments, these projects
+            show how I use code to create interactive elements and motion.
+          </p>
+          <a href="projects.html">View interactive projects →</a>
+        </article>
+
+        <article class="highlight-card">
+          <div class="highlight-tag">Design & Narrative</div>
+          <h3>Visual & Game-Focused Work</h3>
+          <p>
+            Photography and game analysis that connect
+            visual style, story, and player experience.
+          </p>
+          <a href="design.html">Explore creative work →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology</div>
+      <div>Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
+    </div>
+  </footer>
+
+  <script>
+  // Keep footer year current
+  const yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+
+  // SCROLL-LINKED VINE DRAWING
+
+  const vinePaths = document.querySelectorAll(".vine-path");
+  const vineData = [];
+
+  vinePaths.forEach((path) => {
+    // Get total length of SVG path
+    const length = path.getTotalLength();
+
+    // Set stroke dash so vine can "draw"
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+
+    vineData.push({ path, length });
+  });
+
+  function updateVinesOnScroll() {
+    const scrollableHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    const scrollPercent =
+      scrollableHeight > 0 ? scrollY / scrollableHeight : 0;
+
+    vineData.forEach(({ path, length }) => {
+      const offset = length * (1 - scrollPercent);
+      path.style.strokeDashoffset = offset;
+    });
+  }
+
+  window.addEventListener("scroll", updateVinesOnScroll);
+  window.addEventListener("resize", updateVinesOnScroll);
+  updateVinesOnScroll(); // initial position
+
+  const flowers = document.querySelectorAll(".vine-flower");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("bloomed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.4,
+      }
+    );
+
+    flowers.forEach((flower) => observer.observe(flower));
+  } else {
+    flowers.forEach((flower) => flower.classList.add("bloomed"));
+  }
+</script>
+</body>
+</html>
