@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Photography – Gabriella Vozar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blush:#F8DDE2;
+      --sage:#A7C4A0;
+      --forest:#6E937C;
+      --cream:#FFF6F3;
+      --charcoal:#3A3A3A;
+      --card:#F2F2F2;
+      --line:#C6B8AE;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:"Lato", system-ui, sans-serif;
+      color:var(--charcoal);
+      background: radial-gradient(circle at top, var(--blush), var(--cream));
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      background:rgba(255,246,243,0.92);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(198,184,174,0.55);
+    }
+
+    .nav-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0.75rem 1rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+
+    .logo{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:0.05em;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:var(--charcoal);
+      margin-left:1.25rem;
+      position:relative;
+      font-size:0.95rem;
+    }
+
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:-0.2rem;
+      width:0;
+      height:2px;
+      background:var(--sage);
+      transform:translateX(-50%);
+      transition:0.25s ease;
+    }
+
+    nav a:hover::after,
+    nav a:focus-visible::after{ width:100%; }
+
+    nav a[aria-current="page"]{
+      color:var(--forest);
+      font-weight:600;
+    }
+
+    main{ flex:1; }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:2.5rem 1.25rem 3rem;
+    }
+
+    .page-title{
+      text-align:center;
+      margin-bottom:1.5rem;
+    }
+
+    .page-title h1{
+      font-family:"Playfair Display", serif;
+      font-size:clamp(2rem,3vw,3rem);
+      margin-bottom:0.35rem;
+    }
+
+    .page-title p{
+      max-width:60rem;
+      margin:0 auto;
+      line-height:1.7;
+      color:#555;
+    }
+
+    /* Tabs */
+    .tabs{
+      display:flex;
+      justify-content:center;
+      gap:0.5rem;
+      flex-wrap:wrap;
+      margin:1.5rem 0 2rem;
+    }
+
+    .tab{
+      border:1px solid rgba(110,147,124,0.6);
+      background:rgba(167,196,160,0.15);
+      color:var(--forest);
+      border-radius:999px;
+      padding:0.45rem 1.1rem;
+      font-size:0.9rem;
+      cursor:pointer;
+    }
+
+    .tab[aria-selected="true"]{
+      background:var(--forest);
+      color:white;
+    }
+
+    /* Panels */
+    .panel{
+      display:none;
+    }
+
+    .panel.active{
+      display:block;
+    }
+
+    /* Placeholder grid */
+    .photo-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1rem;
+    }
+
+    @media(max-width:900px){
+      .photo-grid{ grid-template-columns:repeat(2,1fr); }
+    }
+
+    @media(max-width:500px){
+      .photo-grid{ grid-template-columns:1fr; }
+    }
+
+    .placeholder{
+      aspect-ratio:4/3;
+      border-radius:16px;
+      border:1px solid rgba(198,184,174,0.75);
+      background:
+        linear-gradient(135deg, rgba(248,221,226,0.55), rgba(167,196,160,0.18));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:0.75rem;
+      color:#555;
+      font-size:0.95rem;
+      font-style:italic;
+    }
+
+    footer{
+      border-top:1px solid rgba(198,184,174,0.6);
+      background:rgba(255,246,243,0.95);
+      padding:0.9rem 1.25rem;
+      font-size:0.8rem;
+    }
+
+    .footer-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="nav-inner">
+    <div class="logo">GV • Digital Media</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="photography.html" aria-current="page">Photography</a>
+      <a href="gamedesign.html">Game Design</a>
+      <a href="about.html">About</a>
+      <a href="accessibility.html">Accessibility</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="page-title">
+      <h1>Photography</h1>
+      <p>
+        A curated selection of photography organized by subject. Categories will be
+        populated as I finalize which images best represent my work.
+      </p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" role="tablist" aria-label="Photography categories">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="sports" id="tab-sports">
+        Sports
+      </button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="pets" id="tab-pets">
+        Pets
+      </button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="landscapes" id="tab-landscapes">
+        Landscapes
+      </button>
+    </div>
+
+    <!-- Sports -->
+    <section class="panel active" role="tabpanel" id="sports" aria-labelledby="tab-sports">
+      <div class="photo-grid">
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+      </div>
+    </section>
+
+    <!-- Pets -->
+    <section class="panel" role="tabpanel" id="pets" aria-labelledby="tab-pets">
+      <div class="photo-grid">
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+      </div>
+    </section>
+
+    <!-- Landscapes -->
+    <section class="panel" role="tabpanel" id="landscapes" aria-labelledby="tab-landscapes">
+      <div class="photo-grid">
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">Placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">Placeholder</div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>© <span id="year"></span> Gabriella Vozar</div>
+    <div>Photography portfolio</div>
+  </div>
+</footer>
+
+<script>
+  // Tab interaction
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
+    });
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

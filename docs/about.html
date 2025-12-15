@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About – Gabriella Vozar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blush:#F8DDE2;
+      --sage:#A7C4A0;
+      --forest:#6E937C;
+      --cream:#FFF6F3;
+      --charcoal:#3A3A3A;
+      --card:#F2F2F2;
+      --line:#C6B8AE;
+      --muted:#555;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:"Lato", system-ui, sans-serif;
+      color:var(--charcoal);
+      background: radial-gradient(circle at top, var(--blush), var(--cream));
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      background:rgba(255,246,243,0.92);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(198,184,174,0.55);
+    }
+
+    .nav-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0.75rem 1rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+
+    .logo{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:0.05em;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:var(--charcoal);
+      margin-left:1.25rem;
+      position:relative;
+      font-size:0.95rem;
+    }
+
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:-0.2rem;
+      width:0;
+      height:2px;
+      background:var(--sage);
+      transform:translateX(-50%);
+      transition:0.25s ease;
+    }
+
+    nav a:hover::after,
+    nav a:focus-visible::after{ width:100%; }
+
+    nav a[aria-current="page"]{
+      color:var(--forest);
+      font-weight:600;
+    }
+
+    main{ flex:1; }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:2.5rem 1.25rem 3rem;
+    }
+
+    .page-title{
+      text-align:center;
+      margin-bottom:1.75rem;
+    }
+
+    .page-title h1{
+      font-family:"Playfair Display", serif;
+      font-size:clamp(2rem,3vw,3rem);
+      margin-bottom:0.35rem;
+    }
+
+    .page-title p{
+      max-width:60rem;
+      margin:0 auto;
+      line-height:1.7;
+      color:var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.25rem;
+      align-items:start;
+      margin-top: 1.75rem;
+    }
+
+    @media(max-width:900px){
+      .grid{ grid-template-columns:1fr; }
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(198,184,174,0.75);
+      border-radius:18px;
+      padding:1.25rem;
+      box-shadow:0 10px 22px rgba(0,0,0,0.05);
+    }
+
+    h2{
+      font-family:"Playfair Display", serif;
+      font-size:1.35rem;
+      margin-bottom:0.65rem;
+    }
+
+    .card p{
+      color:#444;
+      line-height:1.7;
+      margin-bottom:0.8rem;
+      font-size:0.98rem;
+    }
+
+    .divider{
+      height:1px;
+      background: rgba(198,184,174,0.65);
+      margin: 0.9rem 0 1rem;
+    }
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.55rem;
+      margin-top:0.2rem;
+    }
+
+    .pill{
+      border:1px solid rgba(110,147,124,0.6);
+      background:rgba(167,196,160,0.15);
+      color:var(--forest);
+      border-radius:999px;
+      padding:0.35rem 0.85rem;
+      font-size:0.85rem;
+    }
+
+    .pill.pink{
+      border-color: rgba(232,180,200,0.65);
+      background: rgba(232,180,200,0.2);
+      color:#7a3c55;
+    }
+
+    ul{
+      padding-left: 1.1rem;
+      line-height:1.7;
+      color:#444;
+      margin-top:0.25rem;
+    }
+
+    .small{
+      font-size:0.95rem;
+      color:#555;
+      line-height:1.65;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.6rem;
+      margin-top: 0.8rem;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0.55rem 1rem;
+      border-radius:999px;
+      border:none;
+      text-decoration:none;
+      font-size:0.9rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.18s ease;
+    }
+
+    .btn.primary{
+      background:var(--sage);
+      color:#fff;
+      box-shadow:0 10px 20px rgba(110,147,124,0.35);
+    }
+
+    .btn.primary:hover,
+    .btn.primary:focus-visible{
+      background:var(--forest);
+      transform:translateY(-1px);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--forest);
+      border:1px solid var(--forest);
+    }
+
+    .btn.secondary:hover,
+    .btn.secondary:focus-visible{
+      background:var(--forest);
+      color:#fff;
+      transform:translateY(-1px);
+    }
+
+    footer{
+      border-top:1px solid rgba(198,184,174,0.6);
+      background:rgba(255,246,243,0.95);
+      padding:0.9rem 1.25rem;
+      font-size:0.8rem;
+    }
+
+    .footer-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="nav-inner">
+    <div class="logo">GV • Digital Media</div>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="photography.html">Photography</a>
+      <a href="game-design.html">Game Design</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="accessibility.html">Accessibility</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="page-title">
+      <h1>About</h1>
+      <p>
+        I’m Gabriella Vozar, a Digital Media, Arts, and Technology student focused on building
+        clear, interactive experiences — mixing design, code, and storytelling.
+      </p>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT: About text -->
+      <section class="card" aria-labelledby="about-me">
+        <h2 id="about-me">Hi — I’m Gabriella.</h2>
+        <p>
+          I’m a DIGIT (Digital Media, Arts, and Technology) student with a Media Production minor.
+          What I like most about this major is that it isn’t only visual design — it’s also interactive development,
+          research/writing, and building experiences that people can actually use.
+        </p>
+        <p>
+          My work this semester includes interactive web projects (HTML/CSS/JavaScript), a research-focused Tech Issue
+          resource guide, and experiments with React and Three.js. I’m especially drawn to projects where I can combine
+          creativity with structure: designing the look, but also thinking through navigation, systems, accessibility, and audience.
+        </p>
+
+        <div class="divider"></div>
+
+        <h2>What I bring</h2>
+        <ul>
+          <li>Strong follow-through and comfort with feedback/iteration</li>
+          <li>Creative problem-solving (visual + technical)</li>
+          <li>Experience balancing multiple projects and deadlines</li>
+          <li>Interest in sports media, storytelling, and interactive design</li>
+        </ul>
+
+        <div class="cta-row">
+          <a class="btn primary" href="projects.html">View Projects</a>
+          <a class="btn secondary" href="contact.html">Contact</a>
+        </div>
+      </section>
+
+      <!-- RIGHT: Quick facts + skills -->
+      <aside class="card" aria-label="Quick facts and skills">
+        <h2>Quick facts</h2>
+        <p class="small">
+          This portfolio is designed for a course assignment audience (instructors + peers),
+          while still being professional enough for internship/job use.
+        </p>
+
+        <div class="divider"></div>
+
+        <h2>Skills</h2>
+        <div class="pill-row" aria-label="Skills list">
+          <span class="pill">HTML</span>
+          <span class="pill">CSS</span>
+          <span class="pill pink">JavaScript</span>
+          <span class="pill pink">React</span>
+          <span class="pill pink">Three.js</span>
+          <span class="pill pink"">Command Line</span>
+          <span class="pill">Adobe</span>
+          <span class="pill">Canva</span>
+          <span class="pill">CapCut</span>
+          
+        </div>
+
+        <div class="divider"></div>
+
+        <h2>Interests</h2>
+        <div class="pill-row" aria-label="Interests list">
+          <span class="pill">Interactive design</span>
+          <span class="pill">Sports media</span>
+          <span class="pill">Game analysis</span>
+          <span class="pill">Animation</span>
+          <span class="pill">3D + visuals</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2>Next steps</h2>
+        <p class="small">
+          I’m continuing to refine this site to improve accessibility, organization, and presentation quality.
+          The goal is a portfolio that feels intentional and easy to navigate.
+        </p>
+      </aside>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>© <span id="year"></span> Bella Vozar</div>
+    <div>About page</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
