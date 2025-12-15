@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projects – Gabriella Vozar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blush:#F8DDE2;
+      --rose:#E8B4C8;
+      --sage:#A7C4A0;
+      --forest:#6E937C;
+      --cream:#FFF6F3;
+      --charcoal:#3A3A3A;
+      --card:#F2F2F2;
+      --line:#C6B8AE;
+      --muted:#555;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+
+    body{
+      font-family:"Lato", system-ui, -apple-system, sans-serif;
+      color:var(--charcoal);
+      background: radial-gradient(circle at top, var(--blush), var(--cream));
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      background: rgba(255,246,243,0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(198,184,174,0.55);
+    }
+
+    .nav-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0.75rem 1rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .logo{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.05em;
+      font-size:1.05rem;
+      white-space:nowrap;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:var(--charcoal);
+      font-size:0.95rem;
+      margin-left:1.25rem;
+      position:relative;
+    }
+
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:-0.2rem;
+      width:0;
+      height:2px;
+      background:var(--sage);
+      border-radius:999px;
+      transform:translateX(-50%);
+      transition:width 0.25s ease;
+    }
+    nav a:hover::after, nav a:focus-visible::after{ width:100%; }
+    nav a[aria-current="page"]{ color:var(--forest); font-weight:600; }
+
+    main{ flex:1; }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    .page-title{
+      text-align:center;
+      margin-bottom: 1.25rem;
+    }
+    .page-title h1{
+      font-family:"Playfair Display", serif;
+      font-size: clamp(2rem, 2.5vw + 1.2rem, 3rem);
+      margin-bottom: 0.35rem;
+    }
+    .page-title p{
+      max-width: 62rem;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .chip-row{
+      display:flex;
+      gap:0.5rem;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin: 1.25rem 0 2rem;
+    }
+    .chip{
+      border:1px solid rgba(110,147,124,0.55);
+      background: rgba(167,196,160,0.14);
+      color: var(--forest);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.85rem;
+    }
+
+    section{ margin-top: 2.75rem; }
+
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-bottom: 1rem;
+    }
+    .section-head h2{
+      font-family:"Playfair Display", serif;
+      font-size: 1.55rem;
+    }
+    .section-head p{
+      color:var(--muted);
+      max-width: 58rem;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin-top: 0.25rem;
+    }
+    .divider{
+      height:1px;
+      background: rgba(198,184,174,0.7);
+      margin-top: 0.9rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(198,184,174,0.75);
+      border-radius: 18px;
+      padding: 1.15rem 1.15rem 1.1rem;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.05);
+      overflow:hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      display:flex;
+      flex-direction:column;
+      gap: 0.85rem;
+    }
+    .card:hover, .card:focus-within{
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+    }
+
+    .tag-row{
+      display:flex;
+      gap:0.5rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .tag{
+      display:inline-block;
+      font-size:0.78rem;
+      padding: 0.18rem 0.6rem;
+      border-radius:999px;
+      border: 1px solid rgba(167,196,160,0.55);
+      background: rgba(167,196,160,0.18);
+      color: var(--forest);
+    }
+    .tag.pink{
+      border-color: rgba(232,180,200,0.65);
+      background: rgba(232,180,200,0.2);
+      color:#7a3c55;
+    }
+    .tag.gray{
+      border-color: rgba(198,184,174,0.9);
+      background: rgba(198,184,174,0.18);
+      color:#4a4a4a;
+    }
+
+    .card h3{
+      font-family:"Playfair Display", serif;
+      font-size: 1.2rem;
+    }
+    .card p{
+      line-height: 1.65;
+      font-size: 0.95rem;
+      color:#444;
+    }
+
+    /* Live iframe previews */
+    .preview {
+      position: relative;
+      border-radius: 14px;
+      border: 1px solid rgba(198,184,174,0.75);
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(248,221,226,0.65), rgba(167,196,160,0.18));
+      aspect-ratio: 16 / 9;
+    }
+    .preview iframe{
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: white;
+      display:block;
+    }
+    .preview .shield{
+      position:absolute;
+      inset:0;
+      z-index:2;
+    }
+    .preview .label{
+      position:absolute;
+      top:10px;
+      left:10px;
+      z-index:3;
+      font-size:0.75rem;
+      background: rgba(255,246,243,0.92);
+      border: 1px solid rgba(198,184,174,0.7);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      color:#555;
+    }
+
+    /* Mobile fallback */
+    @media (max-width: 600px) {
+      header{ position:static; }
+      nav{ display:flex; flex-wrap:wrap; gap:0.4rem 0.75rem; }
+      nav a{ margin-left:0; }
+
+      .wrap{ padding: 2rem 1rem 2.5rem; }
+
+      .preview iframe { display: none; }
+      .preview{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding: 0.75rem;
+        color: #555;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+      .preview::before { content: "Tap to open live project"; }
+      .preview .label{ display:none; }
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.6rem;
+      margin-top: 0.15rem;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0.55rem 1rem;
+      border-radius:999px;
+      border: none;
+      text-decoration:none;
+      font-size:0.9rem;
+      font-weight:600;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: var(--sage);
+      color:#fff;
+      box-shadow: 0 10px 20px rgba(110,147,124,0.35);
+    }
+    .btn.primary:hover, .btn.primary:focus-visible{
+      background: var(--forest);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(110,147,124,0.45);
+    }
+    .btn.secondary{
+      background: transparent;
+      color: var(--forest);
+      border: 1px solid var(--forest);
+    }
+    .btn.secondary:hover, .btn.secondary:focus-visible{
+      background: var(--forest);
+      color:#fff;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(110,147,124,0.35);
+    }
+
+    .note{
+      margin-top: 0.9rem;
+      color:#555;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      background: rgba(255,246,243,0.85);
+      border: 1px solid rgba(198,184,174,0.55);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+    }
+
+    footer{
+      border-top: 1px solid rgba(198,184,174,0.6);
+      background: rgba(255,246,243,0.95);
+      padding: 0.9rem 1.25rem;
+      font-size:0.8rem;
+    }
+    .footer-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="logo">GV • Digital Media</div>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="projects.html" aria-current="page">Projects</a>
+        <a href="design.html">Design</a>
+        <a href="photography.html">Photography</a>
+        <a href="game-design.html">Game Design</a>
+        <a href="about.html">About</a>
+        <a href="accessibility.html">Accessibility</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="page-title">
+        <h1>Projects</h1>
+        <p>
+          I’m a DIGIT student, so my work isn’t only “design” — it’s a mix of development, writing/research,
+          interactive media, and visual communication. This page highlights projects that show growth from early
+          HTML/CSS sites to more interactive work (React + Three.js) and a research-driven Tech Issue guide.
+        </p>
+      </div>
+
+      <div class="chip-row" aria-label="Project focus tags">
+        <div class="chip">Tech Issue Guide</div>
+        <div class="chip">Interactive Web</div>
+        <div class="chip">Research + Writing</div>
+        <div class="chip">React</div>
+        <div class="chip">Three.js</div>
+        <div class="chip">DIGIT100</div>
+        <div class="chip">DIGIT110</div>
+      </div>
+
+      <!-- FEATURED -->
+      <section aria-labelledby="featured-title">
+        <div class="section-head">
+          <div>
+            <h2 id="featured-title">Featured</h2>
+            <p>
+              The projects I want viewers to open first — they best represent my current skills in interactive web work,
+              organization, and polish.
+            </p>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <!-- Tech Issue -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT400</span>
+              <span class="tag">Tech Issue</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag pink">JavaScript</span>
+            </div>
+            <h3>Tech Issue: Sustainable Technology & AI</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://gabvoz13.github.io/Techissue/"
+                title="Preview: Tech Issue Resource Guide"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/Techissue/" target="_blank" rel="noreferrer"
+                 aria-label="Open Tech Issue Resource Guide in a new tab"></a>
+            </div>
+
+            <p>
+              Multi-page resource guide that blends research writing with web presentation. Built for clarity,
+              navigation, and accessibility.
+            </p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/Techissue/" target="_blank" rel="noreferrer">Live Site</a>
+              <a class="btn secondary" href="https://github.com/GabVoz13/Techissue" target="_blank" rel="noreferrer">GitHub Repo</a>
+            </div>
+          </article>
+
+          <!-- React -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT400</span>
+              <span class="tag">React</span>
+              <span class="tag pink">JavaScript</span>
+            </div>
+            <h3>React Demo</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://gabvoz13.github.io/react/"
+                title="Preview: React Demo"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/react/" target="_blank" rel="noreferrer"
+                 aria-label="Open React Demo in a new tab"></a>
+            </div>
+
+            <p>
+              A React-based interactive demo showing component structure and a more modern front-end workflow.
+            </p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/react/" target="_blank" rel="noreferrer">Live Demo</a>
+              <a class="btn secondary" href="https://github.com/GabVoz13/react" target="_blank" rel="noreferrer">GitHub Repo</a>
+            </div>
+          </article>
+
+          <!-- Three.js -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT400</span>
+              <span class="tag">Three.js</span>
+              <span class="tag pink">3D</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <h3>Three.js Demo</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://gabvoz13.github.io/NodeJSProject/"
+                title="Preview: Three.js Demo"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/NodeJSProject/" target="_blank" rel="noreferrer"
+                 aria-label="Open Three.js Demo in a new tab"></a>
+            </div>
+
+            <p>
+              Interactive 3D experiment in the browser. Focus on scene setup, camera/view, and user experience.
+            </p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/NodeJSProject/" target="_blank" rel="noreferrer">Live Demo</a>
+              <a class="btn secondary" href="https://github.com/GabVoz13/NodeJSProject" target="_blank" rel="noreferrer">GitHub Repo</a>
+            </div>
+          </article>
+
+          <!-- (Optional) Your current portfolio as a “meta project” -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag">Portfolio</span>
+              <span class="tag">Information Design</span>
+              <span class="tag pink">Iteration</span>
+            </div>
+            <h3>Final Portfolio Site (This Website)</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="index.html"
+                title="Preview: Final Portfolio Home"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="index.html" target="_blank" rel="noreferrer"
+                 aria-label="Open Final Portfolio Home in a new tab"></a>
+            </div>
+
+            <p>
+              A unified multi-page website built to present projects for a clear audience, with consistent style,
+              readable layouts, and accessible structure.
+            </p>
+
+            <div class="actions">
+              <a class="btn primary" href="index.html" target="_blank" rel="noreferrer">Open</a>
+              <a class="btn secondary" href="https://github.com/GabVoz13/Pro_Port" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="note">
+          Tip: if any embedded preview ever shows a blank area, it’s usually because that site blocks iframes.
+          The buttons below each card will still open the project normally in a new tab.
+        </div>
+      </section>
+
+      <!-- DIGIT100 -->
+      <section aria-labelledby="digit100-title">
+        <div class="section-head">
+          <div>
+            <h2 id="digit100-title">DIGIT100</h2>
+            <p>
+              Early portfolio work (HTML/CSS + content organization). I’m keeping these projects to show growth -
+              the content matters, and the site structure shows where I started.
+            </p>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <!-- DIGIT100 Home -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT100</span>
+              <span class="tag">Portfolio</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+            </div>
+            <h3>DIGIT100 Portfolio Home</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://gabvoz13.github.io/Digit100/"
+                title="Preview: DIGIT100 Home"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/Digit100/" target="_blank" rel="noreferrer"
+                 aria-label="Open DIGIT100 Home in a new tab"></a>
+            </div>
+
+            <p>
+              Landing page introducing the site sections (Gallery, Resume, Projects, writing/analysis pages).</p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/Digit100/" target="_blank" rel="noreferrer">Open</a>
+              <a class="btn secondary" href="https://github.com/gabvoz13/Digit100" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+
+          <!-- DIGIT100 Resume -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT100</span>
+              <span class="tag">Professional</span>
+              <span class="tag">Content</span>
+            </div>
+            <h3>Resume Page</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://gabvoz13.github.io/Digit100/Resume.html"
+                title="Preview: DIGIT100 Resume"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/Digit100/Resume.html" target="_blank" rel="noreferrer"
+                 aria-label="Open DIGIT100 Resume in a new tab"></a>
+            </div>
+
+            <p>
+              A web-formatted resume page showcasing experience, education, skills, and involvement.</p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/Digit100/Resume.html" target="_blank" rel="noreferrer">Open</a>
+              <a class="btn secondary" href="https://github.com/gabvoz13/Digit100" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+
+          <!-- DIGIT100 Projects page -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT100</span>
+              <span class="tag">Projects</span>
+              <span class="tag pink">Collaboration</span>
+            </div>
+            <h3>Projects Page</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://gabvoz13.github.io/Digit100/Projects.html"
+                title="Preview: DIGIT100 Projects"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/Digit100/Projects.html" target="_blank" rel="noreferrer"
+                 aria-label="Open DIGIT100 Projects in a new tab"></a>
+            </div>
+
+            <p>
+              A hub page featuring Scanniverse work and a link out to the DIGIT110 CBML semester project.</p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/Digit100/Projects.html" target="_blank" rel="noreferrer">Open</a>
+              <a class="btn secondary" href="https://github.com/gabvoz13/Digit100" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+
+          <!-- DIGIT100 GvW Essay -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT100</span>
+              <span class="tag">Writing</span>
+              <span class="tag pink">Reflection</span>
+            </div>
+            <h3>GitHub Pages vs WordPress Reflection</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://gabvoz13.github.io/Digit100/projectessay.html"
+                title="Preview: GitHub vs WordPress Reflection"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/Digit100/projectessay.html" target="_blank" rel="noreferrer"
+                 aria-label="Open GitHub vs WordPress Reflection in a new tab"></a>
+            </div>
+
+            <p>
+              Reflection comparing GitHub Pages and WordPress (learning curve, control, customization).</p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/Digit100/projectessay.html" target="_blank" rel="noreferrer">Read</a>
+              <a class="btn secondary" href="https://github.com/gabvoz13/Digit100" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+
+          <!-- DIGIT100 Text Compositions -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT100</span>
+              <span class="tag">Text Analysis</span>
+              <span class="tag pink">Voyant / AntConc</span>
+            </div>
+            <h3>Text Compositions</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://gabvoz13.github.io/Digit100/Textcomp.html"
+                title="Preview: Text Compositions"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/Digit100/Textcomp.html" target="_blank" rel="noreferrer"
+                 aria-label="Open Text Compositions in a new tab"></a>
+            </div>
+
+            <p>
+              Lyric comparison project using tools like Voyant and AntConc to track patterns across decades and genres.</p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/Digit100/Textcomp.html" target="_blank" rel="noreferrer">Open</a>
+              <a class="btn secondary" href="https://github.com/gabvoz13/Digit100" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+
+          <!-- DIGIT100 Game Analysis -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT100</span>
+              <span class="tag">Game Writing</span>
+              <span class="tag pink">Analysis</span>
+            </div>
+            <h3>Cry of Fear Game Analysis</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://gabvoz13.github.io/Digit100/Gameanalysis.html"
+                title="Preview: Cry of Fear Game Analysis"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/Digit100/Gameanalysis.html" target="_blank" rel="noreferrer"
+                 aria-label="Open Cry of Fear Game Analysis in a new tab"></a>
+            </div>
+
+            <p>
+              Written analysis focusing on atmosphere, themes, and player experience in Cry of Fear.</p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/Digit100/Gameanalysis.html" target="_blank" rel="noreferrer">Read</a>
+              <a class="btn secondary" href="https://github.com/gabvoz13/Digit100" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+
+          <!-- Scanniverse (described on Projects page) -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT100</span>
+              <span class="tag">Scanniverse</span>
+              <span class="tag pink">Team Project</span>
+            </div>
+            <h3>Scanniverse: Lion Statue Scan</h3>
+
+            <div class="preview">
+              <span class="label">Project page</span>
+              <iframe
+                src="https://gabvoz13.github.io/Digit100/Projects.html"
+                title="Preview: Scanniverse section on Projects page"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/Digit100/Projects.html" target="_blank" rel="noreferrer"
+                 aria-label="Open Projects page (Scanniverse) in a new tab"></a>
+            </div>
+
+            <p>
+              Group scan of the Penn State Behrend lion statue and surrounding details, with shared responsibilities
+              (scanning, annotations, photos, research).</p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/Digit100/Projects.html" target="_blank" rel="noreferrer">Open</a>
+              <a class="btn secondary" href="https://github.com/gabvoz13/Digit100" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- DIGIT110 -->
+      <section aria-labelledby="digit110-title">
+        <div class="section-head">
+          <div>
+            <h2 id="digit110-title">DIGIT110</h2>
+            <p>
+              Coursework that pushed deeper into structuring/organizing content through code and collaboration.
+            </p>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <!-- CBML / Emily Kalie -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag gray">DIGIT110</span>
+              <span class="tag">CBML</span>
+              <span class="tag pink">Collaboration</span>
+            </div>
+            <h3>CBML Semester Project (Comic Book Analysis)</h3>
+
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://emikalie.github.io"
+                title="Preview: CBML Semester Project"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://emikalie.github.io" target="_blank" rel="noreferrer"
+                 aria-label="Open CBML Semester Project in a new tab"></a>
+            </div>
+
+            <p>
+              A comic book analysis project linking text and artwork structure using code. Featured on my DIGIT100 Projects page.</p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://emikalie.github.io/BenjiBearComic/index.html" target="_blank" rel="noreferrer">Project Site</a>
+              <a class="btn secondary" href="https://github.com/emikalie/BenjiBearComic" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+
+          <article class="card">
+  <div class="tag-row">
+    <span class="tag gray">DIGIT100</span>
+    <span class="tag">Collaboration</span>
+    <span class="tag pink">Web Project</span>
+  </div>
+
+  <h3>True Crime Website</h3>
+
+  <div class="preview">
+    <span class="label">Live preview</span>
+    <iframe
+      src="https://dal5842.github.io/True_Crime/"
+      title="Preview: True Crime Website"
+      loading="lazy"
+    ></iframe>
+
+    <a
+      class="shield"
+      href="https://dal5842.github.io/True_Crime/"
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Open True Crime Website in a new tab"
+    ></a>
+  </div>
+
+  <p>
+    A collaborative web project exploring true crime content through a structured multi-page layout and presentation.
+  </p>
+
+  <div class="actions">
+    <a class="btn primary" href="https://dal5842.github.io/True_Crime/" target="_blank" rel="noreferrer">Live Site</a>
+    <a class="btn secondary" href="https://github.com/dal5842/True_Crime" target="_blank" rel="noreferrer">GitHub Repo</a>
+  </div>
+</article>
+
+          <!-- Bridge card (optional) -->
+          <article class="card">
+            <div class="tag-row">
+              <span class="tag">Growth</span>
+              <span class="tag">Process</span>
+              <span class="tag pink">Reflection</span>
+            </div>
+            <h3>Skill Growth: From Static Pages to Interactive Systems</h3>
+
+            <div class="preview">
+              <span class="label">Compare</span>
+              <iframe
+                src="https://gabvoz13.github.io/Digit100/"
+                title="Preview: DIGIT100 baseline"
+                loading="lazy"
+              ></iframe>
+              <a class="shield" href="https://gabvoz13.github.io/Techissue/" target="_blank" rel="noreferrer"
+                 aria-label="Open Tech Issue site in a new tab"></a>
+            </div>
+
+            <p>
+              DIGIT100 focused on structure and content. Later projects prioritize interactivity, navigation systems,
+              and deliberate audience design — while keeping accessibility and readability in mind.
+            </p>
+
+            <div class="actions">
+              <a class="btn primary" href="https://gabvoz13.github.io/Digit100/" target="_blank" rel="noreferrer">DIGIT100</a>
+              <a class="btn secondary" href="https://gabvoz13.github.io/Techissue/" target="_blank" rel="noreferrer">Tech Issue</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Gabriella Vozar</div>
+      <div>Projects page for DIGIT portfolio assignment</div>
+    </div>
+  </footer>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
