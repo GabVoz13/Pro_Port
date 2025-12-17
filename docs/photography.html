@@ -52,6 +52,14 @@
       font-family:"Playfair Display", serif;
       font-weight:700;
       letter-spacing:0.05em;
+      white-space:nowrap;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:0.4rem 0.75rem;
     }
 
     nav a{
@@ -80,6 +88,32 @@
     nav a[aria-current="page"]{
       color:var(--forest);
       font-weight:600;
+    }
+
+    /* === Petal toggle button === */
+    .fx-toggle{
+      margin-left:0.5rem;
+      padding:0.45rem 0.75rem;
+      border-radius:999px;
+      border:1px solid rgba(110,147,124,0.75);
+      background:rgba(167,196,160,0.14);
+      color:var(--forest);
+      font-size:0.85rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.18s ease;
+      white-space:nowrap;
+    }
+    .fx-toggle:hover,
+    .fx-toggle:focus-visible{
+      background:var(--forest);
+      color:#fff;
+      transform:translateY(-1px);
+    }
+    .fx-toggle[aria-pressed="true"]{
+      background:var(--sage);
+      border-color:var(--sage);
+      color:#fff;
     }
 
     main{ flex:1; }
@@ -132,16 +166,14 @@
       color:white;
     }
 
-    /* Panels */
-    .panel{
-      display:none;
+    .tab:focus-visible{
+      outline:3px solid rgba(167,196,160,0.6);
+      outline-offset:2px;
     }
 
-    .panel.active{
-      display:block;
-    }
+    .panel{ display:none; }
+    .panel.active{ display:block; }
 
-    /* Placeholder grid */
     .photo-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -172,6 +204,7 @@
       font-style:italic;
     }
 
+    /* Footer */
     footer{
       border-top:1px solid rgba(198,184,174,0.6);
       background:rgba(255,246,243,0.95);
@@ -179,13 +212,63 @@
       font-size:0.8rem;
     }
 
-    .footer-inner{
+    .footer-inner.centered{
       max-width:1100px;
       margin:0 auto;
       display:flex;
-      justify-content:space-between;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:0.35rem;
+    }
+
+    .license{
+      font-size:0.75rem;
+      color:#555;
+      display:flex;
+      align-items:center;
       flex-wrap:wrap;
-      gap:0.5rem;
+      justify-content:center;
+      gap:0.25rem;
+    }
+
+    .license a{
+      color:var(--forest);
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    .license a:hover,
+    .license a:focus-visible{ text-decoration:underline; }
+
+    .tech{
+      color:#666;
+      font-size:0.75rem;
+    }
+
+    /* Petals */
+    .petal{
+      position:fixed;
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      pointer-events:none;
+      z-index:9998;
+      transform:translate(-50%,-50%);
+      opacity:0.9;
+      animation:petal-float 700ms ease-out forwards;
+    }
+
+    @keyframes petal-float{
+      to{
+        transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2);
+        opacity:0;
+      }
+    }
+
+    @media(max-width:600px){
+      header{ position:static; }
+      nav a{ margin-left:0; }
     }
   </style>
 </head>
@@ -202,6 +285,11 @@
       <a href="about.html">About</a>
       <a href="accessibility.html">Accessibility</a>
       <a href="contact.html">Contact</a>
+
+      <!-- Petal toggle -->
+      <button id="fxToggle" class="fx-toggle" type="button" aria-pressed="false">
+        Petals: Off
+      </button>
     </nav>
   </div>
 </header>
@@ -217,21 +305,13 @@
       </p>
     </div>
 
-    <!-- Tabs -->
     <div class="tabs" role="tablist" aria-label="Photography categories">
-      <button class="tab" role="tab" aria-selected="true" aria-controls="sports" id="tab-sports">
-        Sports
-      </button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="pets" id="tab-pets">
-        Pets
-      </button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="landscapes" id="tab-landscapes">
-        Landscapes
-      </button>
+      <button class="tab" role="tab" aria-selected="true" aria-controls="sports">Sports</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="pets">Pets</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="landscapes">Landscapes</button>
     </div>
 
-    <!-- Sports -->
-    <section class="panel active" role="tabpanel" id="sports" aria-labelledby="tab-sports">
+    <section class="panel active" id="sports">
       <div class="photo-grid">
         <div class="placeholder">placeholder</div>
         <div class="placeholder">placeholder</div>
@@ -242,8 +322,7 @@
       </div>
     </section>
 
-    <!-- Pets -->
-    <section class="panel" role="tabpanel" id="pets" aria-labelledby="tab-pets">
+    <section class="panel" id="pets">
       <div class="photo-grid">
         <div class="placeholder">placeholder</div>
         <div class="placeholder">placeholder</div>
@@ -254,15 +333,14 @@
       </div>
     </section>
 
-    <!-- Landscapes -->
-    <section class="panel" role="tabpanel" id="landscapes" aria-labelledby="tab-landscapes">
+    <section class="panel" id="landscapes">
       <div class="photo-grid">
         <div class="placeholder">placeholder</div>
         <div class="placeholder">placeholder</div>
-        <div class="placeholder">Placeholder</div>
         <div class="placeholder">placeholder</div>
         <div class="placeholder">placeholder</div>
-        <div class="placeholder">Placeholder</div>
+        <div class="placeholder">placeholder</div>
+        <div class="placeholder">placeholder</div>
       </div>
     </section>
 
@@ -271,48 +349,79 @@
 
 <footer>
   <div class="footer-inner centered">
-
-    <div class="copyright">
-      © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
-    </div>
+    <div>© <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology</div>
 
     <div class="license">
       This work is licensed under
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
-        CC BY 4.0
-      </a>
-      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
-           alt="Creative Commons"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
-      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
-           alt="Attribution required"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="">
+      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="">
     </div>
 
     <div class="tech">
       Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull
     </div>
-
   </div>
 </footer>
 
-
 <script>
-  // Tab interaction
+  // Tabs
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      tabs.forEach(t => t.setAttribute('aria-selected','false'));
       panels.forEach(p => p.classList.remove('active'));
-
-      tab.setAttribute('aria-selected', 'true');
+      tab.setAttribute('aria-selected','true');
       document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
     });
   });
 
+  // Year
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Petal toggle
+  const toggle = document.getElementById("fxToggle");
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+  let petalsOn = localStorage.getItem("petalsOn") === "true";
+
+  function updateToggle(){
+    toggle.textContent = petalsOn ? "Petals: On" : "Petals: Off";
+    toggle.setAttribute("aria-pressed", petalsOn);
+  }
+  updateToggle();
+
+  toggle.addEventListener("click", () => {
+    petalsOn = !petalsOn;
+    localStorage.setItem("petalsOn", petalsOn);
+    updateToggle();
+  });
+
+  if (!prefersReduced && finePointer) {
+    let last = 0;
+    window.addEventListener("mousemove", e => {
+      if (!petalsOn) return;
+      const now = performance.now();
+      if (now - last < 35) return;
+      last = now;
+
+      const p = document.createElement("div");
+      p.className = "petal";
+      p.style.left = e.clientX + "px";
+      p.style.top  = e.clientY + "px";
+      p.style.setProperty("--dx", (Math.random()*90-45)+"px");
+      p.style.setProperty("--dy", (Math.random()*90-45)+"px");
+      p.style.background = Math.random() > 0.5
+        ? "rgba(248,221,226,0.95)"
+        : "rgba(167,196,160,0.9)";
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),800);
+    });
+  }
 </script>
 </body>
 </html>
+

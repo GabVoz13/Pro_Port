@@ -92,6 +92,32 @@
       padding:2.5rem 1.25rem 3rem;
     }
 
+    /* === Petal toggle button === */
+    .fx-toggle{
+      margin-left:0.5rem;
+      padding:0.45rem 0.75rem;
+      border-radius:999px;
+      border:1px solid rgba(110,147,124,0.75);
+      background:rgba(167,196,160,0.14);
+      color:var(--forest);
+      font-size:0.85rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.18s ease;
+      white-space:nowrap;
+    }
+    .fx-toggle:hover,
+    .fx-toggle:focus-visible{
+      background:var(--forest);
+      color:#fff;
+      transform:translateY(-1px);
+    }
+    .fx-toggle[aria-pressed="true"]{
+      background:var(--sage);
+      border-color:var(--sage);
+      color:#fff;
+    }
+
     .page-title{
       text-align:center;
       margin-bottom:1.5rem;
@@ -252,6 +278,31 @@
       }
       .preview .label{ display:none; }
     }
+
+    /* Petals */
+    .petal{
+      position:fixed;
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      pointer-events:none;
+      z-index:9998;
+      transform:translate(-50%,-50%);
+      opacity:0.9;
+      animation:petal-float 700ms ease-out forwards;
+    }
+
+    @keyframes petal-float{
+      to{
+        transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2);
+        opacity:0;
+      }
+    }
+
+    @media(max-width:600px){
+      header{ position:static; }
+      nav a{ margin-left:0; }
+    }
   </style>
 </head>
 
@@ -267,6 +318,11 @@
       <a href="about.html">About</a>
       <a href="accessibility.html">Accessibility</a>
       <a href="contact.html">Contact</a>
+
+      <!-- Petal toggle -->
+      <button id="fxToggle" class="fx-toggle" type="button" aria-pressed="false">
+        Petals: Off
+      </button>
     </nav>
   </div>
 </header>
@@ -362,6 +418,47 @@
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Petal toggle
+  const toggle = document.getElementById("fxToggle");
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+  let petalsOn = localStorage.getItem("petalsOn") === "true";
+
+  function updateToggle(){
+    toggle.textContent = petalsOn ? "Petals: On" : "Petals: Off";
+    toggle.setAttribute("aria-pressed", petalsOn);
+  }
+  updateToggle();
+
+  toggle.addEventListener("click", () => {
+    petalsOn = !petalsOn;
+    localStorage.setItem("petalsOn", petalsOn);
+    updateToggle();
+  });
+
+  if (!prefersReduced && finePointer) {
+    let last = 0;
+    window.addEventListener("mousemove", e => {
+      if (!petalsOn) return;
+      const now = performance.now();
+      if (now - last < 35) return;
+      last = now;
+
+      const p = document.createElement("div");
+      p.className = "petal";
+      p.style.left = e.clientX + "px";
+      p.style.top  = e.clientY + "px";
+      p.style.setProperty("--dx", (Math.random()*90-45)+"px");
+      p.style.setProperty("--dy", (Math.random()*90-45)+"px");
+      p.style.background = Math.random() > 0.5
+        ? "rgba(248,221,226,0.95)"
+        : "rgba(167,196,160,0.9)";
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),800);
+    });
+  }
 </script>
 </body>
 </html>

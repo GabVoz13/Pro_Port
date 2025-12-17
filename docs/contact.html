@@ -55,6 +55,14 @@
       font-family:"Playfair Display", serif;
       font-weight:700;
       letter-spacing:0.05em;
+      white-space:nowrap;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:0.35rem 0.75rem;
     }
 
     nav a{
@@ -75,6 +83,7 @@
       background:var(--sage);
       transform:translateX(-50%);
       transition:0.25s ease;
+      border-radius:999px;
     }
 
     nav a:hover::after,
@@ -83,6 +92,33 @@
     nav a[aria-current="page"]{
       color:var(--forest);
       font-weight:600;
+    }
+
+    /* Nav toggle button */
+    .fx-toggle{
+      margin-left:0.5rem;
+      padding:0.45rem 0.75rem;
+      border-radius:999px;
+      border:1px solid rgba(110,147,124,0.75);
+      background:rgba(167,196,160,0.14);
+      color:var(--forest);
+      font:inherit;
+      font-size:0.85rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.18s ease;
+      white-space:nowrap;
+    }
+    .fx-toggle:hover,
+    .fx-toggle:focus-visible{
+      background:var(--forest);
+      color:#fff;
+      transform:translateY(-1px);
+    }
+    .fx-toggle[aria-pressed="true"]{
+      background:var(--sage);
+      border-color:var(--sage);
+      color:#fff;
     }
 
     main{ flex:1; }
@@ -156,6 +192,7 @@
       display:flex;
       gap:0.6rem;
       margin-top:1rem;
+      flex-wrap:wrap;
     }
 
     .btn{
@@ -165,36 +202,84 @@
       font-size:0.9rem;
       font-weight:600;
       cursor:pointer;
+      transition:0.18s ease;
     }
 
     .btn.primary{
       background:var(--sage);
       color:white;
+      box-shadow: 0 10px 20px rgba(110,147,124,0.25);
     }
 
-    .btn.primary:hover{
+    .btn.primary:hover,
+    .btn.primary:focus-visible{
       background:var(--forest);
+      transform:translateY(-1px);
     }
 
+    /* Footer */
     footer{
       border-top:1px solid rgba(198,184,174,0.6);
       background:rgba(255,246,243,0.95);
-      padding:0.9rem 1.25rem;
+      padding:0.95rem 1.25rem;
       font-size:0.8rem;
     }
 
-    .footer-inner{
+    .footer-inner.centered{
       max-width:1100px;
       margin:0 auto;
       display:flex;
-      justify-content:space-between;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:0.35rem;
+    }
+
+    .license{
+      font-size:0.75rem;
+      color:#555;
+      display:flex;
+      align-items:center;
       flex-wrap:wrap;
-      gap:0.5rem;
+      justify-content:center;
+      gap:0.25rem;
+    }
+
+    .license a{
+      color:var(--forest);
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    .license a:hover,
+    .license a:focus-visible{ text-decoration:underline; }
+
+    .tech{
+      color:#666;
+      font-size:0.75rem;
+    }
+
+    /* Petal trail effect */
+    .petal{
+      position: fixed;
+      width:10px; height:10px;
+      border-radius: 999px;
+      pointer-events:none;
+      z-index:9998;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+      animation: petal-float 700ms ease-out forwards;
+      filter: blur(0.2px);
+    }
+    @keyframes petal-float{
+      to{
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2);
+        opacity: 0;
+      }
     }
 
     @media(max-width:600px){
       header{ position:static; }
-      nav{ display:flex; flex-wrap:wrap; gap:0.4rem 0.75rem; }
       nav a{ margin-left:0; }
     }
   </style>
@@ -204,7 +289,7 @@
 <header>
   <div class="nav-inner">
     <div class="logo">GV • Digital Media</div>
-    <nav>
+    <nav aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="projects.html">Projects</a>
       <a href="photography.html">Photography</a>
@@ -212,6 +297,11 @@
       <a href="about.html">About</a>
       <a href="accessibility.html">Accessibility</a>
       <a href="contact.html" aria-current="page">Contact</a>
+
+      <!-- Effect toggle (accessible) -->
+      <button id="fxToggle" class="fx-toggle" type="button" aria-pressed="false">
+        Petals: Off
+      </button>
     </nav>
   </div>
 </header>
@@ -227,7 +317,6 @@
 
     <section class="card">
       <form action="https://formspree.io/f/xblneaoa" method="POST">
-
         <label for="name">Name</label>
         <input id="name" name="name" type="text" required>
 
@@ -244,6 +333,7 @@
         <!-- Formspree extras -->
         <input type="hidden" name="_subject" value="New Portfolio Contact">
         <input type="text" name="_gotcha" style="display:none">
+
         <div class="btn-row">
           <button class="btn primary" type="submit">Send message</button>
         </div>
@@ -254,7 +344,6 @@
 
 <footer>
   <div class="footer-inner centered">
-
     <div class="copyright">
       © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
     </div>
@@ -275,13 +364,64 @@
     <div class="tech">
       Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull
     </div>
-
   </div>
 </footer>
 
-
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+  // Year
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Petal effect toggle (saved across pages)
+  const toggleBtn = document.getElementById("fxToggle");
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+  let petalsOn = localStorage.getItem("petalsOn") === "true";
+
+  function updateToggleUI() {
+    toggleBtn.setAttribute("aria-pressed", String(petalsOn));
+    toggleBtn.textContent = petalsOn ? "Petals: On" : "Petals: Off";
+  }
+
+  updateToggleUI();
+
+  toggleBtn.addEventListener("click", () => {
+    petalsOn = !petalsOn;
+    localStorage.setItem("petalsOn", String(petalsOn));
+    updateToggleUI();
+  });
+
+  // Petals follow cursor (only if user allows motion + desktop pointer)
+  if (!prefersReduced && finePointer) {
+    let last = 0;
+
+    window.addEventListener("mousemove", (e) => {
+      if (!petalsOn) return;
+
+      const now = performance.now();
+      if (now - last < 35) return; // throttle
+      last = now;
+
+      const p = document.createElement("div");
+      p.className = "petal";
+      p.style.left = e.clientX + "px";
+      p.style.top  = e.clientY + "px";
+
+      // random drift
+      p.style.setProperty("--dx", (Math.random() * 90 - 45) + "px");
+      p.style.setProperty("--dy", (Math.random() * 90 - 45) + "px");
+
+      // soft palette petals
+      p.style.background = (Math.random() > 0.5)
+        ? "rgba(167,196,160,0.9)"   // sage
+        : "rgba(248,221,226,0.95)"; // blush
+
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 800);
+    });
+  }
 </script>
 </body>
 </html>
+

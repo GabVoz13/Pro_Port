@@ -57,11 +57,18 @@
       white-space:nowrap;
     }
 
+    nav{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:0.4rem 0.75rem;
+    }
+
     nav a{
       text-decoration:none;
       color:var(--charcoal);
       font-size:0.95rem;
-      margin-left:1.25rem;
+      margin-left:0.6rem;
       position:relative;
     }
 
@@ -248,8 +255,6 @@
     /* Mobile fallback */
     @media (max-width: 600px) {
       header{ position:static; }
-      nav{ display:flex; flex-wrap:wrap; gap:0.4rem 0.75rem; }
-      nav a{ margin-left:0; }
 
       .wrap{ padding: 2rem 1rem 2.5rem; }
 
@@ -319,20 +324,107 @@
       padding: 0.95rem 1rem;
     }
 
+    /* Footer */
     footer{
       border-top: 1px solid rgba(198,184,174,0.6);
       background: rgba(255,246,243,0.95);
       padding: 0.9rem 1.25rem;
       font-size:0.8rem;
     }
-    .footer-inner{
+    .footer-inner.centered{
       max-width:1100px;
       margin:0 auto;
       display:flex;
-      justify-content:space-between;
+      flex-direction:column;
       align-items:center;
+      text-align:center;
+      gap:0.35rem;
+    }
+    .footer-inner .tech{
+      color:#666;
+      font-size:0.75rem;
+    }
+    .footer-inner .license{
+      font-size:0.75rem;
+      color:#555;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       flex-wrap:wrap;
-      gap:0.5rem;
+      gap:0.25rem;
+    }
+    .footer-inner .license a{
+      color:var(--forest);
+      font-weight:600;
+      text-decoration:none;
+    }
+    .footer-inner .license a:hover,
+    .footer-inner .license a:focus-visible{
+      text-decoration:underline;
+    }
+
+    /* -----------------------------
+       React toggle button (nav)
+    ------------------------------ */
+    #react-effects-toggle{ display:flex; align-items:center; margin-left:0.6rem; }
+
+    .effects-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:0.45rem;
+      padding:0.42rem 0.75rem;
+      border-radius:999px;
+      border:1px solid rgba(110,147,124,0.75);
+      background: rgba(167,196,160,0.12);
+      color: var(--forest);
+      font-size:0.85rem;
+      font-weight:600;
+      cursor:pointer;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .effects-btn:hover,
+    .effects-btn:focus-visible{
+      background: rgba(167,196,160,0.22);
+      transform: translateY(-1px);
+    }
+    .effects-btn[aria-pressed="true"]{
+      background: var(--sage);
+      color:#fff;
+      border-color: var(--sage);
+    }
+    .effects-dot{
+      width:10px; height:10px;
+      border-radius:999px;
+      background: rgba(110,147,124,0.65);
+      box-shadow: 0 0 0 3px rgba(167,196,160,0.18);
+    }
+    .effects-btn[aria-pressed="true"] .effects-dot{
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.22);
+    }
+
+    /* -----------------------------
+       Petal trail effect
+       (only runs when enabled + desktop + motion allowed)
+    ------------------------------ */
+    .petal{
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+      animation: petal-float 850ms ease-out forwards;
+      filter: blur(0.1px);
+    }
+
+    @keyframes petal-float{
+      to{
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -349,6 +441,9 @@
         <a href="about.html">About</a>
         <a href="accessibility.html">Accessibility</a>
         <a href="contact.html">Contact</a>
+
+        <!-- React mounts the toggle button here -->
+        <span id="react-effects-toggle"></span>
       </nav>
     </div>
   </header>
@@ -482,7 +577,7 @@
             </div>
           </article>
 
-          <!-- (Optional) Your current portfolio as a “meta project” -->
+          <!-- This Website -->
           <article class="card">
             <div class="tag-row">
               <span class="tag">Portfolio</span>
@@ -555,8 +650,7 @@
                  aria-label="Open DIGIT100 Home in a new tab"></a>
             </div>
 
-            <p>
-              Landing page introducing the site sections (Gallery, Resume, Projects, writing/analysis pages).</p>
+            <p>Landing page introducing the site sections (Gallery, Resume, Projects, writing/analysis pages).</p>
 
             <div class="actions">
               <a class="btn primary" href="https://gabvoz13.github.io/Digit100/" target="_blank" rel="noreferrer">Open</a>
@@ -584,8 +678,7 @@
                  aria-label="Open DIGIT100 Resume in a new tab"></a>
             </div>
 
-            <p>
-              A web-formatted resume page showcasing experience, education, skills, and involvement.</p>
+            <p>A web-formatted resume page showcasing experience, education, skills, and involvement.</p>
 
             <div class="actions">
               <a class="btn primary" href="https://gabvoz13.github.io/Digit100/Resume.html" target="_blank" rel="noreferrer">Open</a>
@@ -613,8 +706,7 @@
                  aria-label="Open DIGIT100 Projects in a new tab"></a>
             </div>
 
-            <p>
-              A hub page featuring Scanniverse work and a link out to the DIGIT110 CBML semester project.</p>
+            <p>A hub page featuring Scanniverse work and a link out to the DIGIT110 CBML semester project.</p>
 
             <div class="actions">
               <a class="btn primary" href="https://gabvoz13.github.io/Digit100/Projects.html" target="_blank" rel="noreferrer">Open</a>
@@ -642,8 +734,7 @@
                  aria-label="Open GitHub vs WordPress Reflection in a new tab"></a>
             </div>
 
-            <p>
-              Reflection comparing GitHub Pages and WordPress (learning curve, control, customization).</p>
+            <p>Reflection comparing GitHub Pages and WordPress (learning curve, control, customization).</p>
 
             <div class="actions">
               <a class="btn primary" href="https://gabvoz13.github.io/Digit100/projectessay.html" target="_blank" rel="noreferrer">Read</a>
@@ -671,24 +762,22 @@
                  aria-label="Open Text Compositions in a new tab"></a>
             </div>
 
-            <p>
-              Lyric comparison project using tools like Voyant and AntConc to track patterns across decades and genres.</p>
+            <p>Lyric comparison project using tools like Voyant and AntConc to track patterns across decades and genres.</p>
 
             <div class="actions">
               <a class="btn primary" href="https://gabvoz13.github.io/Digit100/Textcomp.html" target="_blank" rel="noreferrer">Open</a>
               <a class="btn secondary" href="https://github.com/gabvoz13/Digit100" target="_blank" rel="noreferrer">Repo</a>
             </div>
           </article>
-
+        </div>
+      </section>
 
       <!-- DIGIT110 -->
       <section aria-labelledby="digit110-title">
         <div class="section-head">
           <div>
             <h2 id="digit110-title">DIGIT110</h2>
-            <p>
-              Coursework that pushed deeper into structuring/organizing content through code and collaboration.
-            </p>
+            <p>Coursework that pushed deeper into structuring/organizing content through code and collaboration.</p>
             <div class="divider"></div>
           </div>
         </div>
@@ -710,12 +799,11 @@
                 title="Preview: CBML Semester Project"
                 loading="lazy"
               ></iframe>
-              <a class="shield" href="https://emikalie.github.io" target="_blank" rel="noreferrer"
+              <a class="shield" href="https://emikalie.github.io/BenjiBearComic/index.html" target="_blank" rel="noreferrer"
                  aria-label="Open CBML Semester Project in a new tab"></a>
             </div>
 
-            <p>
-              A comic book analysis project linking text and artwork structure using code. Featured on my DIGIT100 Projects page.</p>
+            <p>A comic book analysis project linking text and artwork structure using code.</p>
 
             <div class="actions">
               <a class="btn primary" href="https://emikalie.github.io/BenjiBearComic/index.html" target="_blank" rel="noreferrer">Project Site</a>
@@ -723,43 +811,37 @@
             </div>
           </article>
 
+          <!-- True Crime Website -->
           <article class="card">
-  <div class="tag-row">
-    <span class="tag gray">DIGIT100</span>
-    <span class="tag">Collaboration</span>
-    <span class="tag pink">Web Project</span>
-  </div>
+            <div class="tag-row">
+              <span class="tag gray">DIGIT100</span>
+              <span class="tag">Collaboration</span>
+              <span class="tag pink">Web Project</span>
+            </div>
 
-  <h3>True Crime Website</h3>
+            <h3>True Crime Website</h3>
 
-  <div class="preview">
-    <span class="label">Live preview</span>
-    <iframe
-      src="https://dal5842.github.io/True_Crime/"
-      title="Preview: True Crime Website"
-      loading="lazy"
-    ></iframe>
+            <div class="preview">
+              <span class="label">Live preview</span>
+              <iframe
+                src="https://dal5842.github.io/True_Crime/"
+                title="Preview: True Crime Website"
+                loading="lazy"
+              ></iframe>
 
-    <a
-      class="shield"
-      href="https://dal5842.github.io/True_Crime/"
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Open True Crime Website in a new tab"
-    ></a>
-  </div>
+              <a class="shield" href="https://dal5842.github.io/True_Crime/" target="_blank" rel="noreferrer"
+                 aria-label="Open True Crime Website in a new tab"></a>
+            </div>
 
-  <p>
-    A collaborative web project exploring true crime content through a structured multi-page layout and presentation.
-  </p>
+            <p>A collaborative web project exploring true crime content through a structured multi-page layout and presentation.</p>
 
-  <div class="actions">
-    <a class="btn primary" href="https://dal5842.github.io/True_Crime/" target="_blank" rel="noreferrer">Live Site</a>
-    <a class="btn secondary" href="https://github.com/dal5842/True_Crime" target="_blank" rel="noreferrer">GitHub Repo</a>
-  </div>
-</article>
+            <div class="actions">
+              <a class="btn primary" href="https://dal5842.github.io/True_Crime/" target="_blank" rel="noreferrer">Live Site</a>
+              <a class="btn secondary" href="https://github.com/dal5842/True_Crime" target="_blank" rel="noreferrer">GitHub Repo</a>
+            </div>
+          </article>
 
-          <!-- Bridge card (optional) -->
+          <!-- Bridge card -->
           <article class="card">
             <div class="tag-row">
               <span class="tag">Growth</span>
@@ -796,36 +878,141 @@
   </main>
 
   <footer>
-  <div class="footer-inner centered">
+    <div class="footer-inner centered">
 
-    <div class="copyright">
-      © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
+      <div class="copyright">
+        © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
+      </div>
+
+      <div class="license">
+        This work is licensed under
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
+          CC BY 4.0
+        </a>
+        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
+             alt="Creative Commons"
+             style="max-width:1em;max-height:1em;margin-left:.2em;">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
+             alt="Attribution required"
+             style="max-width:1em;max-height:1em;margin-left:.2em;">
+      </div>
+
+      <div class="tech">
+        Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull
+      </div>
+
     </div>
-
-    <div class="license">
-      This work is licensed under
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
-        CC BY 4.0
-      </a>
-      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
-           alt="Creative Commons"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
-      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
-           alt="Attribution required"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
-    </div>
-
-    <div class="tech">
-      Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull
-    </div>
-
-  </div>
-</footer>
-
+  </footer>
 
   <script>
     const yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
   </script>
+
+  <!-- React (CDN) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <script>
+    // Petal trail: runs only when enabled + fine pointer + motion allowed
+    (function(){
+      const KEY = "gv_petal_fx_enabled";
+      let enabled = localStorage.getItem(KEY) === "true";
+
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+      let last = 0;
+      function spawnPetal(x, y){
+        const p = document.createElement("div");
+        p.className = "petal";
+        p.style.left = x + "px";
+        p.style.top = y + "px";
+
+        // random drift
+        const dx = (Math.random() * 90 - 45) + "px";
+        const dy = (Math.random() * 110 + 20) + "px";
+        p.style.setProperty("--dx", dx);
+        p.style.setProperty("--dy", dy);
+
+        // soft palette petals
+        p.style.background = (Math.random() > 0.5)
+          ? "rgba(232,180,200,0.92)"   // rose
+          : "rgba(167,196,160,0.90)";  // sage
+
+        document.body.appendChild(p);
+        setTimeout(()=>p.remove(), 900);
+      }
+
+      function onMove(e){
+        if (!enabled) return;
+        if (prefersReduced || !finePointer) return;
+
+        const now = performance.now();
+        if (now - last < 35) return; // throttle (performance)
+        last = now;
+
+        spawnPetal(e.clientX, e.clientY);
+      }
+
+      window.addEventListener("mousemove", onMove, { passive:true });
+
+      // Expose a tiny API so React can toggle it
+      window.__GVFX__ = {
+        get enabled(){ return enabled; },
+        setEnabled(v){
+          enabled = !!v;
+          localStorage.setItem(KEY, String(enabled));
+        },
+        safeAvailable(){
+          return finePointer && !prefersReduced;
+        }
+      };
+    })();
+  </script>
+
+  <script>
+    // React toggle button in nav
+    const e = React.createElement;
+
+    function EffectsToggle(){
+      const api = window.__GVFX__;
+      const [isOn, setIsOn] = React.useState(api ? api.enabled : false);
+      const safe = api ? api.safeAvailable() : false;
+
+      function toggle(){
+        const next = !isOn;
+        setIsOn(next);
+        if (api) api.setEnabled(next);
+      }
+
+      // If motion is reduced or pointer isn't fine, show disabled messaging
+      const label = safe
+        ? (isOn ? "Petals: On" : "Petals: Off")
+        : "Petals: Unavailable";
+
+      return e(
+        "button",
+        {
+          type: "button",
+          className: "effects-btn",
+          onClick: toggle,
+          disabled: !safe,
+          "aria-pressed": safe ? String(isOn) : "false",
+          "aria-label": safe
+            ? (isOn ? "Turn off petal cursor trail" : "Turn on petal cursor trail")
+            : "Petal cursor trail is unavailable due to reduced motion or touch input"
+        },
+        e("span", { className:"effects-dot", "aria-hidden":"true" }),
+        label
+      );
+    }
+
+    const mount = document.getElementById("react-effects-toggle");
+    if (mount) {
+      ReactDOM.createRoot(mount).render(e(EffectsToggle));
+    }
+  </script>
 </body>
 </html>
+
