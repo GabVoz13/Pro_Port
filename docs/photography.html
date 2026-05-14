@@ -142,38 +142,6 @@
       color:#555;
     }
 
-    /* Tabs */
-    .tabs{
-      display:flex;
-      justify-content:center;
-      gap:0.5rem;
-      flex-wrap:wrap;
-      margin:1.5rem 0 2rem;
-    }
-
-    .tab{
-      border:1px solid rgba(110,147,124,0.6);
-      background:rgba(167,196,160,0.15);
-      color:var(--forest);
-      border-radius:999px;
-      padding:0.45rem 1.1rem;
-      font-size:0.9rem;
-      cursor:pointer;
-    }
-
-    .tab[aria-selected="true"]{
-      background:var(--forest);
-      color:white;
-    }
-
-    .tab:focus-visible{
-      outline:3px solid rgba(167,196,160,0.6);
-      outline-offset:2px;
-    }
-
-    .panel{ display:none; }
-    .panel.active{ display:block; }
-
     .photo-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -188,21 +156,83 @@
       .photo-grid{ grid-template-columns:1fr; }
     }
 
-    .placeholder{
+    .photo-card{
       aspect-ratio:4/3;
       border-radius:16px;
-      border:1px solid rgba(198,184,174,0.75);
-      background:
-        linear-gradient(135deg, rgba(248,221,226,0.55), rgba(167,196,160,0.18));
+      overflow:hidden;
+      cursor:pointer;
+      position:relative;
+      background:linear-gradient(135deg,rgba(248,221,226,0.55),rgba(167,196,160,0.18));
+      box-shadow:0 6px 16px rgba(0,0,0,0.06);
+      transition:transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .photo-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 24px rgba(0,0,0,0.10);
+    }
+
+    .photo-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .photo-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0);
+      transition:background 0.18s ease;
+      pointer-events:none;
+    }
+
+    .photo-card:hover::after{ background:rgba(0,0,0,0.08); }
+
+    /* Lightbox */
+    #lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.88);
+      z-index:9999;
       display:flex;
       align-items:center;
       justify-content:center;
-      text-align:center;
-      padding:0.75rem;
-      color:#555;
-      font-size:0.95rem;
-      font-style:italic;
+      padding:1.5rem;
+      cursor:zoom-out;
     }
+
+    #lightbox img{
+      max-width:min(92vw,1000px);
+      max-height:90vh;
+      object-fit:contain;
+      border-radius:10px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.5);
+      cursor:default;
+    }
+
+    #lightbox-close{
+      position:absolute;
+      top:1rem;
+      right:1.25rem;
+      background:rgba(255,255,255,0.12);
+      border:none;
+      color:#fff;
+      font-size:1.75rem;
+      line-height:1;
+      width:2.4rem;
+      height:2.4rem;
+      border-radius:50%;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background 0.15s ease;
+    }
+
+    #lightbox-close:hover,
+    #lightbox-close:focus-visible{ background:rgba(255,255,255,0.28); outline:none; }
 
     /* Footer */
     footer{
@@ -279,11 +309,11 @@
     <div class="logo">GV • Digital Media</div>
     <nav>
       <a href="index.html">Home</a>
-      <a href="projects.html">Projects</a>
+      <a href="marketing.html">Marketing & Content</a>
+      <a href="about.html">About</a>
       <a href="photography.html" aria-current="page">Photography</a>
       <a href="gamedesign.html">Game Design</a>
-      <a href="about.html">About</a>
-      <a href="accessibility.html">Accessibility</a>
+      <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
 
       <!-- Petal toggle -->
@@ -300,47 +330,42 @@
     <div class="page-title">
       <h1>Photography</h1>
       <p>
-        A curated selection of photography organized by subject. Categories will be
-        populated as I finalize which images best represent my work.
+        A curated selection of landscape, nature, and pet photography.
       </p>
     </div>
 
-    <div class="tabs" role="tablist" aria-label="Photography categories">
-      <button class="tab" role="tab" aria-selected="true" aria-controls="sports">Sports</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="pets">Pets</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="landscapes">Landscapes</button>
-    </div>
-
-    <section class="panel active" id="sports">
+    <section aria-label="Photography gallery">
       <div class="photo-grid">
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-      </div>
-    </section>
-
-    <section class="panel" id="pets">
-      <div class="photo-grid">
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-      </div>
-    </section>
-
-    <section class="panel" id="landscapes">
-      <div class="photo-grid">
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
-        <div class="placeholder">placeholder</div>
+        <figure class="photo-card"><img src="images/photography/1.jpg" alt="Landscape photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/2.jpg" alt="Landscape photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/3.jpg" alt="Landscape photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/4.jpg" alt="Landscape photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/5.jpg" alt="Landscape photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/6.jpg" alt="Landscape photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/7.jpg" alt="Photograph of my dogs" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/8.jpg" alt="Photograph of my dogs" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/9.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/10.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/11.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/12.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/13.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/14.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/15.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/16.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/17.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/18.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/19.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/20.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/21.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/22.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/23.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/24.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/25.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/26.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/27.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/28.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/29.jpg" alt="Nature photograph" loading="lazy"></figure>
+        <figure class="photo-card"><img src="images/photography/30.jpg" alt="Nature photograph" loading="lazy"></figure>
       </div>
     </section>
 
@@ -349,37 +374,57 @@
 
 <footer>
   <div class="footer-inner centered">
-    <div>© <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology</div>
-
+    <div class="copyright">
+      © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
+    </div>
     <div class="license">
       This work is licensed under
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
-      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="">
-      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="">
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
+           alt="Creative Commons" style="max-width:1em;max-height:1em;margin-left:.2em;">
+      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
+           alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
     </div>
-
-    <div class="tech">
-      Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull
-    </div>
+    <div class="tech">Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
+    <div><a href="accessibility.html" style="color:var(--forest);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
   </div>
 </footer>
 
-<script>
-  // Tabs
-  const tabs = document.querySelectorAll('.tab');
-  const panels = document.querySelectorAll('.panel');
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Full size photo" style="display:none">
+  <button id="lightbox-close" aria-label="Close photo">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.setAttribute('aria-selected','false'));
-      panels.forEach(p => p.classList.remove('active'));
-      tab.setAttribute('aria-selected','true');
-      document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Lightbox
+  const lightbox = document.getElementById("lightbox");
+  const lbImg    = document.getElementById("lightbox-img");
+  const lbClose  = document.getElementById("lightbox-close");
+
+  document.querySelectorAll(".photo-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const img = card.querySelector("img");
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      lbClose.focus();
     });
   });
 
-  // Year
-  document.getElementById("year").textContent = new Date().getFullYear();
+  function closeLightbox(){
+    lightbox.style.display = "none";
+    lbImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  lbClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener("keydown", e => {
+    if (lightbox.style.display !== "none" && e.key === "Escape") closeLightbox();
+  });
 
   // Petal toggle
   const toggle = document.getElementById("fxToggle");

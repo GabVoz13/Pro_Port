@@ -231,13 +231,38 @@
       font-size:0.8rem;
     }
 
-    .footer-inner{
+        .footer-inner.centered{
       max-width:1100px;
       margin:0 auto;
       display:flex;
-      justify-content:space-between;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:0.35rem;
+    }
+
+    .license{
+      font-size:0.75rem;
+      color:#555;
+      display:flex;
+      align-items:center;
       flex-wrap:wrap;
-      gap:0.5rem;
+      justify-content:center;
+      gap:0.25rem;
+    }
+
+    .license a{
+      color:var(--forest);
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    .license a:hover,
+    .license a:focus-visible{ text-decoration:underline; }
+
+    .tech{
+      color:#666;
+      font-size:0.75rem;
     }
 
     @media(max-width:600px){
@@ -271,14 +296,14 @@
 <body>
 <header>
   <div class="nav-inner">
-    <div class="logo">BV • Digital Media</div>
+    <div class="logo">GV • Digital Media</div>
     <nav aria-label="Main navigation">
       <a href="index.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="photography.html">Photography</a>
-      <a href="game-design.html">Game Design</a>
+      <a href="marketing.html">Marketing & Content</a>
       <a href="about.html">About</a>
-      <a href="accessibility.html" aria-current="page">Accessibility</a>
+      <a href="photography.html">Photography</a>
+      <a href="gamedesign.html">Game Design</a>
+      <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
 
       <!-- Petal toggle -->
@@ -426,31 +451,20 @@
 
 <footer>
   <div class="footer-inner centered">
-
     <div class="copyright">
       © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
     </div>
-
     <div class="license">
       This work is licensed under
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
-        CC BY 4.0
-      </a>
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
       <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
-           alt="Creative Commons"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
+           alt="Creative Commons" style="max-width:1em;max-height:1em;margin-left:.2em;">
       <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
-           alt="Attribution required"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
+           alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
     </div>
-
-    <div class="tech">
-      Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull
-    </div>
-
+    <div class="tech">Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
   </div>
 </footer>
->
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();

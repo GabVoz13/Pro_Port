@@ -255,13 +255,38 @@
       font-size:0.8rem;
     }
 
-    .footer-inner{
+        .footer-inner.centered{
       max-width:1100px;
       margin:0 auto;
       display:flex;
-      justify-content:space-between;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:0.35rem;
+    }
+
+    .license{
+      font-size:0.75rem;
+      color:#555;
+      display:flex;
+      align-items:center;
       flex-wrap:wrap;
-      gap:0.5rem;
+      justify-content:center;
+      gap:0.25rem;
+    }
+
+    .license a{
+      color:var(--forest);
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    .license a:hover,
+    .license a:focus-visible{ text-decoration:underline; }
+
+    .tech{
+      color:#666;
+      font-size:0.75rem;
     }
 
     @media(max-width:600px){
@@ -312,11 +337,11 @@
     <div class="logo">GV • Digital Media</div>
     <nav>
       <a href="index.html">Home</a>
-      <a href="projects.html">Projects</a>
+      <a href="marketing.html">Marketing & Content</a>
+      <a href="about.html">About</a>
       <a href="photography.html">Photography</a>
       <a href="gamedesign.html" aria-current="page">Game Design</a>
-      <a href="about.html">About</a>
-      <a href="accessibility.html">Accessibility</a>
+      <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
 
       <!-- Petal toggle -->
@@ -334,7 +359,7 @@
       <h1>Game Design</h1>
       <p>
         My interest in game design focuses on how mechanics, narrative, and player
-        experience work together. Right now this page highlights design-oriented analysis
+        experience work together. This page highlights design-oriented analysis
         rather than visual production alone.
       </p>
     </div>
@@ -384,6 +409,75 @@
           </a>
         </div>
       </article>
+
+      <article class="card">
+        <div class="tag-row">
+          <span class="tag">Bitsy</span>
+          <span class="tag">Narrative</span>
+          <span class="tag pink">Playable</span>
+        </div>
+
+        <h3>You Had to Be There — Bitsy Game</h3>
+
+        <div class="preview">
+          <span class="label">Playable game</span>
+          <iframe
+            src="you_had_to_be_there.html"
+            title="You Had to Be There — Bitsy Game"
+            loading="lazy"
+          ></iframe>
+          <a
+            class="shield"
+            href="you_had_to_be_there.html"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Play You Had to Be There in full screen"
+          ></a>
+        </div>
+
+        <p>
+          A short narrative game built in Bitsy — exploring storytelling through
+          simple movement, dialogue, and hand-crafted pixel environments.
+        </p>
+
+        <details style="margin-top:0.75rem;">
+          <summary style="cursor:pointer;font-weight:600;color:var(--forest);font-size:0.9rem;list-style:none;display:flex;align-items:center;gap:0.4rem;">
+            <span class="summary-arrow" style="display:inline-block;transition:transform 0.2s ease;">▸</span> Read Artist Statement
+          </summary>
+          <div style="margin-top:0.75rem;border-top:1px solid rgba(198,184,174,0.6);padding-top:0.75rem;">
+            <p style="font-size:0.92rem;line-height:1.7;color:#444;">
+              <em>You Had to Be There</em> grew out of something personal: I didn't have access to social media
+              growing up. While peers were building MySpace pages, setting up Snapchats, and texting each other,
+              I was completely outside those spaces — not by choice, but by circumstance. Friends stopped
+              inviting me to things. By the time we were teenagers, everyone had a snap score and a streak,
+              and there was no real way to reach me outside of school or athletics.
+            </p>
+            <p style="margin-top:0.65rem;font-size:0.92rem;line-height:1.7;color:#444;">
+              I wanted the game to reflect that feeling. You play as a young character moving through different
+              social spaces without ever fully understanding them. NPCs reference inside jokes you'll never learn
+              and drama you were never part of. The game ends where it started — back in your bedroom, now with
+              a phone, but too late. Everyone has already moved on to a new joke without you.
+            </p>
+            <p style="margin-top:0.65rem;font-size:0.92rem;line-height:1.7;color:#444;">
+              The assignment asked us to connect our work to technology and pop culture. Social media felt like
+              the obvious direction, but my relationship with it is complicated. I've learned that a good game
+              is one a player can relate to — and I think a lot of people know what it feels like to be on the
+              outside of something everyone else already understands.
+            </p>
+          </div>
+        </details>
+
+        <div class="actions" style="margin-top:0.9rem;">
+          <a
+            class="btn primary"
+            href="you_had_to_be_there.html"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Play Full Screen
+          </a>
+        </div>
+      </article>
     </div>
 
   </div>
@@ -391,33 +485,32 @@
 
 <footer>
   <div class="footer-inner centered">
-
     <div class="copyright">
       © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
     </div>
-
     <div class="license">
       This work is licensed under
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
-        CC BY 4.0
-      </a>
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
       <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
-           alt="Creative Commons"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
+           alt="Creative Commons" style="max-width:1em;max-height:1em;margin-left:.2em;">
       <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
-           alt="Attribution required"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
+           alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
     </div>
-
-    <div class="tech">
-      Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull
-    </div>
-
+    <div class="tech">Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
+    <div><a href="accessibility.html" style="color:var(--forest);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
   </div>
 </footer>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Artist statement toggle arrow
+  document.querySelectorAll("details").forEach(el => {
+    const arrow = el.querySelector(".summary-arrow");
+    el.addEventListener("toggle", () => {
+      if (arrow) arrow.style.transform = el.open ? "rotate(90deg)" : "rotate(0deg)";
+    });
+  });
 
   // Petal toggle
   const toggle = document.getElementById("fxToggle");

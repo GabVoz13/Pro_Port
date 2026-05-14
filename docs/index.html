@@ -226,49 +226,22 @@
       color: var(--rose);
     }
 
-    /* Right side "card" */
-    .hero-panel {
-      background: rgba(255, 246, 243, 0.9);
+    /* Right side — profile photo */
+    .hero-photo {
       border-radius: 20px;
-      padding: 1.5rem 1.5rem 1.75rem;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(198, 184, 174, 0.5);
-      position: relative;
       overflow: hidden;
-    }
-
-    .hero-panel h2 {
-      font-family: "Playfair Display", serif;
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-panel p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-bottom: 0.8rem;
-    }
-
-    .hero-panel ul {
-      list-style: none;
-      font-size: 0.9rem;
-      padding-left: 0;
-      margin-top: 0.5rem;
-    }
-
-    .hero-panel li {
-      margin-bottom: 0.3rem;
+      aspect-ratio: 4/5;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+      border: 1px solid rgba(198, 184, 174, 0.5);
+      background: linear-gradient(135deg, rgba(248,221,226,0.45), rgba(167,196,160,0.25));
       position: relative;
-      padding-left: 1.1rem;
     }
 
-    .hero-panel li::before {
-      content: "✿";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: var(--rose);
-      font-size: 0.8rem;
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     /* HIGHLIGHT SECTION*/
@@ -368,14 +341,38 @@
       font-size: 0.8rem;
     }
 
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+        .footer-inner.centered{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:0.35rem;
+    }
+
+    .license{
+      font-size:0.75rem;
+      color:#555;
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:0.25rem;
+    }
+
+    .license a{
+      color:var(--forest);
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    .license a:hover,
+    .license a:focus-visible{ text-decoration:underline; }
+
+    .tech{
+      color:#666;
+      font-size:0.75rem;
     }
 
     /*FULL SIDE-WALL VINES*/
@@ -474,8 +471,9 @@ footer {
     padding: 2.5rem 1.25rem 3rem;
   }
 
-  .hero-panel {
+  .hero-photo {
     margin-top: 0.5rem;
+    aspect-ratio: 3/4;
   }
 
   .highlight-grid {
@@ -574,11 +572,11 @@ footer {
     <div class="nav-inner">
       <div class="logo">GV • Digital Media</div>
       <nav aria-label="Main navigation">
-        <a href="projects.html">Projects</a>
+        <a href="marketing.html">Marketing & Content</a>
+        <a href="about.html">About</a>
         <a href="photography.html">Photography</a>
         <a href="gamedesign.html">Game Design</a>
-        <a href="about.html">About</a>
-        <a href="accessibility.html">Accessibility</a>
+        <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
 
         <!-- Petal toggle -->
@@ -689,38 +687,31 @@ footer {
           Hi, I’m <span>Gabriella Vozar</span>.
         </h1>
         <p class="hero-tagline">
-          A Digital Media, Arts, and Technology student blending code, design, animation, and storytelling.
+          A Digital Media, Arts, and Technology graduate — content creator, social media manager, and interactive designer.
         </p>
         <p class="hero-body">
-          This portfolio brings together the work I’ve developed:
-          interactive web experiments, a research-based Tech Issue guide, design
-          and photography, and game-focused analysis. My major isn’t just design
-          – it’s a mix of programming, media production, and creative technology.
+          This portfolio showcases my media work: social media content and original graphics
+          for PHA Icemen Hockey, photography, game design analysis, and interactive web projects.
+          My background combines content strategy, visual design, and front-end development.
         </p>
 
         <div class="hero-buttons">
           <a class="btn-primary" href="projects.html">View Interactive Projects</a>
           <a class="btn-secondary" href="about.html">Learn More About Me</a>
+          <a class="btn-secondary" href="documents/VOZAR_RESUME_GENERAL.pdf" target="_blank" rel="noopener">Download Resume</a>
         </div>
 
         <div class="hero-meta">
+          <span>Social Media • Graphic Design • Photography</span>
           <span>HTML • CSS • JavaScript • React</span>
-          <span>Blender • Photography • Game Design</span>
+          <span><a href="https://www.linkedin.com/in/gabvozar" target="_blank" rel="noopener" style="color:var(--forest);text-decoration:none;font-weight:600;">LinkedIn ↗</a></span>
         </div>
       </div>
 
-      <!-- RIGHT: highlight panel -->
-      <aside class="hero-panel" aria-label="Featured work preview">
-        <h2>What you’ll find here</h2>
-        <p>
-          This site is a snapshot of my growth as a multidisciplinary creator in the DIGIT program.
-        </p>
-        <ul>
-          <li>My Tech Issue Resource Guide on sustainable technology</li>
-          <li>Experiments with interactive JavaScript, CSS, and React</li>
-          <li>Photography and game design reflections</li>
-        </ul>
-      </aside>
+      <!-- RIGHT: profile photo -->
+      <div class="hero-photo">
+        <img src="images/misc/Portfolio.png" alt="Gabriella Vozar">
+      </div>
 
       <!-- Decorative flowers with grow animations -->
       <div class="flower flower-left" aria-hidden="true">
@@ -752,41 +743,41 @@ footer {
 
     <section class="highlights" aria-labelledby="highlights-title">
       <div class="highlights-header">
-        <h2 id="highlights-title">Featured semester work</h2>
+        <h2 id="highlights-title">Featured work</h2>
         <p>
-          A quick look at some of the projects I’ll highlight across this site.
+          A quick look at the work across this site.
         </p>
       </div>
 
       <div class="highlight-grid">
         <article class="highlight-card">
-          <div class="highlight-tag">Tech Issue Guide</div>
-          <h3>AI & Sustainable Technology</h3>
+          <div class="highlight-tag">Marketing & Content</div>
+          <h3>Social Media for PHA Icemen Hockey</h3>
           <p>
-            A research-driven resource guide exploring the environmental impact
-            of AI and digital consumption, built as a multi-page interactive website.
+            A full season of content: game-day posts, player spotlights, event
+            announcements, and original graphics — published to Facebook and synced to Instagram.
           </p>
-          <a href="projects.html">See how I built it →</a>
+          <a href="marketing.html">See the work →</a>
+        </article>
+
+        <article class="highlight-card">
+          <div class="highlight-tag">Photography</div>
+          <h3>Sports & Lifestyle Photography</h3>
+          <p>
+            A curated selection of photographs across sports, pets, and landscapes —
+            shot and edited to tell a story through a single frame.
+          </p>
+          <a href="photography.html">View gallery →</a>
         </article>
 
         <article class="highlight-card">
           <div class="highlight-tag">Interactive Media</div>
-          <h3>Experiments with Code</h3>
+          <h3>Web Projects & Game Design</h3>
           <p>
-            From vanilla JavaScript to React and 3D experiments, these projects
-            show how I use code to create interactive elements and motion.
+            Interactive web experiments built with JavaScript, React, and Three.js,
+            plus in-depth game design analysis connecting mechanics to narrative.
           </p>
-          <a href="projects.html">View interactive projects →</a>
-        </article>
-
-        <article class="highlight-card">
-          <div class="highlight-tag">Design & Narrative</div>
-          <h3>Visual & Game-Focused Work</h3>
-          <p>
-            Photography and game analysis that connect
-            visual style, story, and player experience.
-          </p>
-          <a href="projects.html">Explore creative work →</a>
+          <a href="projects.html">Explore projects →</a>
         </article>
       </div>
     </section>
@@ -794,28 +785,19 @@ footer {
 
 <footer>
   <div class="footer-inner centered">
-
     <div class="copyright">
       © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
     </div>
-
     <div class="license">
       This work is licensed under
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
-        CC BY 4.0
-      </a>
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
       <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
-           alt="Creative Commons"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
+           alt="Creative Commons" style="max-width:1em;max-height:1em;margin-left:.2em;">
       <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
-           alt="Attribution required"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
+           alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
     </div>
-
-    <div class="tech">
-      Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull
-    </div>
-
+    <div class="tech">Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
+    <div><a href="accessibility.html" style="color:var(--forest);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
   </div>
 </footer>
 

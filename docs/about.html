@@ -262,13 +262,38 @@
       font-size:0.8rem;
     }
 
-    .footer-inner{
+        .footer-inner.centered{
       max-width:1100px;
       margin:0 auto;
       display:flex;
-      justify-content:space-between;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:0.35rem;
+    }
+
+    .license{
+      font-size:0.75rem;
+      color:#555;
+      display:flex;
+      align-items:center;
       flex-wrap:wrap;
-      gap:0.5rem;
+      justify-content:center;
+      gap:0.25rem;
+    }
+
+    .license a{
+      color:var(--forest);
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    .license a:hover,
+    .license a:focus-visible{ text-decoration:underline; }
+
+    .tech{
+      color:#666;
+      font-size:0.75rem;
     }
 
     /* Petals */
@@ -299,11 +324,11 @@
     <div class="logo">GV • Digital Media</div>
     <nav aria-label="Main navigation">
       <a href="index.html">Home</a>
-      <a href="projects.html">Projects</a>
+      <a href="marketing.html">Marketing & Content</a>
+      <a href="about.html" aria-current="page">About</a>
       <a href="photography.html">Photography</a>
       <a href="gamedesign.html">Game Design</a>
-      <a href="about.html" aria-current="page">About</a>
-      <a href="accessibility.html">Accessibility</a>
+      <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
 
       <!-- Petal toggle -->
@@ -330,29 +355,39 @@
       <section class="card" aria-labelledby="about-me">
         <h2 id="about-me">Hi — I’m Gabriella.</h2>
         <p>
-          I’m a DIGIT (Digital Media, Arts, and Technology) student with a Media Production minor.
-          What I like most about this major is that it isn’t only visual design — it’s also interactive development,
-          research/writing, and building experiences that people can actually use.
+          I’m a recent Penn State graduate with a BA in Digital Media, Arts, and Technology
+          and a minor in Media Production. What drew me to the major is that it goes beyond
+          visual design — it’s also interactive development, media strategy, and building
+          experiences that connect with a real audience.
         </p>
         <p>
-          My work this semester includes interactive web projects (HTML/CSS/JavaScript), a research-focused Tech Issue
-          resource guide, and experiments with React and Three.js. I’m especially drawn to projects where I can combine
-          creativity with structure: designing the look, but also thinking through navigation, systems, accessibility, and audience.
+          My work spans social media management and content creation for PHA Icemen Hockey,
+          interactive web projects (HTML/CSS/JavaScript/React), photography, and game design
+          analysis. I’m especially drawn to work where creativity meets strategy — designing
+          the visuals, but also thinking through the platform, the message, and the audience.
         </p>
 
         <div class="divider"></div>
 
         <h2>What I bring</h2>
         <ul>
-          <li>Strong follow-through and comfort with feedback/iteration</li>
-          <li>Creative problem-solving (visual + technical)</li>
-          <li>Experience balancing multiple projects and deadlines</li>
-          <li>Interest in sports media, storytelling, and interactive design</li>
+          <li>Real-client content experience: social media management for PHA Icemen Hockey</li>
+          <li>Creative problem-solving across visual design, writing, and code</li>
+          <li>Strong follow-through: content calendars, quick turnarounds, and deadlines</li>
+          <li>Background in sports media, storytelling, and interactive design</li>
         </ul>
+
+        <div class="divider"></div>
+
+        <p class="small">
+          Currently seeking full-time roles in content creation, social media management,
+          digital marketing, product management, and digital media production — especially in sports media.
+        </p>
 
         <div class="cta-row">
           <a class="btn primary" href="projects.html">View Projects</a>
           <a class="btn secondary" href="contact.html">Contact</a>
+          <a class="btn secondary" href="documents/VOZAR_RESUME_GENERAL.pdf" target="_blank" rel="noopener">Download Resume</a>
         </div>
       </section>
 
@@ -360,8 +395,9 @@
       <aside class="card" aria-label="Quick facts and skills">
         <h2>Quick facts</h2>
         <p class="small">
-          This portfolio is designed for a course assignment audience (instructors + peers),
-          while still being professional enough for internship/job use.
+          BA in Digital Media, Arts, and Technology — Penn State University, 2025.
+          Experience in social media management, graphic design, photography,
+          and interactive web development. Available for opportunities in media and content.
         </p>
 
         <div class="divider"></div>
@@ -395,8 +431,8 @@
 
         <h2>Next steps</h2>
         <p class="small">
-          I’m continuing to refine this site to improve accessibility, organization, and presentation quality.
-          The goal is a portfolio that feels intentional and easy to navigate.
+          Actively seeking opportunities in content creation, social media, digital marketing,
+          product management, sports media, and digital media production. Open to internships and entry-level roles.
         </p>
       </aside>
     </div>
@@ -406,28 +442,19 @@
 
 <footer>
   <div class="footer-inner centered">
-
     <div class="copyright">
       © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
     </div>
-
     <div class="license">
       This work is licensed under
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
-        CC BY 4.0
-      </a>
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
       <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
-           alt="Creative Commons"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
+           alt="Creative Commons" style="max-width:1em;max-height:1em;margin-left:.2em;">
       <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
-           alt="Attribution required"
-           style="max-width:1em;max-height:1em;margin-left:.2em;">
+           alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
     </div>
-
-    <div class="tech">
-      Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull
-    </div>
-
+    <div class="tech">Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
+    <div><a href="accessibility.html" style="color:var(--forest);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
   </div>
 </footer>
 

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Marketing & Content – Gabriella Vozar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blush:#F8DDE2;
+      --sage:#A7C4A0;
+      --forest:#6E937C;
+      --cream:#FFF6F3;
+      --charcoal:#3A3A3A;
+      --card:#F2F2F2;
+      --line:#C6B8AE;
+      --muted:#555;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:"Lato", system-ui, sans-serif;
+      color:var(--charcoal);
+      background: radial-gradient(circle at top, var(--blush), var(--cream));
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      background:rgba(255,246,243,0.92);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(198,184,174,0.55);
+    }
+
+    .nav-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0.75rem 1rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+
+    .logo{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:0.05em;
+      white-space:nowrap;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:0.4rem 0.75rem;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:var(--charcoal);
+      margin-left:1.25rem;
+      position:relative;
+      font-size:0.95rem;
+    }
+
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:-0.2rem;
+      width:0;
+      height:2px;
+      background:var(--sage);
+      transform:translateX(-50%);
+      transition:0.25s ease;
+    }
+
+    nav a:hover::after,
+    nav a:focus-visible::after{ width:100%; }
+
+    nav a[aria-current="page"]{
+      color:var(--forest);
+      font-weight:600;
+    }
+
+    .fx-toggle{
+      margin-left:0.5rem;
+      padding:0.45rem 0.75rem;
+      border-radius:999px;
+      border:1px solid rgba(110,147,124,0.75);
+      background:rgba(167,196,160,0.14);
+      color:var(--forest);
+      font-size:0.85rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.18s ease;
+      white-space:nowrap;
+    }
+    .fx-toggle:hover,
+    .fx-toggle:focus-visible{
+      background:var(--forest);
+      color:#fff;
+      transform:translateY(-1px);
+    }
+    .fx-toggle[aria-pressed="true"]{
+      background:var(--sage);
+      border-color:var(--sage);
+      color:#fff;
+    }
+
+    main{ flex:1; }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:2.5rem 1.25rem 3rem;
+    }
+
+    .page-title{
+      text-align:center;
+      margin-bottom:1.75rem;
+    }
+
+    .page-title h1{
+      font-family:"Playfair Display", serif;
+      font-size:clamp(2rem,3vw,3rem);
+      margin-bottom:0.35rem;
+    }
+
+    .page-title p{
+      max-width:60rem;
+      margin:0 auto;
+      line-height:1.7;
+      color:var(--muted);
+    }
+
+    /* Intro card */
+    .intro-card{
+      background:var(--card);
+      border:1px solid rgba(198,184,174,0.75);
+      border-radius:18px;
+      padding:1.5rem 1.75rem;
+      box-shadow:0 10px 22px rgba(0,0,0,0.05);
+      margin-bottom:2rem;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:1.25rem;
+      align-items:start;
+    }
+
+    @media(max-width:700px){
+      .intro-card{ grid-template-columns:1fr; }
+    }
+
+    .intro-card h2{
+      font-family:"Playfair Display", serif;
+      font-size:1.3rem;
+      margin-bottom:0.6rem;
+    }
+
+    .intro-card p{
+      color:#444;
+      line-height:1.7;
+      font-size:0.97rem;
+      margin-bottom:0.6rem;
+    }
+
+    .intro-card p:last-child{ margin-bottom:0; }
+
+    .stat-col{
+      display:flex;
+      flex-direction:column;
+      gap:0.65rem;
+      min-width:9rem;
+    }
+
+    .stat{
+      background:rgba(167,196,160,0.18);
+      border:1px solid rgba(110,147,124,0.4);
+      border-radius:12px;
+      padding:0.6rem 0.9rem;
+      text-align:center;
+    }
+
+    .stat .num{
+      font-family:"Playfair Display", serif;
+      font-size:1.5rem;
+      color:var(--forest);
+      display:block;
+    }
+
+    .stat .label{
+      font-size:0.78rem;
+      color:var(--muted);
+    }
+
+    /* Tabs */
+    .tabs{
+      display:flex;
+      justify-content:center;
+      gap:0.5rem;
+      flex-wrap:wrap;
+      margin:0 0 1.75rem;
+    }
+
+    .tab{
+      border:1px solid rgba(110,147,124,0.6);
+      background:rgba(167,196,160,0.15);
+      color:var(--forest);
+      border-radius:999px;
+      padding:0.45rem 1.1rem;
+      font-size:0.9rem;
+      cursor:pointer;
+      font-family:"Lato", sans-serif;
+      transition:0.15s ease;
+    }
+
+    .tab[aria-selected="true"]{
+      background:var(--forest);
+      color:white;
+      border-color:var(--forest);
+    }
+
+    .tab:hover:not([aria-selected="true"]){
+      background:rgba(167,196,160,0.35);
+    }
+
+    .tab:focus-visible{
+      outline:3px solid rgba(167,196,160,0.6);
+      outline-offset:2px;
+    }
+
+    /* Post grid */
+    .post-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.25rem;
+    }
+
+    @media(max-width:900px){
+      .post-grid{ grid-template-columns:repeat(2,1fr); }
+    }
+
+    @media(max-width:500px){
+      .post-grid{ grid-template-columns:1fr; }
+    }
+
+    /* Post card */
+    .post-card{
+      background:var(--card);
+      border:1px solid rgba(198,184,174,0.75);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 8px 18px rgba(0,0,0,0.04);
+      transition:transform 0.18s ease, box-shadow 0.18s ease;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .post-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 14px 28px rgba(0,0,0,0.09);
+    }
+
+    .post-img-wrap{
+      aspect-ratio:4/3;
+      overflow:hidden;
+      background:linear-gradient(135deg, rgba(248,221,226,0.55), rgba(167,196,160,0.22));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    .post-img-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* Shown while image is missing */
+    .post-img-wrap .img-placeholder{
+      color:#888;
+      font-size:0.85rem;
+      font-style:italic;
+      text-align:center;
+      padding:1rem;
+    }
+
+    .post-info{
+      padding:0.85rem 1rem 1rem;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:0.35rem;
+    }
+
+    .platform-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:0.3rem;
+      font-size:0.75rem;
+      font-weight:600;
+      padding:0.2rem 0.6rem;
+      border-radius:999px;
+      width:fit-content;
+    }
+
+    .badge-fb{
+      background:rgba(66,103,178,0.12);
+      color:#4267B2;
+      border:1px solid rgba(66,103,178,0.25);
+    }
+
+    .badge-ig{
+      background:rgba(193,53,132,0.1);
+      color:#C13584;
+      border:1px solid rgba(193,53,132,0.25);
+    }
+
+    .badge-graphic{
+      background:rgba(110,147,124,0.15);
+      color:var(--forest);
+      border:1px solid rgba(110,147,124,0.35);
+    }
+
+    .post-caption{
+      font-size:0.88rem;
+      color:#444;
+      line-height:1.55;
+      margin-top:0.15rem;
+      flex:1;
+    }
+
+    .post-date{
+      font-size:0.78rem;
+      color:#888;
+      margin-top:0.25rem;
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(198,184,174,0.6);
+      background:rgba(255,246,243,0.95);
+      padding:0.9rem 1.25rem;
+      font-size:0.8rem;
+    }
+
+    .footer-inner.centered{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:0.35rem;
+    }
+
+    .license{
+      font-size:0.75rem;
+      color:#555;
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:0.25rem;
+    }
+
+    .license a{
+      color:var(--forest);
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    .license a:hover,
+    .license a:focus-visible{ text-decoration:underline; }
+
+    .tech{ color:#666; font-size:0.75rem; }
+
+    /* Petals */
+    .petal{
+      position:fixed;
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      pointer-events:none;
+      z-index:9998;
+      transform:translate(-50%,-50%);
+      opacity:0.9;
+      animation:petal-float 700ms ease-out forwards;
+    }
+
+    @keyframes petal-float{
+      to{
+        transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2);
+        opacity:0;
+      }
+    }
+
+    @media(max-width:600px){
+      header{ position:static; }
+      nav a{ margin-left:0; }
+    }
+
+    /* Lightbox */
+    .post-card{ cursor:pointer; }
+
+    .post-img-wrap::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0);
+      transition:background 0.18s ease;
+      pointer-events:none;
+    }
+
+    .post-card:hover .post-img-wrap::after{ background:rgba(0,0,0,0.1); }
+
+    #lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.82);
+      z-index:9999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:1.5rem;
+      cursor:zoom-out;
+    }
+
+    #lightbox img{
+      max-width:min(90vw,900px);
+      max-height:88vh;
+      object-fit:contain;
+      border-radius:12px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.5);
+      cursor:default;
+    }
+
+    #lightbox-close{
+      position:absolute;
+      top:1rem;
+      right:1.25rem;
+      background:rgba(255,255,255,0.12);
+      border:none;
+      color:#fff;
+      font-size:1.75rem;
+      line-height:1;
+      width:2.4rem;
+      height:2.4rem;
+      border-radius:50%;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background 0.15s ease;
+    }
+
+    #lightbox-close:hover,
+    #lightbox-close:focus-visible{ background:rgba(255,255,255,0.28); outline:none; }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="nav-inner">
+    <div class="logo">GV • Digital Media</div>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="marketing.html" aria-current="page">Marketing & Content</a>
+      <a href="about.html">About</a>
+      <a href="photography.html">Photography</a>
+      <a href="gamedesign.html">Game Design</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+
+      <button id="fxToggle" class="fx-toggle" type="button" aria-pressed="false">
+        Petals: Off
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="page-title">
+      <h1>Marketing & Content</h1>
+      <p>
+        Real-world social media work for PHA Icemen Hockey — managing the content
+        calendar, designing graphics, and writing posts for Facebook and Instagram.
+      </p>
+    </div>
+
+    <!-- Intro / context card -->
+    <div class="intro-card" role="region" aria-label="Experience overview">
+      <div>
+        <h2>PHA Icemen Hockey</h2>
+        <p>
+          For the 2025–26 season, I managed social media content for PHA Icemen Hockey.
+          I owned the full workflow: planning the content calendar, designing all graphics
+          from scratch in Canva, writing post copy, and publishing to Facebook — with
+          every post automatically synced to Instagram.
+        </p>
+        <p>
+          Every graphic shown below was made by me. This was real-audience work with quick
+          turnarounds: game-day hype posts, score updates the same night as games, player
+          spotlights, and season announcements — all designed and written in-house.
+        </p>
+      </div>
+      <div class="stat-col" aria-label="Quick stats">
+        <div class="stat">
+          <span class="num">2</span>
+          <span class="label">Platforms</span>
+        </div>
+        <div class="stat">
+          <span class="num">1</span>
+          <span class="label">Season managed</span>
+        </div>
+        <div class="stat">
+          <span class="num">9+</span>
+          <span class="label">Graphics made</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="tabs" role="tablist" aria-label="Filter by company">
+      <button class="tab" role="tab" aria-selected="true" data-filter="all">All Posts</button>
+      <button class="tab" role="tab" aria-selected="false" data-filter="pha-icemen">PHA Icemen Hockey</button>
+    </div>
+
+    <section id="post-gallery" aria-label="Portfolio posts">
+      <div class="post-grid">
+
+        <figure class="post-card" data-company="pha-icemen">
+          <div class="post-img-wrap">
+            <img src="images/marketing/icemen-post-1.png" alt="PHA Icemen game-day hype post" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="img-placeholder" style="display:none">icemen-post-1.png</div>
+          </div>
+          <figcaption class="post-info">
+            <p class="post-caption">Tryout announcement — urgency-driven graphic promoting 16U AA & AAA Icemen open tryouts.</p>
+            <span class="post-date">2025–26 season</span>
+          </figcaption>
+        </figure>
+
+        <figure class="post-card" data-company="pha-icemen">
+          <div class="post-img-wrap">
+            <img src="images/marketing/icemen-post-2.png" alt="PHA Icemen tryout recruitment post" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="img-placeholder" style="display:none">icemen-post-2.png</div>
+          </div>
+          <figcaption class="post-info">
+            <p class="post-caption">Tryout recruitment post — encouraging players to find their fit with the 16U Icemen program.</p>
+            <span class="post-date">2025–26 season</span>
+          </figcaption>
+        </figure>
+
+        <figure class="post-card" data-company="pha-icemen">
+          <div class="post-img-wrap">
+            <img src="images/marketing/icemen-post-3.png" alt="PHA Icemen score update post" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="img-placeholder" style="display:none">icemen-post-3.png</div>
+          </div>
+          <figcaption class="post-info">
+            <p class="post-caption">New Year post — kicking off the new year with a celebratory branded graphic for the Icemen community.</p>
+            <span class="post-date">2025–26 season</span>
+          </figcaption>
+        </figure>
+
+        <figure class="post-card" data-company="pha-icemen">
+          <div class="post-img-wrap">
+            <img src="images/marketing/icemen-post-4.png" alt="PHA Icemen event announcement" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="img-placeholder" style="display:none">icemen-post-4.png</div>
+          </div>
+          <figcaption class="post-info">
+            <p class="post-caption">Thanksgiving holiday post — branded graphic celebrating the Icemen hockey family with a seasonal message.</p>
+            <span class="post-date">2025–26 season</span>
+          </figcaption>
+        </figure>
+
+        <figure class="post-card" data-company="pha-icemen">
+          <div class="post-img-wrap">
+            <img src="images/marketing/icemen-post-5.png" alt="PHA Icemen Veterans Day tribute post" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="img-placeholder" style="display:none">icemen-post-5.png</div>
+          </div>
+          <figcaption class="post-info">
+            <p class="post-caption">Veterans Day tribute — honoring veterans and their families on behalf of the PHA Icemen community.</p>
+            <span class="post-date">2025–26 season</span>
+          </figcaption>
+        </figure>
+
+        <figure class="post-card" data-company="pha-icemen">
+          <div class="post-img-wrap">
+            <img src="images/marketing/icemen-post-7.png" alt="PHA Icemen Halloween post" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="img-placeholder" style="display:none">icemen-post-7.png</div>
+          </div>
+          <figcaption class="post-info">
+            <p class="post-caption">Halloween holiday post — spooky-season branded graphic designed to drive fan engagement.</p>
+            <span class="post-date">2025–26 season</span>
+          </figcaption>
+        </figure>
+
+        <figure class="post-card" data-company="pha-icemen">
+          <div class="post-img-wrap">
+            <img src="images/marketing/icemen-post-8.png" alt="PHA Icemen sponsor spotlight — Envirosafe" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="img-placeholder" style="display:none">icemen-post-8.png</div>
+          </div>
+          <figcaption class="post-info">
+            <p class="post-caption">Sponsor spotlight — recognizing Envirosafe Stripping, Inc. as a 14U team sponsor for the season.</p>
+            <span class="post-date">2025–26 season</span>
+          </figcaption>
+        </figure>
+
+        <figure class="post-card" data-company="pha-icemen">
+          <div class="post-img-wrap">
+            <img src="images/marketing/icemen-post-9.png" alt="PHA Icemen sponsor spotlight — Easley and Rivers" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="img-placeholder" style="display:none">icemen-post-9.png</div>
+          </div>
+          <figcaption class="post-info">
+            <p class="post-caption">Sponsor spotlight — recognizing Easley &amp; Rivers as a sponsor of the 18U team.</p>
+            <span class="post-date">2025–26 season</span>
+          </figcaption>
+        </figure>
+
+        <figure class="post-card" data-company="pha-icemen">
+          <div class="post-img-wrap">
+            <img src="images/marketing/icemen-post-10.png" alt="PHA Icemen Motown Tournament send-off post" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="img-placeholder" style="display:none">icemen-post-10.png</div>
+          </div>
+          <figcaption class="post-info">
+            <p class="post-caption">Tournament send-off post — rallying fans as teams headed to the CCM Motown Tournament in Detroit.</p>
+            <span class="post-date">2025–26 season</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner centered">
+    <div class="copyright">
+      © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
+    </div>
+    <div class="license">
+      This work is licensed under
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
+           alt="Creative Commons" style="max-width:1em;max-height:1em;margin-left:.2em;">
+      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
+           alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
+    </div>
+    <div class="tech">Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
+    <div><a href="accessibility.html" style="color:var(--forest);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
+  </div>
+</footer>
+
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Full size image" style="display:none">
+  <button id="lightbox-close" aria-label="Close image">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Lightbox
+  const lightbox  = document.getElementById("lightbox");
+  const lbImg     = document.getElementById("lightbox-img");
+  const lbClose   = document.getElementById("lightbox-close");
+
+  document.querySelectorAll(".post-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const img = card.querySelector("img");
+      if (!img || img.style.display === "none") return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      lbClose.focus();
+    });
+  });
+
+  function closeLightbox(){
+    lightbox.style.display = "none";
+    lbImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  lbClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener("keydown", e => {
+    if (lightbox.style.display !== "none" && e.key === "Escape") closeLightbox();
+  });
+
+  // Company filter tabs
+  const tabs = document.querySelectorAll(".tab");
+  const cards = document.querySelectorAll(".post-card");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.setAttribute("aria-selected", "false"));
+      tab.setAttribute("aria-selected", "true");
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (filter === "all" || card.dataset.company === filter) ? "" : "none";
+      });
+    });
+  });
+
+  // Petal toggle
+  const toggle = document.getElementById("fxToggle");
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+  let petalsOn = localStorage.getItem("petalsOn") === "true";
+
+  function updateToggle(){
+    toggle.textContent = petalsOn ? "Petals: On" : "Petals: Off";
+    toggle.setAttribute("aria-pressed", petalsOn);
+  }
+  updateToggle();
+
+  toggle.addEventListener("click", () => {
+    petalsOn = !petalsOn;
+    localStorage.setItem("petalsOn", petalsOn);
+    updateToggle();
+  });
+
+  if (!prefersReduced && finePointer) {
+    let last = 0;
+    window.addEventListener("mousemove", e => {
+      if (!petalsOn) return;
+      const now = performance.now();
+      if (now - last < 35) return;
+      last = now;
+
+      const p = document.createElement("div");
+      p.className = "petal";
+      p.style.left = e.clientX + "px";
+      p.style.top  = e.clientY + "px";
+      p.style.setProperty("--dx", (Math.random()*90-45)+"px");
+      p.style.setProperty("--dy", (Math.random()*90-45)+"px");
+      p.style.background = Math.random() > 0.5
+        ? "rgba(248,221,226,0.95)"
+        : "rgba(167,196,160,0.9)";
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),800);
+    });
+  }
+</script>
+</body>
+</html>
