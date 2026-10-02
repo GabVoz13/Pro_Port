@@ -1,2 +1,10 @@
 .DS_Store
 **/.DS_Store
+
+# Editor and OS clutter
+.vscode/
+*.swp
+Thumbs.db
+
+# Temp folder left by git history rewrites
+.git-rewrite/
