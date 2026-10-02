@@ -4,28 +4,51 @@
   <meta charset="UTF-8" />
   <title>Contact – Gabriella Vozar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get in touch with Gabriella Vozar about full-time roles, freelance projects, or collaborations." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#141011" />
+
+  <!-- Link previews (LinkedIn, iMessage, Slack, email) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gabriella Vozar" />
+  <meta property="og:title" content="Contact – Gabriella Vozar" />
+  <meta property="og:description" content="Get in touch with Gabriella Vozar about full-time roles, freelance projects, or collaborations." />
+  <meta property="og:url" content="https://gabvoz13.github.io/Pro_Port/contact.html" />
+  <meta property="og:image" content="https://gabvoz13.github.io/Pro_Port/images/og-preview.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Gabriella Vozar: social graphics, brand templates and short-form video" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --blush:#F8DDE2;
-      --sage:#A7C4A0;
-      --forest:#6E937C;
-      --cream:#FFF6F3;
-      --charcoal:#3A3A3A;
-      --card:#F2F2F2;
-      --line:#C6B8AE;
-      --muted:#555;
+      /* Dark jewel-tone palette */
+      --burgundy:#7A2431;       /* brand fill: buttons, active states */
+      --burgundy-dark:#8E2C3A;  /* brand fill hover (lighter on dark) */
+      --heading:#E8A7B1;        /* wine-rose: headings, nav, key text */
+      --emerald:#93C4A6;        /* accent: links, hover, small highlights */
+      --rose:#C9707E;           /* decorative flowers */
+      --ivory:#141011;          /* page background */
+      --wash:#1F1718;           /* faint wine tint for the top-of-page gradient */
+      --ink:#EEE7E4;            /* body text */
+      --card:#1D1819;           /* raised surfaces */
+      --line:#3A3133;
+      --muted:#B4A9A5;
     }
+
+    /* Palette roles: wine-rose leads headings + nav */
+    h1, h2, h3, .logo{ color:var(--heading); }
 
     *{box-sizing:border-box;margin:0;padding:0}
 
     body{
       font-family:"Lato", system-ui, sans-serif;
-      color:var(--charcoal);
-      background: radial-gradient(circle at top, var(--blush), var(--cream));
+      color:var(--ink);
+      background: radial-gradient(circle at top, var(--wash), var(--ivory));
       min-height:100vh;
       display:flex;
       flex-direction:column;
@@ -35,9 +58,9 @@
       position:sticky;
       top:0;
       z-index:10;
-      background:rgba(255,246,243,0.92);
+      background:rgba(20,16,17,0.92);
       backdrop-filter:blur(6px);
-      border-bottom:1px solid rgba(198,184,174,0.55);
+      border-bottom:1px solid rgba(238,220,214,0.14);
     }
 
     .nav-inner{
@@ -67,7 +90,7 @@
 
     nav a{
       text-decoration:none;
-      color:var(--charcoal);
+      color:var(--heading);
       margin-left:1.25rem;
       position:relative;
       font-size:0.95rem;
@@ -80,7 +103,7 @@
       bottom:-0.2rem;
       width:0;
       height:2px;
-      background:var(--sage);
+      background:var(--emerald);
       transform:translateX(-50%);
       transition:0.25s ease;
       border-radius:999px;
@@ -90,18 +113,20 @@
     nav a:focus-visible::after{ width:100%; }
 
     nav a[aria-current="page"]{
-      color:var(--forest);
+      color:var(--heading);
       font-weight:600;
     }
+
+    nav a[aria-current="page"]::after{ width:100%; }
 
     /* Nav toggle button */
     .fx-toggle{
       margin-left:0.5rem;
       padding:0.45rem 0.75rem;
-      border-radius:999px;
-      border:1px solid rgba(110,147,124,0.75);
-      background:rgba(167,196,160,0.14);
-      color:var(--forest);
+      border-radius:6px;
+      border:1px solid rgba(147,196,166,0.6);
+      background:rgba(232,167,177,0.08);
+      color:var(--heading);
       font:inherit;
       font-size:0.85rem;
       font-weight:600;
@@ -111,13 +136,13 @@
     }
     .fx-toggle:hover,
     .fx-toggle:focus-visible{
-      background:var(--forest);
+      background:var(--burgundy-dark);
       color:#fff;
       transform:translateY(-1px);
     }
     .fx-toggle[aria-pressed="true"]{
-      background:var(--sage);
-      border-color:var(--sage);
+      background:var(--burgundy);
+      border-color:var(--heading);
       color:#fff;
     }
 
@@ -149,10 +174,9 @@
 
     .card{
       background:var(--card);
-      border:1px solid rgba(198,184,174,0.75);
-      border-radius:18px;
+      border:1px solid rgba(238,220,214,0.19);
+      border-radius:8px;
       padding:1.25rem;
-      box-shadow:0 10px 22px rgba(0,0,0,0.05);
     }
 
     label{
@@ -165,15 +189,14 @@
     input, textarea{
       width:100%;
       padding:0.75rem 0.85rem;
-      border-radius:14px;
-      border:1px solid rgba(198,184,174,0.85);
-      background:rgba(255,246,243,0.85);
+      border-radius:8px;
+      border:1px solid rgba(238,220,214,0.21);
+      background:rgba(20,16,17,0.85);
       font:inherit;
     }
 
     input:focus, textarea:focus{
-      border-color: rgba(110,147,124,0.85);
-      box-shadow: 0 0 0 3px rgba(167,196,160,0.22);
+      border-color: rgba(147,196,166,0.68);
       outline:none;
     }
 
@@ -184,7 +207,7 @@
 
     .help{
       font-size:0.8rem;
-      color:#666;
+      color:var(--muted);
       margin-top:0.25rem;
     }
 
@@ -197,7 +220,7 @@
 
     .btn{
       padding:0.55rem 1rem;
-      border-radius:999px;
+      border-radius:6px;
       border:none;
       font-size:0.9rem;
       font-weight:600;
@@ -206,21 +229,20 @@
     }
 
     .btn.primary{
-      background:var(--sage);
+      background:var(--burgundy);
       color:white;
-      box-shadow: 0 10px 20px rgba(110,147,124,0.25);
     }
 
     .btn.primary:hover,
     .btn.primary:focus-visible{
-      background:var(--forest);
+      background:var(--burgundy-dark);
       transform:translateY(-1px);
     }
 
     /* Footer */
     footer{
-      border-top:1px solid rgba(198,184,174,0.6);
-      background:rgba(255,246,243,0.95);
+      border-top:1px solid rgba(238,220,214,0.15);
+      background:rgba(20,16,17,0.95);
       padding:0.95rem 1.25rem;
       font-size:0.8rem;
     }
@@ -237,7 +259,7 @@
 
     .license{
       font-size:0.75rem;
-      color:#555;
+      color:var(--muted);
       display:flex;
       align-items:center;
       flex-wrap:wrap;
@@ -246,7 +268,7 @@
     }
 
     .license a{
-      color:var(--forest);
+      color:var(--emerald);
       font-weight:700;
       text-decoration:none;
     }
@@ -255,7 +277,7 @@
     .license a:focus-visible{ text-decoration:underline; }
 
     .tech{
-      color:#666;
+      color:var(--muted);
       font-size:0.75rem;
     }
 
@@ -282,26 +304,35 @@
       header{ position:static; }
       nav a{ margin-left:0; }
     }
+
+    /* Petals toggle lives quietly in the footer */
+    footer .fx-toggle,
+    footer #react-effects-toggle{ margin:0.3rem 0 0; }
+    footer .fx-toggle{ font-size:0.75rem; padding:0.3rem 0.7rem; }
+
+    /* Logo is the home link */
+    a.logo{ text-decoration:none; }
+
+    /* Compact footer: items flow into two lines instead of five */
+    .footer-inner.centered{ flex-direction:row; flex-wrap:wrap; justify-content:center; column-gap:1.25rem; row-gap:0.45rem; }
+    footer .fx-toggle,
+    footer #react-effects-toggle{ margin:0; }
   </style>
 </head>
 
 <body>
 <header>
   <div class="nav-inner">
-    <div class="logo">GV • Digital Media</div>
+    <a class="logo" href="index.html">Gabriella Vozar</a>
     <nav aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="marketing.html">Marketing & Content</a>
       <a href="about.html">About</a>
       <a href="photography.html">Photography</a>
-      <a href="gamedesign.html">Game Design</a>
       <a href="projects.html">Projects</a>
       <a href="contact.html" aria-current="page">Contact</a>
 
       <!-- Effect toggle (accessible) -->
-      <button id="fxToggle" class="fx-toggle" type="button" aria-pressed="false">
-        Petals: Off
-      </button>
     </nav>
   </div>
 </header>
@@ -311,7 +342,7 @@
     <div class="page-title">
       <h1>Contact</h1>
       <p>
-        Use the form below to reach out about projects, coursework, or collaboration.
+        Reach out about full-time roles, freelance projects, or collaborations.
       </p>
     </div>
 
@@ -325,7 +356,7 @@
         <div class="help">I’ll only use this to reply to your message.</div>
 
         <label for="subject">Subject</label>
-        <input id="subject" name="subject" type="text" placeholder="Portfolio / class / collaboration">
+        <input id="subject" name="subject" type="text" placeholder="Job opportunity / freelance project / collaboration">
 
         <label for="message">Message</label>
         <textarea id="message" name="message" required></textarea>
@@ -355,8 +386,9 @@
       <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
            alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
     </div>
-    <div class="tech">Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
-    <div><a href="accessibility.html" style="color:var(--forest);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
+    <div class="tech">Designed and hand-coded by Gabriella in HTML, CSS, JavaScript, and React</div>
+    <button id="fxToggle" class="fx-toggle" type="button" aria-pressed="false">Petals: Off</button>
+    <div><a href="accessibility.html" style="color:var(--emerald);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
   </div>
 </footer>
 
@@ -406,9 +438,9 @@
       p.style.setProperty("--dy", (Math.random() * 90 - 45) + "px");
 
       // soft palette petals
-      p.style.background = (Math.random() > 0.5)
-        ? "rgba(167,196,160,0.9)"   // sage
-        : "rgba(248,221,226,0.95)"; // blush
+      p.style.background = (Math.random() > 0.3)
+        ? "rgba(232,167,177,0.9)"   // wine-rose
+        : "rgba(147,196,166,0.8)";    // emerald
 
       document.body.appendChild(p);
       setTimeout(() => p.remove(), 800);

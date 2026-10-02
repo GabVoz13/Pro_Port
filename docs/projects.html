@@ -4,28 +4,50 @@
   <meta charset="UTF-8" />
   <title>Projects – Gabriella Vozar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive web projects by Gabriella Vozar, built with JavaScript, React, and Three.js." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#141011" />
+
+  <!-- Link previews (LinkedIn, iMessage, Slack, email) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gabriella Vozar" />
+  <meta property="og:title" content="Projects – Gabriella Vozar" />
+  <meta property="og:description" content="Interactive web projects by Gabriella Vozar, built with JavaScript, React, and Three.js." />
+  <meta property="og:url" content="https://gabvoz13.github.io/Pro_Port/projects.html" />
+  <meta property="og:image" content="https://gabvoz13.github.io/Pro_Port/images/og-preview.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Gabriella Vozar: social graphics, brand templates and short-form video" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --blush:#F8DDE2;
-      --rose:#E8B4C8;
-      --sage:#A7C4A0;
-      --forest:#6E937C;
-      --cream:#FFF6F3;
-      --charcoal:#3A3A3A;
-      --card:#F2F2F2;
-      --line:#C6B8AE;
-      --muted:#555;
+      /* Dark jewel-tone palette */
+      --burgundy:#7A2431;       /* brand fill: buttons, active states */
+      --burgundy-dark:#8E2C3A;  /* brand fill hover (lighter on dark) */
+      --heading:#E8A7B1;        /* wine-rose: headings, nav, key text */
+      --emerald:#93C4A6;        /* accent: links, hover, small highlights */
+      --rose:#C9707E;           /* decorative flowers */
+      --ivory:#141011;          /* page background */
+      --wash:#1F1718;           /* faint wine tint for the top-of-page gradient */
+      --ink:#EEE7E4;            /* body text */
+      --card:#1D1819;           /* raised surfaces */
+      --line:#3A3133;
+      --muted:#B4A9A5;
     }
+
+    /* Palette roles: wine-rose leads headings + nav */
+    h1, h2, h3, .logo{ color:var(--heading); }
 
     *{ box-sizing:border-box; margin:0; padding:0; }
 
     body{
       font-family:"Lato", system-ui, -apple-system, sans-serif;
-      color:var(--charcoal);
-      background: radial-gradient(circle at top, var(--blush), var(--cream));
+      color:var(--ink);
+      background: radial-gradient(circle at top, var(--wash), var(--ivory));
       min-height:100vh;
       display:flex;
       flex-direction:column;
@@ -33,9 +55,9 @@
 
     header{
       position:sticky; top:0; z-index:10;
-      background: rgba(255,246,243,0.92);
+      background: rgba(20,16,17,0.92);
       backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(198,184,174,0.55);
+      border-bottom: 1px solid rgba(238,220,214,0.14);
     }
 
     .nav-inner{
@@ -66,7 +88,7 @@
 
     nav a{
       text-decoration:none;
-      color:var(--charcoal);
+      color:var(--heading);
       font-size:0.95rem;
       margin-left:0.6rem;
       position:relative;
@@ -79,13 +101,14 @@
       bottom:-0.2rem;
       width:0;
       height:2px;
-      background:var(--sage);
+      background:var(--emerald);
       border-radius:999px;
       transform:translateX(-50%);
       transition:width 0.25s ease;
     }
     nav a:hover::after, nav a:focus-visible::after{ width:100%; }
-    nav a[aria-current="page"]{ color:var(--forest); font-weight:600; }
+    nav a[aria-current="page"]{ color:var(--heading); font-weight:600; }
+    nav a[aria-current="page"]::after{ width:100%; }
 
     main{ flex:1; }
 
@@ -120,10 +143,10 @@
       margin: 1.25rem 0 2rem;
     }
     .chip{
-      border:1px solid rgba(110,147,124,0.55);
-      background: rgba(167,196,160,0.14);
-      color: var(--forest);
-      border-radius: 999px;
+      border:1px solid rgba(147,196,166,0.44);
+      background: rgba(232,167,177,0.08);
+      color:var(--heading);
+      border-radius:4px;
       padding: 0.35rem 0.85rem;
       font-size: 0.85rem;
     }
@@ -151,7 +174,7 @@
     }
     .divider{
       height:1px;
-      background: rgba(198,184,174,0.7);
+      background: rgba(238,220,214,0.17);
       margin-top: 0.9rem;
     }
 
@@ -167,10 +190,9 @@
 
     .card{
       background: var(--card);
-      border: 1px solid rgba(198,184,174,0.75);
-      border-radius: 18px;
+      border: 1px solid rgba(238,220,214,0.19);
+      border-radius:8px;
       padding: 1.15rem 1.15rem 1.1rem;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.05);
       overflow:hidden;
       transition: transform 0.18s ease, box-shadow 0.18s ease;
       display:flex;
@@ -179,7 +201,6 @@
     }
     .card:hover, .card:focus-within{
       transform: translateY(-3px);
-      box-shadow: 0 16px 32px rgba(0,0,0,0.08);
     }
 
     .tag-row{
@@ -192,20 +213,20 @@
       display:inline-block;
       font-size:0.78rem;
       padding: 0.18rem 0.6rem;
-      border-radius:999px;
-      border: 1px solid rgba(167,196,160,0.55);
-      background: rgba(167,196,160,0.18);
-      color: var(--forest);
+      border-radius:4px;
+      border: 1px solid rgba(147,196,166,0.33);
+      background: rgba(232,167,177,0.1);
+      color:var(--heading);
     }
-    .tag.pink{
-      border-color: rgba(232,180,200,0.65);
-      background: rgba(232,180,200,0.2);
-      color:#7a3c55;
+    .tag.accent{
+      border-color: rgba(147,196,166,0.36);
+      background: rgba(147,196,166,0.08);
+      color:var(--emerald);
     }
     .tag.gray{
-      border-color: rgba(198,184,174,0.9);
-      background: rgba(198,184,174,0.18);
-      color:#4a4a4a;
+      border-color: rgba(238,220,214,0.23);
+      background: rgba(238,220,214,0.04);
+      color:#D6CDC9;
     }
 
     .card h3{
@@ -215,16 +236,16 @@
     .card p{
       line-height: 1.65;
       font-size: 0.95rem;
-      color:#444;
+      color:#D6CDC9;
     }
 
     /* Live iframe previews */
     .preview {
       position: relative;
-      border-radius: 14px;
-      border: 1px solid rgba(198,184,174,0.75);
+      border-radius:8px;
+      border: 1px solid rgba(238,220,214,0.19);
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(248,221,226,0.65), rgba(167,196,160,0.18));
+      background: linear-gradient(135deg, rgba(232,167,177,0.13), rgba(232,167,177,0.1));
       aspect-ratio: 16 / 9;
     }
     .preview iframe{
@@ -245,11 +266,11 @@
       left:10px;
       z-index:3;
       font-size:0.75rem;
-      background: rgba(255,246,243,0.92);
-      border: 1px solid rgba(198,184,174,0.7);
+      background: rgba(20,16,17,0.92);
+      border: 1px solid rgba(238,220,214,0.17);
       padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      color:#555;
+      border-radius:4px;
+      color:var(--muted);
     }
 
     /* Mobile fallback */
@@ -264,7 +285,7 @@
         align-items:center;
         justify-content:center;
         padding: 0.75rem;
-        color: #555;
+        color: var(--muted);
         text-align: center;
         font-size: 0.95rem;
       }
@@ -283,7 +304,7 @@
       align-items:center;
       justify-content:center;
       padding:0.55rem 1rem;
-      border-radius:999px;
+      border-radius:6px;
       border: none;
       text-decoration:none;
       font-size:0.9rem;
@@ -292,42 +313,39 @@
       cursor:pointer;
     }
     .btn.primary{
-      background: var(--sage);
+      background: var(--burgundy);
       color:#fff;
-      box-shadow: 0 10px 20px rgba(110,147,124,0.35);
     }
     .btn.primary:hover, .btn.primary:focus-visible{
-      background: var(--forest);
+      background: var(--burgundy-dark);
       transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(110,147,124,0.45);
     }
     .btn.secondary{
       background: transparent;
-      color: var(--forest);
-      border: 1px solid var(--forest);
+      color:var(--heading);
+      border:1px solid var(--heading);
     }
     .btn.secondary:hover, .btn.secondary:focus-visible{
-      background: var(--forest);
+      background: var(--burgundy-dark);
       color:#fff;
       transform: translateY(-1px);
-      box-shadow: 0 10px 20px rgba(110,147,124,0.35);
     }
 
     .note{
       margin-top: 0.9rem;
-      color:#555;
+      color:var(--muted);
       font-size: 0.95rem;
       line-height: 1.6;
-      background: rgba(255,246,243,0.85);
-      border: 1px solid rgba(198,184,174,0.55);
-      border-radius: 14px;
+      background: rgba(20,16,17,0.85);
+      border: 1px solid rgba(238,220,214,0.14);
+      border-radius:8px;
       padding: 0.95rem 1rem;
     }
 
     /* Footer */
     footer{
-      border-top: 1px solid rgba(198,184,174,0.6);
-      background: rgba(255,246,243,0.95);
+      border-top: 1px solid rgba(238,220,214,0.15);
+      background: rgba(20,16,17,0.95);
       padding: 0.9rem 1.25rem;
       font-size:0.8rem;
     }
@@ -341,12 +359,12 @@
       gap:0.35rem;
     }
     .footer-inner .tech{
-      color:#666;
+      color:var(--muted);
       font-size:0.75rem;
     }
     .footer-inner .license{
       font-size:0.75rem;
-      color:#555;
+      color:var(--muted);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -354,7 +372,7 @@
       gap:0.25rem;
     }
     .footer-inner .license a{
-      color:var(--forest);
+      color:var(--emerald);
       font-weight:600;
       text-decoration:none;
     }
@@ -373,10 +391,10 @@
       align-items:center;
       gap:0.45rem;
       padding:0.42rem 0.75rem;
-      border-radius:999px;
-      border:1px solid rgba(110,147,124,0.75);
-      background: rgba(167,196,160,0.12);
-      color: var(--forest);
+      border-radius:6px;
+      border:1px solid rgba(147,196,166,0.6);
+      background: rgba(232,167,177,0.07);
+      color:var(--heading);
       font-size:0.85rem;
       font-weight:600;
       cursor:pointer;
@@ -384,23 +402,21 @@
     }
     .effects-btn:hover,
     .effects-btn:focus-visible{
-      background: rgba(167,196,160,0.22);
+      background: rgba(232,167,177,0.13);
       transform: translateY(-1px);
     }
     .effects-btn[aria-pressed="true"]{
-      background: var(--sage);
+      background: var(--burgundy);
       color:#fff;
-      border-color: var(--sage);
+      border-color:var(--heading);
     }
     .effects-dot{
       width:10px; height:10px;
       border-radius:999px;
-      background: rgba(110,147,124,0.65);
-      box-shadow: 0 0 0 3px rgba(167,196,160,0.18);
+      background: rgba(232,167,177,1.0);
     }
     .effects-btn[aria-pressed="true"] .effects-dot{
       background: #fff;
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.22);
     }
 
     /* -----------------------------
@@ -426,24 +442,35 @@
         opacity: 0;
       }
     }
+
+    /* Petals toggle lives quietly in the footer */
+    footer .fx-toggle,
+    footer #react-effects-toggle{ margin:0.3rem 0 0; }
+    footer .fx-toggle{ font-size:0.75rem; padding:0.3rem 0.7rem; }
+
+    /* Logo is the home link */
+    a.logo{ text-decoration:none; }
+
+    /* Compact footer: items flow into two lines instead of five */
+    .footer-inner.centered{ flex-direction:row; flex-wrap:wrap; justify-content:center; column-gap:1.25rem; row-gap:0.45rem; }
+    footer .fx-toggle,
+    footer #react-effects-toggle{ margin:0; }
   </style>
 </head>
 
 <body>
   <header>
     <div class="nav-inner">
-      <div class="logo">GV • Digital Media</div>
+      <a class="logo" href="index.html">Gabriella Vozar</a>
       <nav aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="marketing.html">Marketing & Content</a>
         <a href="about.html">About</a>
         <a href="photography.html">Photography</a>
-        <a href="gamedesign.html">Game Design</a>
         <a href="projects.html" aria-current="page">Projects</a>
         <a href="contact.html">Contact</a>
 
         <!-- React mounts the toggle button here -->
-        <span id="react-effects-toggle"></span>
       </nav>
     </div>
   </header>
@@ -490,7 +517,7 @@
               <span class="tag">Tech Issue</span>
               <span class="tag">HTML</span>
               <span class="tag">CSS</span>
-              <span class="tag pink">JavaScript</span>
+              <span class="tag accent">JavaScript</span>
             </div>
             <h3>Tech Issue: Sustainable Technology & AI</h3>
 
@@ -521,7 +548,7 @@
             <div class="tag-row">
               <span class="tag gray">DIGIT400</span>
               <span class="tag">React</span>
-              <span class="tag pink">JavaScript</span>
+              <span class="tag accent">JavaScript</span>
             </div>
             <h3>React Demo</h3>
 
@@ -551,7 +578,7 @@
             <div class="tag-row">
               <span class="tag gray">DIGIT400</span>
               <span class="tag">Three.js</span>
-              <span class="tag pink">3D</span>
+              <span class="tag accent">3D</span>
               <span class="tag">JavaScript</span>
             </div>
             <h3>Three.js Demo</h3>
@@ -582,7 +609,7 @@
             <div class="tag-row">
               <span class="tag">Portfolio</span>
               <span class="tag">Information Design</span>
-              <span class="tag pink">Iteration</span>
+              <span class="tag accent">Iteration</span>
             </div>
             <h3>Final Portfolio Site (This Website)</h3>
 
@@ -691,7 +718,7 @@
             <div class="tag-row">
               <span class="tag gray">DIGIT100</span>
               <span class="tag">Projects</span>
-              <span class="tag pink">Collaboration</span>
+              <span class="tag accent">Collaboration</span>
             </div>
             <h3>Projects Page</h3>
 
@@ -719,7 +746,7 @@
             <div class="tag-row">
               <span class="tag gray">DIGIT100</span>
               <span class="tag">Writing</span>
-              <span class="tag pink">Reflection</span>
+              <span class="tag accent">Reflection</span>
             </div>
             <h3>GitHub Pages vs WordPress Reflection</h3>
 
@@ -747,7 +774,7 @@
             <div class="tag-row">
               <span class="tag gray">DIGIT100</span>
               <span class="tag">Text Analysis</span>
-              <span class="tag pink">Voyant / AntConc</span>
+              <span class="tag accent">Voyant / AntConc</span>
             </div>
             <h3>Text Compositions</h3>
 
@@ -788,7 +815,7 @@
             <div class="tag-row">
               <span class="tag gray">DIGIT110</span>
               <span class="tag">CBML</span>
-              <span class="tag pink">Collaboration</span>
+              <span class="tag accent">Collaboration</span>
             </div>
             <h3>CBML Semester Project (Comic Book Analysis)</h3>
 
@@ -816,7 +843,7 @@
             <div class="tag-row">
               <span class="tag gray">DIGIT100</span>
               <span class="tag">Collaboration</span>
-              <span class="tag pink">Web Project</span>
+              <span class="tag accent">Web Project</span>
             </div>
 
             <h3>True Crime Website</h3>
@@ -846,7 +873,7 @@
             <div class="tag-row">
               <span class="tag">Growth</span>
               <span class="tag">Process</span>
-              <span class="tag pink">Reflection</span>
+              <span class="tag accent">Reflection</span>
             </div>
             <h3>Skill Growth: From Static Pages to Interactive Systems</h3>
 
@@ -890,8 +917,9 @@
       <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
            alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
     </div>
-    <div class="tech">Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
-    <div><a href="accessibility.html" style="color:var(--forest);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
+    <div class="tech">Designed and hand-coded by Gabriella in HTML, CSS, JavaScript, and React</div>
+    <span id="react-effects-toggle"></span>
+    <div><a href="accessibility.html" style="color:var(--emerald);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
   </div>
 </footer>
 
@@ -927,9 +955,9 @@
         p.style.setProperty("--dy", dy);
 
         // soft palette petals
-        p.style.background = (Math.random() > 0.5)
-          ? "rgba(232,180,200,0.92)"   // rose
-          : "rgba(167,196,160,0.90)";  // sage
+        p.style.background = (Math.random() > 0.3)
+          ? "rgba(232,167,177,0.9)"   // wine-rose
+        : "rgba(147,196,166,0.8)";    // emerald
 
         document.body.appendChild(p);
         setTimeout(()=>p.remove(), 900);

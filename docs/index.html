@@ -2,23 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Gabriella Vozar – Digital Media Portfolio</title>
+  <title>Gabriella Vozar – Digital Media Designer &amp; Content Creator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gabriella Vozar is a digital media designer and content creator: social graphics, brand templates, photography, and short-form video." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#141011" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Link previews (LinkedIn, iMessage, Slack, email) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gabriella Vozar" />
+  <meta property="og:title" content="Gabriella Vozar – Digital Media Designer &amp; Content Creator" />
+  <meta property="og:description" content="Gabriella Vozar is a digital media designer and content creator: social graphics, brand templates, photography, and short-form video." />
+  <meta property="og:url" content="https://gabvoz13.github.io/Pro_Port/" />
+  <meta property="og:image" content="https://gabvoz13.github.io/Pro_Port/images/og-preview.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Gabriella Vozar: social graphics, brand templates and short-form video" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&family=Grand+Hotel&display=swap" rel="stylesheet">
 
   <style>
     /* COLOR & TYPOGRAPHY VARIABLES*/
-    :root {
-      --blush:   #F8DDE2;
-      --rose:    #E8B4C8;
-      --sage:    #A7C4A0;
-      --forest:  #6E937C;
-      --cream:   #FFF6F3;
-      --charcoal:#3A3A3A;
-      --card-bg: #F2F2F2;
-      --line:    #C6B8AE;
+    :root{
+      /* Dark jewel-tone palette */
+      --burgundy:#7A2431;       /* brand fill: buttons, active states */
+      --burgundy-dark:#8E2C3A;  /* brand fill hover (lighter on dark) */
+      --heading:#E8A7B1;        /* wine-rose: headings, nav, key text */
+      --emerald:#93C4A6;        /* accent: links, hover, small highlights */
+      --rose:#C9707E;           /* decorative flowers */
+      --ivory:#141011;          /* page background */
+      --wash:#1F1718;           /* faint wine tint for the top-of-page gradient */
+      --ink:#EEE7E4;            /* body text */
+      --card:#1D1819;           /* raised surfaces */
+      --line:#3A3133;
+      --muted:#B4A9A5;
     }
+
+    /* Palette roles: wine-rose leads headings + nav */
+    h1, h2, h3, .logo{ color:var(--heading); }
 
     * {
       box-sizing: border-box;
@@ -28,8 +51,8 @@
 
     body {
       font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, var(--blush), var(--cream));
-      color: var(--charcoal);
+      background: radial-gradient(circle at top, var(--wash), var(--ivory));
+      color: var(--ink);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -40,9 +63,9 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      background: rgba(255, 246, 243, 0.9);
+      background: rgba(20,16,17,0.9);
       backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(198, 184, 174, 0.5);
+      border-bottom: 1px solid rgba(238,220,214,0.12);
     }
 
     .nav-inner {
@@ -65,7 +88,7 @@
       text-decoration: none;
       margin-left: 1.5rem;
       font-size: 0.95rem;
-      color: var(--charcoal);
+      color:var(--heading);
       position: relative;
     }
 
@@ -76,7 +99,7 @@
       bottom: -0.2rem;
       width: 0;
       height: 2px;
-      background: var(--sage);
+      background: var(--emerald);
       border-radius: 999px;
       transform: translateX(-50%);
       transition: width 0.25s ease;
@@ -95,10 +118,10 @@
     .fx-toggle{
       margin-left:0.5rem;
       padding:0.45rem 0.75rem;
-      border-radius:999px;
-      border:1px solid rgba(110,147,124,0.75);
-      background:rgba(167,196,160,0.14);
-      color:var(--forest);
+      border-radius:6px;
+      border:1px solid rgba(147,196,166,0.6);
+      background:rgba(232,167,177,0.08);
+      color:var(--heading);
       font-size:0.85rem;
       font-weight:600;
       cursor:pointer;
@@ -107,20 +130,20 @@
     }
     .fx-toggle:hover,
     .fx-toggle:focus-visible{
-      background:var(--forest);
+      background:var(--burgundy-dark);
       color:#fff;
       transform:translateY(-1px);
     }
     .fx-toggle[aria-pressed="true"]{
-      background:var(--sage);
-      border-color:var(--sage);
+      background:var(--burgundy);
+      border-color:var(--heading);
       color:#fff;
     }
 
     .hero {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 3.5rem 1.5rem 4rem;
+      padding: 4rem 1.5rem 3rem;
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
       gap: 2.5rem;
@@ -136,20 +159,27 @@
       }
     }
 
+    /* Name sits small above; the headline says what she does */
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--heading);
+      margin-bottom: 1rem;
+    }
+
     .hero-text h1 {
       font-family: "Playfair Display", serif;
-      font-size: clamp(2.2rem, 3vw + 1.5rem, 3.2rem);
-      margin-bottom: 0.75rem;
+      font-size: clamp(2.1rem, 2.4vw + 1.4rem, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1.1rem;
+      color: var(--ink);
     }
 
     .hero-text h1 span {
-      color: var(--forest);
-    }
-
-    .hero-tagline {
-      font-size: 1.05rem;
-      font-weight: 400;
-      margin-bottom: 1rem;
+      color:var(--heading);
+      font-style: italic;
     }
 
     .hero-body {
@@ -168,7 +198,7 @@
 
     .btn-primary,
     .btn-secondary {
-      border-radius: 999px;
+      border-radius:6px;
       padding: 0.65rem 1.5rem;
       font-size: 0.95rem;
       border: none;
@@ -183,65 +213,379 @@
     }
 
     .btn-primary {
-      background: var(--sage);
+      background: var(--burgundy);
       color: #fff;
-      box-shadow: 0 8px 18px rgba(110, 147, 124, 0.35);
     }
 
     .btn-primary:hover,
     .btn-primary:focus-visible {
       transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(110, 147, 124, 0.45);
-      background: var(--forest);
+      background: var(--burgundy-dark);
     }
 
     .btn-secondary {
       background: transparent;
-      border: 1px solid var(--forest);
-      color: var(--forest);
+      border:1px solid var(--heading);
+      color:var(--heading);
     }
 
     .btn-secondary:hover,
     .btn-secondary:focus-visible {
-      background: var(--forest);
+      background: var(--burgundy-dark);
       color: #fff;
-      box-shadow: 0 8px 18px rgba(110, 147, 124, 0.35);
       transform: translateY(-1px);
     }
 
-    .hero-meta {
-      font-size: 0.85rem;
-      color: #555;
+
+    .hero-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
-    .hero-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      margin-right: 0.75rem;
+    .hero-links a {
+      color: var(--emerald);
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(147,196,166,0.48);
+      padding-bottom: 1px;
     }
 
-    .hero-meta span::before {
-      content: "•";
-      color: var(--rose);
+    .hero-links a:hover,
+    .hero-links a:focus-visible {
+      color: var(--ink);
+      border-color: var(--ink);
     }
 
-    /* Right side — profile photo */
-    .hero-photo {
-      border-radius: 20px;
+    /* Right side — phone mockup with floating posts */
+    .hero-showcase {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      gap: 1.25rem;
+      padding: 1rem 0 0;
+      text-decoration: none;
+      isolation: isolate;
+    }
+
+    /* Soft wine glow behind the phone */
+    .hero-showcase::before {
+      content: "";
+      position: absolute;
+      inset: 5% 0 15%;
+      z-index: -2;
+      background: radial-gradient(closest-side, rgba(122,36,49,0.55), rgba(122,36,49,0) 100%);
+      filter: blur(20px);
+    }
+
+    /* iPhone frame: titanium edge, side buttons, Dynamic Island */
+    .iphone {
+      position: relative;
+      width: min(280px, 72vw);
+      aspect-ratio: 9 / 19;
+      padding: 9px;
+      border-radius: 46px;
+      background: linear-gradient(145deg, #5A5354, #2A2526 40%, #4A4344 70%, #221E1F);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 0 1.5px rgba(255,255,255,0.12);
+      transition: transform 0.4s ease;
+    }
+
+    .iphone::before,                  /* action + volume buttons (left) */
+    .iphone::after {                  /* side button (right) */
+      content: "";
+      position: absolute;
+      width: 3px;
+      border-radius: 2px;
+      background: #3A3435;
+    }
+
+    .iphone::before {
+      left: -3px;
+      top: 22%;
+      height: 26%;
+      background: linear-gradient(#3A3435 0 18%, transparent 18% 28%, #3A3435 28% 60%, transparent 60% 68%, #3A3435 68%);
+    }
+
+    .iphone::after {
+      right: -3px;
+      top: 30%;
+      height: 16%;
+    }
+
+    .hero-showcase:hover .iphone,
+    .hero-showcase:focus-visible .iphone {
+      transform: translateY(-4px);
+    }
+
+    .iphone-screen {
+      position: relative;
+      height: 100%;
+      border-radius: 38px;
       overflow: hidden;
-      aspect-ratio: 4/5;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
-      border: 1px solid rgba(198, 184, 174, 0.5);
-      background: linear-gradient(135deg, rgba(248,221,226,0.45), rgba(167,196,160,0.25));
+      background: #000;
+      color: #F5F5F5;
+      display: flex;
+      flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .status-bar {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 40px;
+      padding: 0 1.35rem 0 1.6rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      flex: none;
+    }
+
+    .dynamic-island {
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      width: 82px;
+      height: 23px;
+      border-radius: 999px;
+      background: #000;
+      box-shadow: 0 0 0 1px #111;
+      transform: translateX(-50%);
+    }
+
+    .status-icons {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .status-icons svg {
+      height: 9px;
+      width: auto;
+      fill: currentColor;
+    }
+
+    /* Instagram (dark mode) chrome */
+    .ig-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.75rem 0.25rem;
+      flex: none;
+    }
+
+    .ig-wordmark {
+      font-family: "Grand Hotel", cursive;
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    .iphone-screen svg {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+
+    .iphone-screen .status-icons svg { stroke: none; fill: currentColor; }
+
+    .ig-top-icons {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .ig-top-icons svg,
+    .ig-actions svg,
+    .ig-tabbar svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .ig-stories {
+      display: flex;
+      gap: 0.65rem;
+      padding: 0.35rem 0.75rem 0.55rem;
+      border-bottom: 1px solid #262626;
+      flex: none;
+    }
+
+    .ig-story {
+      display: grid;
+      justify-items: center;
+      gap: 0.2rem;
+    }
+
+    .ig-story small {
+      font-size: 0.55rem;
+      color: #F5F5F5;
+    }
+
+    /* Story / avatar ring */
+    .ig-ring {
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      padding: 2px;
+      background: conic-gradient(from 200deg, #FEDA75, #FA7E1E, #D62976, #962FBF, #4F5BD5, #FEDA75);
+    }
+
+    .ig-story .ig-ring {
+      width: 46px;
+      height: 46px;
+    }
+
+    .ig-ring img,
+    .ig-ring > span {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid #000;
+      object-fit: cover;
+    }
+
+    .ig-feed-viewport {
+      flex: 1;
+      overflow: hidden;
       position: relative;
     }
 
-    .hero-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .ig-feed {
+      transition: transform 0.9s cubic-bezier(.65,0,.35,1);
+    }
+
+    .ig-post-head {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+    }
+
+    .ig-avatar {
+      width: 26px;
+      height: 26px;
+    }
+
+    .ig-avatar > span {
+      display: grid;
+      place-items: center;
+      background: #1B2A6B;
+      font-size: 0.45rem;
+      font-weight: 800;
+    }
+
+    .ig-more {
+      margin-left: auto;
+      letter-spacing: 1px;
+    }
+
+    .ig-post img {
       display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .ig-actions {
+      display: flex;
+      gap: 0.7rem;
+      padding: 0.55rem 0.65rem 0.3rem;
+    }
+
+    .ig-save {
+      margin-left: auto;
+    }
+
+    .ig-caption {
+      padding: 0 0.65rem 0.8rem;
+      font-size: 0.66rem;
+      line-height: 1.4;
+      color: #F5F5F5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .ig-tabbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0.55rem 0.5rem 1.4rem;
+      border-top: 1px solid #262626;
+      background: #000;
+      flex: none;
+    }
+
+    .ig-me {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--heading), var(--burgundy));
+    }
+
+    .home-indicator {
+      position: absolute;
+      bottom: 7px;
+      left: 50%;
+      width: 34%;
+      height: 4px;
+      border-radius: 999px;
+      background: #F5F5F5;
+      transform: translateX(-50%);
+    }
+
+    /* Tilted posts tucked behind the phone */
+    .float-post {
+      position: absolute;
+      z-index: -1;
+      border-radius: 6px;
+      border: 1px solid rgba(238,220,214,0.15);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+    }
+
+    .float-post--back {
+      width: 42%;
+      top: 6%;
+      left: -6%;
+      transform: rotate(-9deg);
+    }
+
+    .float-post--front {
+      width: 48%;
+      bottom: 16%;
+      right: -9%;
+      transform: rotate(7deg);
+    }
+
+    .hero-work-caption {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .hero-showcase:hover .hero-work-caption,
+    .hero-showcase:focus-visible .hero-work-caption {
+      color: var(--emerald);
+    }
+
+    /* Gentle fade-up as things come into view (JS adds .reveal-ready) */
+    .reveal-ready .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal-ready .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-ready .reveal { opacity: 1; transform: none; transition: none; }
+      .ig-feed { transition: none; }
     }
 
     /* HIGHLIGHT SECTION*/
@@ -251,92 +595,161 @@
       padding: 0 1.5rem 3rem;
     }
 
-    .highlights-header {
-      text-align: center;
-      margin-bottom: 2rem;
+    /* Left-aligned section heads, matching the hero */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
     }
 
-    .highlights-header h2 {
+    .section-head h2 {
       font-family: "Playfair Display", serif;
       font-size: 1.6rem;
-      margin-bottom: 0.4rem;
     }
 
-    .highlights-header p {
-      font-size: 0.95rem;
-      color: #555;
+    .section-head--more {
+      margin-top: 3.5rem;
+      margin-bottom: 0;
     }
 
-    .highlight-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.5rem;
+    .section-head--more h2 {
+      font-size: 1.25rem;
     }
 
-    @media (max-width: 900px) {
-      .highlight-grid {
-        grid-template-columns: 1fr;
-      }
+    .section-link,
+    .text-link {
+      font-size: 0.88rem;
+      color: var(--emerald);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(147,196,166,0.48);
+      padding-bottom: 1px;
     }
 
-    .highlight-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 1.25rem 1.3rem 1.3rem;
-      border: 1px solid rgba(198, 184, 174, 0.7);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    .section-link:hover,
+    .section-link:focus-visible,
+    .text-link:hover,
+    .text-link:focus-visible {
+      color: var(--ink);
+      border-color: var(--ink);
     }
 
-    .highlight-card:hover,
-    .highlight-card:focus-within {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
-    }
-
-    .highlight-card h3 {
+    .highlights h3 {
       font-family: "Playfair Display", serif;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       margin-bottom: 0.4rem;
     }
 
-    .highlight-card p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-bottom: 0.6rem;
+    .highlights p {
+      font-size: 0.93rem;
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
     }
 
     .highlight-tag {
       display: inline-block;
       font-size: 0.78rem;
       padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(167, 196, 160, 0.18);
-      color: var(--forest);
-      border: 1px solid rgba(167, 196, 160, 0.5);
-      margin-bottom: 0.4rem;
+      border-radius:4px;
+      background: rgba(232,167,177,0.1);
+      color:var(--heading);
+      border: 1px solid rgba(147,196,166,0.3);
+      margin-bottom: 0.5rem;
     }
 
-    .highlight-card a {
-      font-size: 0.85rem;
-      color: var(--forest);
+    /* Lead case study: a strip of real posts over a two-column summary */
+    .feature {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .feature-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+    }
+
+    .feature-strip img {
+      width: 100%;
+      aspect-ratio: 6/5;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.2s ease;
+    }
+
+    .feature-strip:hover img {
+      opacity: 0.9;
+    }
+
+    .feature-text {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      gap: 2rem;
+      padding: 1.5rem 1.6rem 1.4rem;
+    }
+
+    .feature-text h3 {
+      font-size: 1.6rem;
+    }
+
+    /* The other clients: clean text entries, no empty image areas */
+    .client-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .client-item {
+      border-top: 2px solid var(--burgundy);
+      padding-top: 1.1rem;
+    }
+
+    /* More work: simple linked rows */
+    .more-item {
+      display: grid;
+      grid-template-columns: 14rem 1fr auto;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1.1rem 0.25rem;
+      border-bottom: 1px solid var(--line);
       text-decoration: none;
-      border-bottom: 1px solid rgba(110, 147, 124, 0.6);
-      padding-bottom: 1px;
+      color: var(--ink);
+      transition: background 0.18s ease, padding 0.18s ease;
     }
 
-    .highlight-card a:hover,
-    .highlight-card a:focus-visible {
-      color: var(--charcoal);
-      border-color: var(--charcoal);
+    .more-item:hover,
+    .more-item:focus-visible {
+      background: rgba(232,167,177,0.05);
+      padding-left: 0.75rem;
+    }
+
+    .more-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+      color: var(--heading);
+    }
+
+    .more-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .more-arrow {
+      color: var(--emerald);
     }
 
     /* FOOTER*/
     footer {
-      border-top: 1px solid rgba(198, 184, 174, 0.6);
-      background: rgba(255, 246, 243, 0.95);
+      border-top: 1px solid rgba(238,220,214,0.15);
+      background: rgba(20,16,17,0.95);
       padding: 0.9rem 1.5rem;
       font-size: 0.8rem;
     }
@@ -353,7 +766,7 @@
 
     .license{
       font-size:0.75rem;
-      color:#555;
+      color:var(--muted);
       display:flex;
       align-items:center;
       flex-wrap:wrap;
@@ -362,7 +775,7 @@
     }
 
     .license a{
-      color:var(--forest);
+      color:var(--emerald);
       font-weight:600;
       text-decoration:none;
     }
@@ -371,80 +784,11 @@
     .license a:focus-visible{ text-decoration:underline; }
 
     .tech{
-      color:#666;
+      color:var(--muted);
       font-size:0.75rem;
     }
 
-    /*FULL SIDE-WALL VINES*/
-.side-vine {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  height: 100vh;
-  width: auto;
-  pointer-events: none;
-  opacity: 0.7;
-  z-index: 0;
-}
-
-.side-vine-left {
-  left: 0;
-}
-
-.side-vine-right {
-  right: 0;
-  transform: scaleX(-1); /* mirror vine on the right */
-}
-
-/* Vine path – JS will animate strokeDashoffset */
-.vine-path {
-  fill: none;
-  stroke: var(--forest);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 0;
-  stroke-dashoffset: 0;
-}
-
-/* Flowers start invisible and small */
-.vine-flower {
-  opacity: 0;
-  transform-origin: center;
-  transform: scale(0.3) translateY(6px);
-}
-
-/* Flowers bloom when JS adds .bloomed */
-.vine-flower.bloomed {
-  animation: flower-pop 0.9s ease-out forwards;
-}
-
-/* Flower colors */
-.vine-flower .petal {
-  fill: var(--rose);
-}
-
-.vine-flower .center {
-  fill: #ffe8aa;
-}
-
-/* Bloom animation */
-@keyframes flower-pop {
-  0% {
-    opacity: 0;
-    transform: scale(0.3) translateY(6px);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(1.05) translateY(-2px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Keep main content above vines */
+/* Keep main content above decorative layers */
 header,
 .hero,
 .highlights,
@@ -471,13 +815,22 @@ footer {
     padding: 2.5rem 1.25rem 3rem;
   }
 
-  .hero-photo {
-    margin-top: 0.5rem;
-    aspect-ratio: 3/4;
+  .hero-showcase {
+    margin-top: 1rem;
   }
 
-  .highlight-grid {
-    grid-template-columns: 1fr; /* stack highlight cards */
+  .feature-text,
+  .client-list {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .more-item {
+    grid-template-columns: 1fr auto;
+  }
+
+  .more-desc {
+    grid-column: 1;
   }
 }
 
@@ -527,17 +880,6 @@ footer {
     padding: 0 1rem 2.5rem;
   }
 
-  /* Make vines more subtle or hide them on very small screens */
-  .side-vine {
-    opacity: 0.35;
-  }
-}
-
-/* Extra tiny screens (optional) */
-@media (max-width: 430px) {
-  .side-vine {
-    display: none; /* hide vines if they start crowding content */
-  }
 }
 
 /* Petals */
@@ -565,220 +907,231 @@ footer {
       nav a{ margin-left:0; }
     }
 
+    /* Petals toggle lives quietly in the footer */
+    footer .fx-toggle,
+    footer #react-effects-toggle{ margin:0.3rem 0 0; }
+    footer .fx-toggle{ font-size:0.75rem; padding:0.3rem 0.7rem; }
+
+    /* Logo is the home link */
+    a.logo{ text-decoration:none; }
+
+    /* Compact footer: items flow into two lines instead of five */
+    .footer-inner.centered{ flex-direction:row; flex-wrap:wrap; justify-content:center; column-gap:1.25rem; row-gap:0.45rem; }
+    footer .fx-toggle,
+    footer #react-effects-toggle{ margin:0; }
   </style>
 </head>
 <body>
   <header>
     <div class="nav-inner">
-      <div class="logo">GV • Digital Media</div>
+      <a class="logo" href="index.html">Gabriella Vozar</a>
       <nav aria-label="Main navigation">
         <a href="marketing.html">Marketing & Content</a>
         <a href="about.html">About</a>
         <a href="photography.html">Photography</a>
-        <a href="gamedesign.html">Game Design</a>
         <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
-
-        <!-- Petal toggle -->
-      <button id="fxToggle" class="fx-toggle" type="button" aria-pressed="false">
-        Petals: Off
-      </button>
       </nav>
     </div>
   </header>
 
-  <!--DECORATIVE SIDE-WALL VINES-->
-
-<!-- LEFT SIDE VINE -->
-<svg class="side-vine side-vine-left" viewBox="0 0 80 800" aria-hidden="true">
-  
-  <!-- Curving vine path -->
-  <path
-    class="vine-path"
-    d="
-      M40 0
-      C 20 60, 60 120, 35 180
-      C 10 250, 55 310, 28 380
-      C 5 460, 50 520, 30 600
-      C 10 680, 40 740, 40 800
-    "
-  />
-
-  <!-- FLOWER 1 -->
-  <g class="vine-flower" transform="translate(25, 160)">
-    <circle class="petal" cx="0" cy="-6" r="5" />
-    <circle class="petal" cx="5" cy="0" r="5" />
-    <circle class="petal" cx="0" cy="6" r="5" />
-    <circle class="petal" cx="-5" cy="0" r="5" />
-    <circle class="center" cx="0" cy="0" r="3.5" />
-  </g>
-
-  <!-- FLOWER 2 -->
-  <g class="vine-flower" transform="translate(50, 350)">
-    <circle class="petal" cx="0" cy="-6" r="5" />
-    <circle class="petal" cx="5" cy="0" r="5" />
-    <circle class="petal" cx="0" cy="6" r="5" />
-    <circle class="petal" cx="-5" cy="0" r="5" />
-    <circle class="center" cx="0" cy="0" r="3.5" />
-  </g>
-
-  <!-- FLOWER 3 -->
-  <g class="vine-flower" transform="translate(30, 580)">
-    <circle class="petal" cx="0" cy="-6" r="5" />
-    <circle class="petal" cx="5" cy="0" r="5" />
-    <circle class="petal" cx="0" cy="6" r="5" />
-    <circle class="petal" cx="-5" cy="0" r="5" />
-    <circle class="center" cx="0" cy="0" r="3.5" />
-  </g>
-
-</svg>
-
-
-
-<!-- RIGHT SIDE VINE -->
-<svg class="side-vine side-vine-right" viewBox="0 0 80 800" aria-hidden="true">
-
-  <!-- Same vine path (mirrored with CSS) -->
-  <path
-    class="vine-path"
-    d="
-      M40 0
-      C 20 60, 60 120, 35 180
-      C 10 250, 55 310, 28 380
-      C 5 460, 50 520, 30 600
-      C 10 680, 40 740, 40 800
-    "
-  />
-
-  <!-- FLOWER 1 -->
-  <g class="vine-flower" transform="translate(45, 200)">
-    <circle class="petal" cx="0" cy="-6" r="5" />
-    <circle class="petal" cx="5" cy="0" r="5" />
-    <circle class="petal" cx="0" cy="6" r="5" />
-    <circle class="petal" cx="-5" cy="0" r="5" />
-    <circle class="center" cx="0" cy="0" r="3.5" />
-  </g>
-
-  <!-- FLOWER 2 -->
-  <g class="vine-flower" transform="translate(50, 430)">
-    <circle class="petal" cx="0" cy="-6" r="5" />
-    <circle class="petal" cx="5" cy="0" r="5" />
-    <circle class="petal" cx="0" cy="6" r="5" />
-    <circle class="petal" cx="-5" cy="0" r="5" />
-    <circle class="center" cx="0" cy="0" r="3.5" />
-  </g>
-
-  <!-- FLOWER 3 -->
-  <g class="vine-flower" transform="translate(35, 650)">
-    <circle class="petal" cx="0" cy="-6" r="5" />
-    <circle class="petal" cx="5" cy="0" r="5" />
-    <circle class="petal" cx="0" cy="6" r="5" />
-    <circle class="petal" cx="-5" cy="0" r="5" />
-    <circle class="center" cx="0" cy="0" r="3.5" />
-  </g>
-
-</svg>
-
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <!-- LEFT: text content -->
-      <div class="hero-text">
+      <div class="hero-text reveal">
+        <p class="hero-eyebrow">Gabriella Vozar · Digital media designer &amp; content creator</p>
         <h1 id="hero-title">
-          Hi, I’m <span>Gabriella Vozar</span>.
+          Social graphics, brand templates &amp; <span>short-form video.</span>
         </h1>
-        <p class="hero-tagline">
-          A Digital Media, Arts, and Technology graduate — content creator, social media manager, and interactive designer.
-        </p>
         <p class="hero-body">
-          This portfolio showcases my media work: social media content and original graphics
-          for PHA Icemen Hockey, photography, game design analysis, and interactive web projects.
-          My background combines content strategy, visual design, and front-end development.
+          I design content that helps organizations show up consistently online. Recent clients
+          include PHA Icemen Hockey, Penn State New Kensington Athletics, and comedian
+          Lisa Ann “The Glam Ham.”
         </p>
 
         <div class="hero-buttons">
-          <a class="btn-primary" href="projects.html">View Interactive Projects</a>
-          <a class="btn-secondary" href="about.html">Learn More About Me</a>
-          <a class="btn-secondary" href="Documents/Gabriella_Vozar_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+          <a class="btn-primary" href="marketing.html">View Design &amp; Content Work</a>
+          <a class="btn-secondary" href="about.html">About Me</a>
         </div>
 
-        <div class="hero-meta">
-          <span>Social Media • Graphic Design • Photography</span>
-          <span>HTML • CSS • JavaScript • React</span>
-          <span><a href="https://www.linkedin.com/in/gabvozar" target="_blank" rel="noopener" style="color:var(--forest);text-decoration:none;font-weight:600;">LinkedIn ↗</a></span>
+        <div class="hero-links">
+          <a href="Documents/Gabriella_Vozar_Resume.pdf" target="_blank" rel="noopener">Resume (PDF) ↗</a>
+          <a href="https://www.linkedin.com/in/gabvozar" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
 
-      <!-- RIGHT: profile photo -->
-      <div class="hero-photo">
-        <img src="images/Misc/Portfolio.png" alt="Gabriella Vozar">
-      </div>
+      <!-- RIGHT: phone mockup showing Icemen posts in a feed -->
+      <a class="hero-showcase reveal" href="marketing.html#pha-icemen" aria-label="See the PHA Icemen Hockey case study">
+        <img class="float-post float-post--back" src="images/marketing/icemen-post-2.webp" alt="">
+        <img class="float-post float-post--front" src="images/marketing/icemen-post-7.webp" alt="">
 
-      <!-- Decorative flowers with grow animations -->
-      <div class="flower flower-left" aria-hidden="true">
-        <div class="stem"></div>
-        <div class="leaf leaf-left"></div>
-        <div class="leaf leaf-right"></div>
-        <div class="flower-head">
-          <div class="petal top"></div>
-          <div class="petal right"></div>
-          <div class="petal bottom"></div>
-          <div class="petal left"></div>
-          <div class="flower-center"></div>
+        <div class="iphone" aria-hidden="true">
+          <div class="iphone-screen">
+            <div class="status-bar">
+              <span class="status-time">9:41</span>
+              <span class="dynamic-island"></span>
+              <span class="status-icons">
+                <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                <svg viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0zM3.4 6.8a6.5 6.5 0 0 1 9.2 0l-1.4 1.4a4.5 4.5 0 0 0-6.4 0zM1 4.4a9.9 9.9 0 0 1 14 0l-1.4 1.4a7.9 7.9 0 0 0-11.2 0z"/></svg>
+                <svg viewBox="0 0 27 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3.5" fill="none" stroke="currentColor" opacity="0.5"/><rect x="2" y="2" width="17" height="8" rx="2"/><rect x="24" y="4" width="2" height="4" rx="1" opacity="0.5"/></svg>
+              </span>
+            </div>
+            <div class="ig-topbar">
+              <span class="ig-wordmark">Instagram</span>
+              <span class="ig-top-icons"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg></span>
+            </div>
+            <div class="ig-stories">
+              <div class="ig-story"><span class="ig-ring"><img src="images/marketing/icemen-post-1.webp" alt=""></span><small>Tryouts</small></div>
+              <div class="ig-story"><span class="ig-ring"><img src="images/marketing/icemen-post-8.webp" alt=""></span><small>Sponsors</small></div>
+              <div class="ig-story"><span class="ig-ring"><img src="images/marketing/icemen-post-4.webp" alt=""></span><small>Holidays</small></div>
+              <div class="ig-story"><span class="ig-ring"><img src="images/marketing/icemen-post-10.webp" alt=""></span><small>Events</small></div>
+            </div>
+            <div class="ig-feed-viewport">
+              <div class="ig-feed">
+              <article class="ig-post">
+                <div class="ig-post-head">
+                  <span class="ig-avatar ig-ring"><span>PHA</span></span>
+                  <span class="ig-user">PHA Icemen Hockey</span>
+                  <span class="ig-more">•••</span>
+                </div>
+                <img src="images/marketing/icemen-post-10.webp" width="1876" height="1579" alt="">
+                <div class="ig-actions">
+                  <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>
+                  <span class="ig-save"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span>
+                </div>
+                <p class="ig-caption"><b>PHA Icemen Hockey</b> Tournament send-off: good luck to our teams heading to the CCM Motown Tournament!</p>
+              </article>
+              <article class="ig-post">
+                <div class="ig-post-head">
+                  <span class="ig-avatar ig-ring"><span>PHA</span></span>
+                  <span class="ig-user">PHA Icemen Hockey</span>
+                  <span class="ig-more">•••</span>
+                </div>
+                <img src="images/marketing/icemen-post-1.webp" width="885" height="1103" alt="">
+                <div class="ig-actions">
+                  <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>
+                  <span class="ig-save"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span>
+                </div>
+                <p class="ig-caption"><b>PHA Icemen Hockey</b> Tryouts start tonight: 16U AA &amp; AAA Icemen open tryouts.</p>
+              </article>
+              <article class="ig-post">
+                <div class="ig-post-head">
+                  <span class="ig-avatar ig-ring"><span>PHA</span></span>
+                  <span class="ig-user">PHA Icemen Hockey</span>
+                  <span class="ig-more">•••</span>
+                </div>
+                <img src="images/marketing/icemen-post-3.webp" width="1873" height="1577" alt="">
+                <div class="ig-actions">
+                  <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>
+                  <span class="ig-save"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span>
+                </div>
+                <p class="ig-caption"><b>PHA Icemen Hockey</b> Happy New Year from the Icemen family. Here's to a great 2026!</p>
+              </article>
+              <article class="ig-post">
+                <div class="ig-post-head">
+                  <span class="ig-avatar ig-ring"><span>PHA</span></span>
+                  <span class="ig-user">PHA Icemen Hockey</span>
+                  <span class="ig-more">•••</span>
+                </div>
+                <img src="images/marketing/icemen-post-5.webp" width="1882" height="1582" alt="">
+                <div class="ig-actions">
+                  <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>
+                  <span class="ig-save"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span>
+                </div>
+                <p class="ig-caption"><b>PHA Icemen Hockey</b> Thank you, veterans. Honoring you and your families today.</p>
+              </article>
+              <article class="ig-post" data-clone>
+                <div class="ig-post-head">
+                  <span class="ig-avatar ig-ring"><span>PHA</span></span>
+                  <span class="ig-user">PHA Icemen Hockey</span>
+                  <span class="ig-more">•••</span>
+                </div>
+                <img src="images/marketing/icemen-post-10.webp" width="1876" height="1579" alt="">
+                <div class="ig-actions">
+                  <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>
+                  <span class="ig-save"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span>
+                </div>
+                <p class="ig-caption"><b>PHA Icemen Hockey</b> Tournament send-off: good luck to our teams heading to the CCM Motown Tournament!</p>
+              </article>
+              </div>
+            </div>
+            <nav class="ig-tabbar">
+              <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z"/></svg><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M3.5 8.5h17M9 3.5l2.5 5M14.5 3.5l2.5 5M10.5 12v5l4-2.5z"/></svg>
+              <span class="ig-me"></span>
+            </nav>
+            <span class="home-indicator"></span>
+          </div>
         </div>
-      </div>
 
-      <div class="flower flower-right" aria-hidden="true">
-        <div class="stem"></div>
-        <div class="leaf leaf-left"></div>
-        <div class="leaf leaf-right"></div>
-        <div class="flower-head">
-          <div class="petal top"></div>
-          <div class="petal right"></div>
-          <div class="petal bottom"></div>
-          <div class="petal left"></div>
-          <div class="flower-center"></div>
-        </div>
-      </div>
+        <span class="hero-work-caption">Social content I designed for PHA Icemen Hockey, 2025–26 →</span>
+      </a>
+
     </section>
 
     <section class="highlights" aria-labelledby="highlights-title">
-      <div class="highlights-header">
-        <h2 id="highlights-title">Featured work</h2>
-        <p>
-          A quick look at the work across this site.
-        </p>
+      <div class="section-head reveal">
+        <h2 id="highlights-title">Selected client work</h2>
+        <a class="section-link" href="marketing.html">All design &amp; content work →</a>
       </div>
 
-      <div class="highlight-grid">
-        <article class="highlight-card">
-          <div class="highlight-tag">Marketing & Content</div>
-          <h3>Social Media for PHA Icemen Hockey</h3>
+      <article class="feature reveal">
+        <a class="feature-strip" href="marketing.html#pha-icemen" tabindex="-1" aria-hidden="true">
+          <img src="images/marketing/icemen-post-4.webp" alt="" loading="lazy">
+          <img src="images/marketing/icemen-post-8.webp" alt="" loading="lazy">
+          <img src="images/marketing/icemen-post-9.webp" alt="" loading="lazy">
+        </a>
+        <div class="feature-text">
+          <div>
+            <div class="highlight-tag">Social Media Design · 2025–26</div>
+            <h3>PHA Icemen Hockey</h3>
+          </div>
+          <div>
+            <p>
+              A full season of social content: tryout campaigns, sponsor spotlights, holiday posts,
+              and tournament send-offs, all designed and written by me for Facebook and Instagram.
+            </p>
+            <a class="text-link" href="marketing.html#pha-icemen">See the case study →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Text-only until their media is in; then they can get image strips like Icemen -->
+      <div class="client-list reveal">
+        <article class="client-item">
+          <div class="highlight-tag">Brand Design · Photography · 2022–24</div>
+          <h3>Penn State New Kensington Athletics</h3>
           <p>
-            A full season of content: game-day posts, player spotlights, event
-            announcements, and original graphics — published to Facebook and synced to Instagram.
+            A full social media template suite that keeps the department's posts on-brand,
+            plus sports event photography I shot and edited.
           </p>
-          <a href="marketing.html">See the work →</a>
+          <a class="text-link" href="marketing.html#psnk-athletics">See the case study →</a>
         </article>
 
-        <article class="highlight-card">
-          <div class="highlight-tag">Photography</div>
-          <h3>Sports & Lifestyle Photography</h3>
+        <article class="client-item">
+          <div class="highlight-tag">Short-Form Video · Jan–Jul 2025</div>
+          <h3>Lisa Ann “The Glam Ham”</h3>
           <p>
-            A curated selection of photographs across sports, pets, and landscapes —
-            shot and edited to tell a story through a single frame.
+            Freelance content production for a local comedian: I recorded her live sets, edited
+            them into TikTok-ready clips, and helped promote and sell her merch.
           </p>
-          <a href="photography.html">View gallery →</a>
+          <a class="text-link" href="marketing.html#glam-ham">See the case study →</a>
         </article>
+      </div>
 
-        <article class="highlight-card">
-          <div class="highlight-tag">Interactive Media</div>
-          <h3>Web Projects & Game Design</h3>
-          <p>
-            Interactive web experiments built with JavaScript, React, and Three.js,
-            plus in-depth game design analysis connecting mechanics to narrative.
-          </p>
-          <a href="projects.html">Explore projects →</a>
-        </article>
+      <div class="section-head section-head--more reveal">
+        <h2>More work</h2>
+      </div>
+      <div class="more-list reveal">
+        <a class="more-item" href="photography.html">
+          <span class="more-title">Photography</span>
+          <span class="more-desc">Landscape, nature, and pet photography, shot and edited by me</span>
+          <span class="more-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="more-item" href="projects.html">
+          <span class="more-title">Interactive web projects</span>
+          <span class="more-desc">Built with JavaScript, React, and Three.js</span>
+          <span class="more-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
   </main>
@@ -796,75 +1149,73 @@ footer {
       <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
            alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
     </div>
-    <div class="tech">Built with HTML, CSS, JavaScript, SVG, React, and a lot of Redbull</div>
-    <div><a href="accessibility.html" style="color:var(--forest);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
+    <div class="tech">Designed and hand-coded by Gabriella in HTML, CSS, JavaScript, and React</div>
+    <button id="fxToggle" class="fx-toggle" type="button" aria-pressed="false">Petals: Off</button>
+    <div class="footer-links"><a href="accessibility.html" style="color:var(--emerald);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a><span aria-hidden="true" style="color:var(--line);margin:0 0.4rem;">·</span><a href="gamedesign.html" style="color:var(--emerald);text-decoration:none;font-size:0.75rem;">Extras: Game Design Analysis</a></div>
   </div>
 </footer>
 
 
   <script>
+  // Fade sections up as they scroll into view (content stays visible without JS)
+  (function(){
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    document.documentElement.classList.add("reveal-ready");
+    const items = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach((el, i) => {
+      el.style.transitionDelay = i < 2 ? (i * 0.15) + "s" : "0s";   // stagger the hero pair
+      io.observe(el);
+    });
+  })();
+
+  // Phone mockup: status bar shows the visitor's local time, iPhone style ("2:07")
+  (function(){
+    const clock = document.querySelector(".status-time");
+    if (!clock) return;
+    const tick = () => {
+      const now = new Date();
+      clock.textContent = (now.getHours() % 12 || 12) + ":" + String(now.getMinutes()).padStart(2, "0");
+      setTimeout(tick, 60000 - now.getSeconds() * 1000 - now.getMilliseconds());  // next minute boundary
+    };
+    tick();
+  })();
+
+  // Phone mockup: auto-scroll the feed one post at a time, looping seamlessly
+  (function(){
+    const feed = document.querySelector(".ig-feed");
+    if (!feed || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const posts = feed.querySelectorAll(".ig-post");
+    let index = 0;
+    setInterval(() => {
+      index += 1;
+      feed.style.transform = `translateY(-${posts[index].offsetTop}px)`;
+      if (posts[index].hasAttribute("data-clone")) {
+        // the last post is a copy of the first, so jump back without animating
+        setTimeout(() => {
+          feed.style.transition = "none";
+          feed.style.transform = "translateY(0)";
+          index = 0;
+          feed.offsetHeight;            // apply before restoring the transition
+          feed.style.transition = "";
+        }, 950);
+      }
+    }, 3200);
+  })();
+
   // Keep footer year current
   const yearEl = document.getElementById("year");
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  // SCROLL-LINKED VINE DRAWING
-
-  const vinePaths = document.querySelectorAll(".vine-path");
-  const vineData = [];
-
-  vinePaths.forEach((path) => {
-    // Get total length of SVG path
-    const length = path.getTotalLength();
-
-    // Set stroke dash so vine can "draw"
-    path.style.strokeDasharray = length;
-    path.style.strokeDashoffset = length;
-
-    vineData.push({ path, length });
-  });
-
-  function updateVinesOnScroll() {
-    const scrollableHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-
-    const scrollY = window.scrollY || window.pageYOffset || 0;
-    const scrollPercent =
-      scrollableHeight > 0 ? scrollY / scrollableHeight : 0;
-
-    vineData.forEach(({ path, length }) => {
-      const offset = length * (1 - scrollPercent);
-      path.style.strokeDashoffset = offset;
-    });
-  }
-
-  window.addEventListener("scroll", updateVinesOnScroll);
-  window.addEventListener("resize", updateVinesOnScroll);
-  updateVinesOnScroll(); // initial position
-
-  const flowers = document.querySelectorAll(".vine-flower");
-
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("bloomed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        root: null,
-        threshold: 0.4,
-      }
-    );
-
-    flowers.forEach((flower) => observer.observe(flower));
-  } else {
-    flowers.forEach((flower) => flower.classList.add("bloomed"));
-  }
 
   // Petal toggle
   const toggle = document.getElementById("fxToggle");
@@ -899,9 +1250,9 @@ footer {
       p.style.top  = e.clientY + "px";
       p.style.setProperty("--dx", (Math.random()*90-45)+"px");
       p.style.setProperty("--dy", (Math.random()*90-45)+"px");
-      p.style.background = Math.random() > 0.5
-        ? "rgba(248,221,226,0.95)"
-        : "rgba(167,196,160,0.9)";
+      p.style.background = Math.random() > 0.3
+        ? "rgba(232,167,177,0.9)"   // wine-rose
+        : "rgba(147,196,166,0.8)";    // emerald
       document.body.appendChild(p);
       setTimeout(()=>p.remove(),800);
     });
