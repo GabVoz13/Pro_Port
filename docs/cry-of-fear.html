@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cry of Fear Analysis – Gabriella Vozar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A game design analysis of Cry of Fear by Gabriella Vozar: narrative, mechanics, atmosphere and sound." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#141011" />
+
+  <!-- Link previews (LinkedIn, iMessage, Slack, email) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gabriella Vozar" />
+  <meta property="og:title" content="Cry of Fear Analysis – Gabriella Vozar" />
+  <meta property="og:description" content="A game design analysis of Cry of Fear by Gabriella Vozar: narrative, mechanics, atmosphere and sound." />
+  <meta property="og:url" content="https://gabvoz13.github.io/Pro_Port/cry-of-fear.html" />
+  <meta property="og:image" content="https://gabvoz13.github.io/Pro_Port/images/og-preview.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Gabriella Vozar: social graphics, brand templates and short-form video" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Dark jewel-tone palette */
+      --burgundy:#7A2431;       /* brand fill: buttons, active states */
+      --burgundy-dark:#8E2C3A;  /* brand fill hover (lighter on dark) */
+      --heading:#E8A7B1;        /* wine-rose: headings, nav, key text */
+      --emerald:#93C4A6;        /* accent: links, hover, small highlights */
+      --rose:#C9707E;           /* decorative flowers */
+      --ivory:#141011;          /* page background */
+      --wash:#1F1718;           /* faint wine tint for the top-of-page gradient */
+      --ink:#EEE7E4;            /* body text */
+      --card:#1D1819;           /* raised surfaces */
+      --line:#3A3133;
+      --muted:#B4A9A5;
+    }
+
+    /* Palette roles: wine-rose leads headings + nav */
+    h1, h2, h3, .logo{ color:var(--heading); }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+
+    body{
+      font-family:"Lato", system-ui, -apple-system, sans-serif;
+      color:var(--ink);
+      background: radial-gradient(circle at top, var(--wash), var(--ivory));
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      background: rgba(20,16,17,0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(238,220,214,0.14);
+    }
+
+    .nav-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0.75rem 1rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .logo{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.05em;
+      font-size:1.05rem;
+      white-space:nowrap;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:0.4rem 0.75rem;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:var(--heading);
+      font-size:0.95rem;
+      margin-left:0.6rem;
+      position:relative;
+    }
+
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:-0.2rem;
+      width:0;
+      height:2px;
+      background:var(--emerald);
+      border-radius:999px;
+      transform:translateX(-50%);
+      transition:width 0.25s ease;
+    }
+    nav a:hover::after, nav a:focus-visible::after{ width:100%; }
+    nav a[aria-current="page"]{ color:var(--heading); font-weight:600; }
+    nav a[aria-current="page"]::after{ width:100%; }
+
+    main{ flex:1; }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    .page-title{
+      text-align:center;
+      margin-bottom: 1.25rem;
+    }
+    .page-title h1{
+      font-family:"Playfair Display", serif;
+      font-size: clamp(2rem, 2.5vw + 1.2rem, 3rem);
+      margin-bottom: 0.35rem;
+    }
+    .page-title p{
+      max-width: 62rem;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    section{ margin-top: 2.75rem; }
+
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-bottom: 1rem;
+    }
+    .section-head h2{
+      font-family:"Playfair Display", serif;
+      font-size: 1.55rem;
+    }
+    .section-head p{
+      color:var(--muted);
+      max-width: 58rem;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin-top: 0.25rem;
+    }
+    .divider{
+      height:1px;
+      background: rgba(238,220,214,0.17);
+      margin-top: 0.9rem;
+    }
+
+    .tag-row{
+      display:flex;
+      gap:0.5rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .tag{
+      display:inline-block;
+      font-size:0.78rem;
+      padding: 0.18rem 0.6rem;
+      border-radius:4px;
+      border: 1px solid rgba(147,196,166,0.33);
+      background: rgba(232,167,177,0.1);
+      color:var(--heading);
+    }
+    .tag.accent{
+      border-color: rgba(147,196,166,0.36);
+      background: rgba(147,196,166,0.08);
+      color:var(--emerald);
+    }
+    .tag.gray{
+      border-color: rgba(238,220,214,0.23);
+      background: rgba(238,220,214,0.04);
+      color:#D6CDC9;
+    }
+
+
+    @media (max-width: 600px){
+      header{ position:static; }
+      .wrap{ padding: 2rem 1rem 2.5rem; }
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.6rem;
+      margin-top: 0.15rem;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0.55rem 1rem;
+      border-radius:6px;
+      border: none;
+      text-decoration:none;
+      font-size:0.9rem;
+      font-weight:600;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: var(--burgundy);
+      color:#fff;
+    }
+    .btn.primary:hover, .btn.primary:focus-visible{
+      background: var(--burgundy-dark);
+      transform: translateY(-1px);
+    }
+    .btn.secondary{
+      background: transparent;
+      color:var(--heading);
+      border:1px solid var(--heading);
+    }
+    .btn.secondary:hover, .btn.secondary:focus-visible{
+      background: var(--burgundy-dark);
+      color:#fff;
+      transform: translateY(-1px);
+    }
+
+
+    /* Footer */
+    footer{
+      border-top: 1px solid rgba(238,220,214,0.15);
+      background: rgba(20,16,17,0.95);
+      padding: 0.9rem 1.25rem;
+      font-size:0.8rem;
+    }
+    .footer-inner.centered{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:0.35rem;
+    }
+    .footer-inner .tech{
+      color:var(--muted);
+      font-size:0.75rem;
+    }
+    .footer-inner .license{
+      font-size:0.75rem;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:0.25rem;
+    }
+    .footer-inner .license a{
+      color:var(--emerald);
+      font-weight:600;
+      text-decoration:none;
+    }
+    .footer-inner .license a:hover,
+    .footer-inner .license a:focus-visible{
+      text-decoration:underline;
+    }
+
+    /* -----------------------------
+       React toggle button (nav)
+    ------------------------------ */
+    #react-effects-toggle{ display:flex; align-items:center; margin-left:0.6rem; }
+
+    .effects-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:0.45rem;
+      padding:0.42rem 0.75rem;
+      border-radius:6px;
+      border:1px solid rgba(147,196,166,0.6);
+      background: rgba(232,167,177,0.07);
+      color:var(--heading);
+      font-size:0.85rem;
+      font-weight:600;
+      cursor:pointer;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .effects-btn:hover,
+    .effects-btn:focus-visible{
+      background: rgba(232,167,177,0.13);
+      transform: translateY(-1px);
+    }
+    .effects-btn[aria-pressed="true"]{
+      background: var(--burgundy);
+      color:#fff;
+      border-color:var(--heading);
+    }
+    .effects-dot{
+      width:10px; height:10px;
+      border-radius:999px;
+      background: rgba(232,167,177,1.0);
+    }
+    .effects-btn[aria-pressed="true"] .effects-dot{
+      background: #fff;
+    }
+
+    /* -----------------------------
+       Petal trail effect
+       (only runs when enabled + desktop + motion allowed)
+    ------------------------------ */
+    .petal{
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+      animation: petal-float 850ms ease-out forwards;
+      filter: blur(0.1px);
+    }
+
+    @keyframes petal-float{
+      to{
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2);
+        opacity: 0;
+      }
+    }
+
+    /* Petals toggle lives quietly in the footer */
+    footer .fx-toggle,
+    footer #react-effects-toggle{ margin:0.3rem 0 0; }
+    footer .fx-toggle{ font-size:0.75rem; padding:0.3rem 0.7rem; }
+
+    /* Logo is the home link */
+    a.logo{ text-decoration:none; }
+
+    /* Compact footer: items flow into two lines instead of five */
+    .footer-inner.centered{ flex-direction:row; flex-wrap:wrap; justify-content:center; column-gap:1.25rem; row-gap:0.45rem; }
+    footer .fx-toggle,
+    footer #react-effects-toggle{ margin:0; }
+    /* ---------- Cry of Fear analysis page ---------- */
+    .back{ display:inline-block; color:var(--emerald); text-decoration:none; font-size:0.9rem; margin-bottom:1rem; }
+    .back:hover, .back:focus-visible{ text-decoration:underline; }
+    .back.bottom{ margin:2.5rem 0 0; }
+
+    .cof-hero{ border-radius:8px; overflow:hidden; border:1px solid rgba(238,220,214,0.19); background:#0d0b0b; }
+    .cof-hero img{ display:block; width:100%; height:auto; max-height:340px; object-fit:cover; }
+
+    .cof-title{ text-align:center; margin:1.75rem auto 0; max-width:46rem; }
+    .eyebrow{ font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--emerald); font-weight:600; }
+    .cof-title h1{ font-family:"Playfair Display", serif; font-size:clamp(2.2rem, 3vw + 1.2rem, 3.4rem); margin:0.3rem 0 0.5rem; }
+    .cof-title p{ color:var(--muted); line-height:1.7; }
+
+    .facts{ display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:1px; margin:1.75rem 0 0;
+      background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+    .facts div{ background:var(--card); padding:0.85rem 1rem; }
+    .facts dt{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); }
+    .facts dd{ margin-top:0.25rem; font-size:0.95rem; color:var(--ink); }
+    .facts a{ color:var(--emerald); }
+    @media (max-width: 860px){ .facts{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+
+    .toc{ position:sticky; top:3.4rem; z-index:5; display:flex; flex-wrap:wrap; justify-content:center; gap:0.4rem;
+      margin:1.5rem 0 0; padding:0.6rem; background:rgba(20,16,17,0.92); backdrop-filter:blur(6px);
+      border:1px solid rgba(238,220,214,0.14); border-radius:8px; }
+    .toc a{ color:var(--heading); text-decoration:none; font-size:0.88rem; padding:0.3rem 0.7rem; border-radius:4px; }
+    .toc a:hover, .toc a:focus-visible{ background:rgba(232,167,177,0.1); }
+    @media (max-width: 600px){ .toc{ position:static; } }
+
+    .block{ margin-top:3.25rem; scroll-margin-top:7rem; }
+    .block h2{ font-family:"Playfair Display", serif; font-size:1.75rem; padding-bottom:0.6rem;
+      border-bottom:1px solid rgba(238,220,214,0.17); margin-bottom:1.25rem; }
+    .block h3{ font-family:"Playfair Display", serif; font-size:1.25rem; margin:2rem 0 0.75rem; }
+    .prose{ max-width:46rem; }
+    .prose p, .feature-text p{ line-height:1.75; color:#D6CDC9; }
+    .prose p + p, .feature-text p + p{ margin-top:0.9rem; }
+    strong{ color:var(--ink); }
+
+    figure{ margin:0; }
+    figure img, figure video{ display:block; width:100%; height:auto; border-radius:8px; border:1px solid rgba(238,220,214,0.19); background:#0d0b0b; }
+    figcaption, .caption{ font-size:0.82rem; color:var(--muted); margin-top:0.5rem; }
+    .wide-fig{ margin:1.5rem 0 0; }
+
+    .video-frame{ aspect-ratio:16/9; border-radius:8px; overflow:hidden; border:1px solid rgba(238,220,214,0.19); background:#0d0b0b; }
+    .video-frame iframe{ width:100%; height:100%; border:0; display:block; }
+    .caption{ margin-bottom:1.25rem; }
+
+    .point-grid{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:1rem; }
+    .point-grid.three{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+    .prose + .point-grid{ margin-top:1.1rem; }
+    @media (max-width: 760px){ .point-grid, .point-grid.three{ grid-template-columns:1fr; } }
+    .point{ background:var(--card); border:1px solid rgba(238,220,214,0.19); border-radius:8px; padding:1rem 1.1rem; }
+    .point h4{ color:var(--heading); font-size:1rem; margin-bottom:0.4rem; }
+    .point p{ color:#D6CDC9; line-height:1.65; font-size:0.94rem; }
+
+    .symbols{ border-top:1px solid var(--line); margin-bottom:1.25rem; }
+    .symbols div{ display:grid; grid-template-columns:9rem 1fr; gap:1rem; padding:0.75rem 0; border-bottom:1px solid var(--line); }
+    .symbols dt{ color:var(--heading); font-weight:600; }
+    .symbols dd{ color:#D6CDC9; line-height:1.6; }
+    @media (max-width: 520px){ .symbols div{ grid-template-columns:1fr; gap:0.2rem; } }
+
+    .feature{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:1.75rem; align-items:center; margin-top:1.75rem; }
+    .feature.flip .feature-text{ order:2; }
+    .feature-text h3{ margin-top:0; }
+    .hint{ font-size:0.85rem; color:var(--emerald) !important; }
+    @media (max-width: 800px){
+      .feature{ grid-template-columns:1fr; gap:1rem; }
+      .feature.flip .feature-text{ order:0; }
+    }
+    .media-placeholder{ aspect-ratio:16/9; border-radius:8px; border:1px dashed rgba(238,220,214,0.3);
+      background:linear-gradient(135deg, rgba(122,36,49,0.3), rgba(20,16,17,0.6));
+      display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:0.9rem; text-align:center; padding:1rem; }
+
+    .compare{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:1rem; margin-top:1.25rem; }
+    .compare img{ aspect-ratio:16/10; object-fit:cover; }
+    .compare .center img{ border-color:var(--heading); }
+    @media (max-width: 700px){ .compare{ grid-template-columns:1fr; } }
+
+    .pull{ margin:1.75rem 0 0; padding:1.25rem 1.5rem; border-left:3px solid var(--heading); background:var(--card);
+      border-radius:0 8px 8px 0; font-family:"Playfair Display", serif; font-size:1.25rem; line-height:1.55; color:var(--heading); max-width:46rem; }
+
+
+    .reviews{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:1rem; margin-top:1rem; }
+    @media (max-width: 860px){ .reviews{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+    .review{ display:block; text-decoration:none; background:var(--card); border:1px solid rgba(238,220,214,0.19); border-radius:8px; overflow:hidden; transition:border-color 0.18s ease; }
+    .review:hover, .review:focus-visible{ border-color:rgba(232,167,177,0.5); }
+    .review img{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; }
+    .review span{ display:block; padding:0.6rem 0.75rem; color:var(--heading); font-size:0.88rem; }
+    .credits{ margin-top:1.5rem; font-size:0.85rem; color:var(--muted); line-height:1.7; max-width:46rem; }
+    .credits a{ color:var(--emerald); }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav-inner">
+      <a class="logo" href="index.html">Gabriella Vozar</a>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="marketing.html">Marketing & Content</a>
+        <a href="about.html">About</a>
+        <a href="photography.html">Photography</a>
+        <a href="projects.html" aria-current="page">Projects</a>
+        <a href="contact.html">Contact</a>
+
+        <!-- React mounts the toggle button here -->
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <a class="back" href="projects.html#game-analysis">&larr; Projects</a>
+
+      <!-- HERO -->
+      <div class="cof-hero">
+        <img src="images/cry-of-fear/banner.webp" alt="Cry of Fear title art: a hooded figure presses a hand against a bloodstained concrete wall" width="837" height="256">
+      </div>
+
+      <div class="cof-title">
+        <span class="eyebrow">Game Design Analysis</span>
+        <h1><em>Cry of Fear</em></h1>
+        <p>
+          How a free, small-team horror mod uses story, scarcity and sound to put the player inside one young
+          man's breaking mind.
+        </p>
+      </div>
+
+      <dl class="facts" aria-label="Game facts">
+        <div><dt>Developer</dt><dd>Team Psykskallar</dd></div>
+        <div><dt>Released</dt><dd>2012</dd></div>
+        <div><dt>Genre</dt><dd>Psychological survival horror</dd></div>
+        <div><dt>Built on</dt><dd>Half-Life (standalone mod)</dd></div>
+        <div><dt>Price</dt><dd><a href="https://store.steampowered.com/app/223710/Cry_of_Fear/" target="_blank" rel="noreferrer">Free on Steam</a></dd></div>
+      </dl>
+
+      <nav class="toc" aria-label="On this page">
+        <a href="#overview">Overview</a>
+        <a href="#narrative">Narrative</a>
+        <a href="#gameplay">Gameplay</a>
+        <a href="#atmosphere">Atmosphere</a>
+        <a href="#conclusion">Conclusion</a>
+        <a href="#sources">Sources</a>
+      </nav>
+
+      <!-- OVERVIEW -->
+      <section id="overview" class="block" aria-labelledby="overview-title">
+        <h2 id="overview-title">Overview</h2>
+
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/dkKSF90vPgM"
+            title="Cry of Fear official trailer"
+            loading="lazy"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+        <p class="caption">Official trailer from Team Psykskallar.</p>
+
+        <div class="prose">
+          <p>
+            <em>Cry of Fear</em> is a psychological survival horror game released in 2012 as a standalone mod for
+            <em>Half-Life</em>. Made by the small indie team Team Psykskallar, it pairs classic horror with
+            modern narrative techniques, and it's known for its haunting atmosphere, emotional story and smart use
+            of limited resources. It's also completely free to play. The game uses narrative, mechanics and
+            atmosphere together to immerse players in dread and psychological tension.
+          </p>
+        </div>
+
+        <figure class="wide-fig">
+          <img src="images/cry-of-fear/monologue.webp" alt="Opening monologue on a black screen: I've always felt alone my whole life, for as long as I can remember." loading="lazy" width="1400" height="404">
+          <figcaption>The introductory monologue that plays when you start the game.</figcaption>
+        </figure>
+
+        <h3>Setting</h3>
+        <div class="prose">
+          <p>
+            The game is set in a desolate, unnamed Scandinavian city, where the protagonist, Simon Henriksson,
+            moves through dark, decaying streets. It shifts between the real world and Simon's distorted
+            perception, blending reality with nightmarish, surreal elements: abandoned streets, hospitals,
+            basements and twisted versions of familiar places. Minimal lighting and eerie sound keep the tension
+            constant, and the city itself becomes a reflection of Simon's trauma, guilt and mental deterioration.
+          </p>
+        </div>
+      </section>
+
+      <!-- NARRATIVE -->
+      <section id="narrative" class="block" aria-labelledby="narrative-title">
+        <h2 id="narrative-title">Narrative Analysis</h2>
+
+        <h3>Storyline</h3>
+        <div class="prose">
+          <p>
+            Simon wakes up in a distorted city, where he faces terrifying monsters and bizarre visions. As the
+            story unfolds, he uncovers memories of a troubled childhood and strained relationships, particularly
+            with his mother. The central mystery is whether Simon can escape the horrors of both the city and his
+            own mind. Sara, a mysterious woman, plays a key role in his emotional journey, though her true purpose
+            is only revealed as the story progresses.
+          </p>
+        </div>
+
+        <h3>Themes</h3>
+        <div class="point-grid">
+          <div class="point">
+            <h4>Trauma &amp; mental health</h4>
+            <p>The game follows Simon's psychological breakdown, showing how trauma can distort perception and shape reality.</p>
+          </div>
+          <div class="point">
+            <h4>Guilt &amp; redemption</h4>
+            <p>Simon grapples with guilt over his past and looks for redemption, though the outcome stays ambiguous.</p>
+          </div>
+          <div class="point">
+            <h4>Isolation</h4>
+            <p>Cut off physically and emotionally, Simon's surroundings mirror his inner loneliness and disarray.</p>
+          </div>
+          <div class="point">
+            <h4>Reality vs. illusion</h4>
+            <p>The blurred line between real and imagined reflects Simon's state of mind and keeps the player questioning what's real.</p>
+          </div>
+        </div>
+
+        <h3>Symbolism</h3>
+        <dl class="symbols">
+          <div><dt>Monsters</dt><dd>Simon's inner demons: guilt, fear and unresolved trauma.</dd></div>
+          <div><dt>The city</dt><dd>His fractured mind, full of decay and confusion.</dd></div>
+          <div><dt>Sara</dt><dd>First a symbol of comfort, later of unresolved guilt and emotional pain.</dd></div>
+          <div><dt>Mirrors</dt><dd>Self-reflection, and how hard it is for Simon to face his own truth.</dd></div>
+          <div><dt>The knife</dt><dd>His self-destructive tendencies and emotional turmoil.</dd></div>
+        </dl>
+
+        <div class="prose">
+          <p>
+            Together, the narrative, themes and symbolism turn the game into an exploration of mental health,
+            trauma and self-acceptance, inviting players into the protagonist's mind and the darkest parts of
+            human psychology.
+          </p>
+        </div>
+      </section>
+
+      <!-- GAMEPLAY -->
+      <section id="gameplay" class="block" aria-labelledby="gameplay-title">
+        <h2 id="gameplay-title">Gameplay Mechanics</h2>
+
+        <div class="feature">
+          <div class="feature-text">
+            <h3>Survival horror</h3>
+            <p>
+              <strong>Limited resources.</strong> Scarce ammunition, healing syringes and a small inventory create
+              constant worry about carrying the wrong things. Scarcity forces you to plan every fight.
+            </p>
+            <p>
+              <strong>Exploration.</strong> Levels demand a thorough search of dark corridors, abandoned buildings
+              and outdoor spaces. Clues are scattered as notes, visual hints and locked doors ("This door requires
+              a code"), so exploring is essential to solving puzzles and finding hidden items.
+            </p>
+          </div>
+          <figure>
+            <img src="images/cry-of-fear/town.webp" alt="First-person view of a dark cobblestone courtyard at night, pistol in hand" loading="lazy" width="1400" height="788">
+            <figcaption>Exploring the town at night.</figcaption>
+          </figure>
+        </div>
+
+        <div class="feature flip">
+          <div class="feature-text">
+            <h3>Combat</h3>
+            <p>
+              <strong>Weaponry.</strong> Weapons range from knives and hammers to pistols and shotguns. Some can be
+              dual-wielded with the phone light in the other hand, trading accuracy for the ability to see.
+            </p>
+          </div>
+          <figure>
+            <img src="images/cry-of-fear/inventory.webp" alt="Cry of Fear inventory screen with weapons and items in slots" loading="lazy" width="838" height="627">
+            <figcaption>The limited inventory.</figcaption>
+          </figure>
+        </div>
+
+        <div class="feature">
+          <div class="feature-text">
+            <p>
+              <strong>Enemies.</strong> Grotesque, zombie-like manifestations tied to Simon's mental state. Their
+              erratic movement made every encounter terrifying, and each one forces a choice: fight and burn
+              resources, or run.
+            </p>
+          </div>
+          <figure>
+            <img src="images/cry-of-fear/enemies.webp" alt="A lineup of Cry of Fear's monster designs" loading="lazy" width="1200" height="1015">
+            <figcaption>Some of the game's enemies.</figcaption>
+          </figure>
+        </div>
+
+        <div class="feature flip">
+          <div class="feature-text">
+            <h3>Core mechanics</h3>
+            <p>
+              <strong>Phone torch.</strong> The map is shrouded in darkness, and the phone light only reaches so
+              far, leaving most of the world in shadow and feeding the fear of the unknown.
+            </p>
+            <p>
+              <strong>Stamina.</strong> Running drains stamina, which is slow to recover. When it's low, Simon
+              slows down and becomes easier to catch, so every sprint is a decision.
+            </p>
+          </div>
+          <figure>
+            <img src="images/cry-of-fear/hud.webp" alt="Dark alley with Simon's phone showing a text from Mom; health and stamina bars circled in red" loading="lazy" width="1280" height="1024">
+            <figcaption>Health and stamina bars (circled) and Simon's phone.</figcaption>
+          </figure>
+        </div>
+
+        <div class="feature">
+          <div class="feature-text">
+            <p>
+              <strong>Sanity.</strong> As Simon deteriorates, the game shows it through disorienting visuals,
+              eerie sounds and sudden changes to the environment. Rooms can look different when you come back,
+              and subtle hallucinations keep you on edge.
+            </p>
+          </div>
+          <!-- PLACEHOLDER: hallucination clip (original is 75 MB; needs trimming/compressing before adding) -->
+          <figure>
+            <div class="media-placeholder">Hallucination gameplay clip coming soon</div>
+            <figcaption>A hallucination sequence.</figcaption>
+          </figure>
+        </div>
+
+        <div class="feature flip">
+          <div class="feature-text">
+            <h3>Puzzles</h3>
+            <p>
+              Progress often means deciphering cryptic notes, finding keys or working out how to open a door.
+              The puzzles test observation and logic, adding a thinking layer between the scares.
+            </p>
+          </div>
+          <figure>
+            <img src="images/cry-of-fear/puzzle.webp" alt="Close-up of a combination padlock puzzle" loading="lazy" width="1200" height="675">
+            <figcaption>A padlock puzzle.</figcaption>
+          </figure>
+        </div>
+
+        <h3>What makes it unique</h3>
+        <div class="point-grid three">
+          <div class="point">
+            <h4>The mobile phone</h4>
+            <p>Flashlight, map and communication device in one. Unexpected texts and calls add to the dread.</p>
+          </div>
+          <div class="point">
+            <h4>Co-op mode</h4>
+            <p>Up to four players can team up for unique challenges while keeping the horror tone. I haven't tried it yet, but I'd like to.</p>
+          </div>
+          <div class="point">
+            <h4>Replayability</h4>
+            <p>Choices in how you treat NPCs and approach combat change the outcome, with multiple endings to uncover.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ATMOSPHERE -->
+      <section id="atmosphere" class="block" aria-labelledby="atmosphere-title">
+        <h2 id="atmosphere-title">Atmosphere &amp; Aesthetics</h2>
+        <div class="prose">
+          <p>
+            Atmosphere is what makes <em>Cry of Fear</em> work. Eerie visuals, haunting sound and emotional depth
+            combine into a world that's as unsettling as it is compelling.
+          </p>
+        </div>
+
+        <div class="point-grid">
+          <div class="point">
+            <h4>Visual design</h4>
+            <p>
+              A low-resolution look reminiscent of early-2000s games makes the horror more ambiguous. Dark lighting
+              and desaturated tones dominate, visual glitches mirror Simon's mind, and the limited light amplifies
+              fear of what you can't see.
+            </p>
+          </div>
+          <div class="point">
+            <h4>Emotional tone</h4>
+            <p>
+              Environments and enemy designs reflect themes of loneliness and trauma. Jump scares are used
+              sparingly; instead, an oppressive atmosphere keeps you feeling vulnerable the whole time.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-text">
+            <h3>Sound design</h3>
+            <p>
+              Ambient audio builds an unpredictable soundscape, from distant whispers to dissonant drones. Sudden
+              musical cues and deliberate silence heighten tension, while echoing footsteps and muffled crying add
+              layers of dread.
+            </p>
+            <p class="hint">Turn your sound on for this clip.</p>
+          </div>
+          <figure>
+            <video controls preload="metadata" playsinline>
+              <source src="images/cry-of-fear/sound-intro.mp4" type="video/mp4">
+            </video>
+            <figcaption>The opening soundscape.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Influences &amp; style</h3>
+        <div class="prose">
+          <p>
+            Drawing from <em>Silent Hill</em> and <em>Resident Evil</em>, the game blends psychological horror with
+            resource-driven survival. Its urban setting and first-person perspective help it stand apart.
+          </p>
+        </div>
+        <div class="compare">
+          <figure>
+            <img src="images/cry-of-fear/silent-hill-2.webp" alt="Foggy street scene from Silent Hill 2 Remake" loading="lazy" width="1198" height="627">
+            <figcaption><em>Silent Hill 2</em> (Remake)</figcaption>
+          </figure>
+          <figure class="center">
+            <img src="images/cry-of-fear/town-square.webp" alt="Cry of Fear's town square at night" loading="lazy" width="1400" height="788">
+            <figcaption><em>Cry of Fear</em></figcaption>
+          </figure>
+          <figure>
+            <img src="images/cry-of-fear/resident-evil-4.webp" alt="Village scene from Resident Evil 4" loading="lazy" width="1400" height="788">
+            <figcaption><em>Resident Evil 4</em></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- CONCLUSION -->
+      <section id="conclusion" class="block" aria-labelledby="conclusion-title">
+        <h2 id="conclusion-title">Conclusion</h2>
+        <div class="prose">
+          <p>
+            <em>Cry of Fear</em> offers a unique take on psychological horror by blending survival mechanics with a
+            deeply unsettling narrative. Its eerie visuals and haunting soundtrack pull you into a nightmarish world
+            where reality and delusion blur. Limited resources and psychological manipulation don't just challenge
+            you; they draw you into Simon's struggle with his own mind. The story can be cryptic, but that ambiguity
+            adds depth and leaves you with more questions than answers.
+          </p>
+        </div>
+        <blockquote class="pull">
+          It may not be for everyone, but for those willing to dive into its dark, disturbing world, it's a game that
+          lingers long after the screen goes dark.
+        </blockquote>
+      </section>
+
+      <!-- SOURCES -->
+      <section id="sources" class="block" aria-labelledby="sources-title">
+        <h2 id="sources-title">Research &amp; Sources</h2>
+
+        <h3>YouTube reviews</h3>
+        <div class="prose">
+          <p>
+            I watched these reviews to get other perspectives and catch anything I might have missed in my own
+            playthroughs.
+          </p>
+        </div>
+        <div class="reviews">
+          <a class="review" href="https://www.youtube.com/watch?v=nTpCsKOzoCE" target="_blank" rel="noreferrer">
+            <img src="https://img.youtube.com/vi/nTpCsKOzoCE/hqdefault.jpg" alt="" loading="lazy">
+            <span>Pyrocynical, part 1</span>
+          </a>
+          <a class="review" href="https://youtu.be/KmweVl9cUtA" target="_blank" rel="noreferrer">
+            <img src="https://img.youtube.com/vi/KmweVl9cUtA/hqdefault.jpg" alt="" loading="lazy">
+            <span>Pyrocynical, part 2</span>
+          </a>
+          <a class="review" href="https://youtu.be/jAF2HM-rvq0" target="_blank" rel="noreferrer">
+            <img src="https://img.youtube.com/vi/jAF2HM-rvq0/hqdefault.jpg" alt="" loading="lazy">
+            <span>Pyrocynical, part 3</span>
+          </a>
+          <a class="review" href="https://youtube.com/playlist?list=PL75D7CA414336B1A4" target="_blank" rel="noreferrer">
+            <img src="https://img.youtube.com/vi/rZp1s0qmEbU/hqdefault.jpg" alt="" loading="lazy">
+            <span>Markiplier playthrough</span>
+          </a>
+        </div>
+
+        <p class="credits">
+          Trailer and game imagery courtesy of
+          <a href="https://www.youtube.com/channel/UCiFrCxT8bZCZzKH-4HGiyWw" target="_blank" rel="noreferrer">Team Psykskallar</a>.
+          Review videos by
+          <a href="https://www.youtube.com/user/Pyrocynical" target="_blank" rel="noreferrer">Pyrocynical</a> and
+          <a href="https://www.youtube.com/user/markiplierGAME" target="_blank" rel="noreferrer">Markiplier</a>.
+          Comparison images from <em>Silent Hill 2</em> (Konami) and <em>Resident Evil 4</em> (Capcom).
+        </p>
+      </section>
+
+      <a class="back bottom" href="projects.html#game-analysis">&larr; Back to Projects</a>
+    </div>
+  </main>
+
+<footer>
+  <div class="footer-inner centered">
+    <div class="copyright">
+      © <span id="year"></span> Gabriella Vozar · Digital Media, Arts, and Technology
+    </div>
+    <div class="license">
+      This work is licensed under
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
+           alt="Creative Commons" style="max-width:1em;max-height:1em;margin-left:.2em;">
+      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
+           alt="Attribution required" style="max-width:1em;max-height:1em;margin-left:.2em;">
+    </div>
+    <div class="tech">Designed and hand-coded by Gabriella in HTML, CSS, JavaScript, and React</div>
+    <span id="react-effects-toggle"></span>
+    <div><a href="accessibility.html" style="color:var(--emerald);text-decoration:none;font-size:0.75rem;">Accessibility Statement</a></div>
+  </div>
+</footer>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
+
+  <!-- React (CDN) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <script>
+    // Petal trail: runs only when enabled + fine pointer + motion allowed
+    (function(){
+      const KEY = "gv_petal_fx_enabled";
+      let enabled = localStorage.getItem(KEY) === "true";
+
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+      let last = 0;
+      function spawnPetal(x, y){
+        const p = document.createElement("div");
+        p.className = "petal";
+        p.style.left = x + "px";
+        p.style.top = y + "px";
+
+        // random drift
+        const dx = (Math.random() * 90 - 45) + "px";
+        const dy = (Math.random() * 110 + 20) + "px";
+        p.style.setProperty("--dx", dx);
+        p.style.setProperty("--dy", dy);
+
+        // soft palette petals
+        p.style.background = (Math.random() > 0.3)
+          ? "rgba(232,167,177,0.9)"   // wine-rose
+        : "rgba(147,196,166,0.8)";    // emerald
+
+        document.body.appendChild(p);
+        setTimeout(()=>p.remove(), 900);
+      }
+
+      function onMove(e){
+        if (!enabled) return;
+        if (prefersReduced || !finePointer) return;
+
+        const now = performance.now();
+        if (now - last < 35) return; // throttle (performance)
+        last = now;
+
+        spawnPetal(e.clientX, e.clientY);
+      }
+
+      window.addEventListener("mousemove", onMove, { passive:true });
+
+      // Expose a tiny API so React can toggle it
+      window.__GVFX__ = {
+        get enabled(){ return enabled; },
+        setEnabled(v){
+          enabled = !!v;
+          localStorage.setItem(KEY, String(enabled));
+        },
+        safeAvailable(){
+          return finePointer && !prefersReduced;
+        }
+      };
+    })();
+  </script>
+
+  <script>
+    // React toggle button in nav
+    const e = React.createElement;
+
+    function EffectsToggle(){
+      const api = window.__GVFX__;
+      const [isOn, setIsOn] = React.useState(api ? api.enabled : false);
+      const safe = api ? api.safeAvailable() : false;
+
+      function toggle(){
+        const next = !isOn;
+        setIsOn(next);
+        if (api) api.setEnabled(next);
+      }
+
+      // If motion is reduced or pointer isn't fine, show disabled messaging
+      const label = safe
+        ? (isOn ? "Petals: On" : "Petals: Off")
+        : "Petals: Unavailable";
+
+      return e(
+        "button",
+        {
+          type: "button",
+          className: "effects-btn",
+          onClick: toggle,
+          disabled: !safe,
+          "aria-pressed": safe ? String(isOn) : "false",
+          "aria-label": safe
+            ? (isOn ? "Turn off petal cursor trail" : "Turn on petal cursor trail")
+            : "Petal cursor trail is unavailable due to reduced motion or touch input"
+        },
+        e("span", { className:"effects-dot", "aria-hidden":"true" }),
+        label
+      );
+    }
+
+    const mount = document.getElementById("react-effects-toggle");
+    if (mount) {
+      ReactDOM.createRoot(mount).render(e(EffectsToggle));
+    }
+  </script>
+</body>
+</html>
+
